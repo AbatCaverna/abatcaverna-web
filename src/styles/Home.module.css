@@ -5,19 +5,33 @@
 
 .main {
   min-height: 100vh;
-  padding: 2rem 0;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.main p {
-  color: #fff;
-  text-align: center;
-}
 
 .image {
+  height: 100vh;
   width: 100%;
   text-align: center;
-  margin-top: 3rem;
+  object-fit: cover;
 }
+
+.moradores h2 {
+  color: var(--yelloy);
+}
+
+.moradores div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.moradores p {
+  max-width: 500px;
+}
+
 
 .footer {
   display: flex;
@@ -35,12 +49,4 @@
   align-items: center;
   flex-grow: 1;
   gap: 1rem;
-}
-
-.title {
-  color: #FFC74A;
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  gap: .5rem;
 }
