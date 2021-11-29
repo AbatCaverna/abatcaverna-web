@@ -7,28 +7,28 @@ export function Moradores() {
       nome: 'Matheus S',
       apelido: 'Teta',
       dataEntrada: 2016,
-      curso: 'Ciencia da Computacao',
+      curso: 'Ciência da Computação',
       image: '/moradores/teta.jpeg'
     },
     {
       nome: 'Lucas Takeshi',
       apelido: 'Coleira',
       dataEntrada: 2016,
-      curso: 'Ciencia da Computacao',
+      curso: 'Ciência da Computação',
       image: '/moradores/coleira.jpeg'
     },
     {
       nome: 'Victor Hugo',
       apelido: 'Cocorico',
       dataEntrada: 2018,
-      curso: 'Ciencia da Computacao',
+      curso: 'Ciência da Computação',
       image: '/moradores/cocorico.jpeg'
     },
     {
       nome: 'Vinicius T',
       apelido: 'Chapoca',
       dataEntrada: 2019,
-      curso: 'Ciencia da Computacao',
+      curso: 'Ciência da Computação',
       image: '/moradores/chapoca.jpeg',
     },
     {
@@ -40,7 +40,7 @@ export function Moradores() {
     }
   ]
   return (
-    <section className={styles.container}>
+    <section id="moradores" className={styles.container}>
       <h2 className={styles.title}>Moradores</h2>
       <div className={styles.content}>
         {moradores.map((morador) => (

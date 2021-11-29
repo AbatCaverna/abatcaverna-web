@@ -21,8 +21,8 @@ const Home: NextPage = () => {
           <Image src="/abat banner.svg" alt="Banner republica" width={1440} height={900} />
 
         </section>
-        <section className={styles.moradores}>
-          <h2>Historia</h2>
+        <section id="historia" className={styles.moradores}>
+          <h2>História</h2>
           <div>
             <Image src="/casa/casa-nova.jpeg" alt="Foto da casa" width={400} height={500} />
 
