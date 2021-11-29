@@ -11,10 +11,11 @@
 
 
 .image {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   text-align: center;
   object-fit: cover;
+  max-width: 1440px;
 }
 
 .moradores h2 {

@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Header } from '../components/Header'
+import { Moradores } from '../components/Moradores'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -17,7 +18,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <section className={styles.image}>
 
-          <Image src="/Republica.svg" alt="Banner republica" width={1440} height={900} />
+          <Image src="/abat banner.svg" alt="Banner republica" width={1440} height={900} />
 
         </section>
         <section className={styles.moradores}>
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quasi cumque inventore, iure eum vitae sapiente. Ea dicta exercitationem maiores quo adipisci eius, rem maxime aspernatur deleniti voluptas accusantium numquam quis tenetur excepturi? Voluptate doloribus autem similique cumque necessitatibus quas at dolor numquam laborum voluptatibus.</p>
           </div>
         </section>
+        <Moradores />
       </main>
 
       <footer className={styles.footer}>
