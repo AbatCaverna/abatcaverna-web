@@ -4,16 +4,16 @@ import Image from 'next/image';
 import styles from './styles.module.css';
 
 export function Header() {
-  const { width } = useWindow();
+  const window = useWindow();
   const [showNav, setShowNav] = useState(true)
 
   useEffect(() => {
-    if (width && width < 480) {
+    if (window && window.width < 480) {
       setShowNav(false)
     } else {
       setShowNav(true)
     }
-  },[width])
+  },[window])
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>
