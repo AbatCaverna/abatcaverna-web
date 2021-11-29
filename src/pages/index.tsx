@@ -24,9 +24,12 @@ const Home: NextPage = () => {
         <section className={styles.moradores}>
           <h2>Historia</h2>
           <div>
-            <Image src="/casa.jpg" alt="Foto da casa" width={400} height={400} />
+            <Image src="/casa/casa-nova.jpeg" alt="Foto da casa" width={400} height={500} />
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quasi cumque inventore, iure eum vitae sapiente. Ea dicta exercitationem maiores quo adipisci eius, rem maxime aspernatur deleniti voluptas accusantium numquam quis tenetur excepturi? Voluptate doloribus autem similique cumque necessitatibus quas at dolor numquam laborum voluptatibus.</p>
+            <p>
+              Somos uma república de Florestal MG, idealizada em 2016 e fundada em 2017. 
+              Fomos criados não apenas para ser uma república mas uma família, amigos e irmãos.
+            </p>
           </div>
         </section>
         <Moradores />
