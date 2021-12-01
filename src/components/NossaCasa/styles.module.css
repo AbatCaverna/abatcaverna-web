@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 0;
+}
+
+.nossa_casa h2 {
+  color: var(--yelloy);
+}
+
+.text_container {
+  color: #fff;
+}
+
+.text_container h3 {
+  text-align: center;
+  color: var(--yelloy);
+  font-size: 2rem;
+}
+
+.contact_list li {
+  cursor: pointer;
+  margin: .5rem 0;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column-reverse;
+  }  
+}

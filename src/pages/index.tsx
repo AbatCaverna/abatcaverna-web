@@ -5,6 +5,7 @@ import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { Historia } from '../components/Historia'
 import { Moradores } from '../components/Moradores'
+import NossaCasa from '../components/NossaCasa'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
         </section>
         <Historia />
         <Moradores />
+        <NossaCasa />
       </main>
 
       <Footer/>
