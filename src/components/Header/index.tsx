@@ -24,15 +24,13 @@ export function Header() {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <a href="#">
-              Home
-              </a>
-            </li>
-            <li>
-              <a href="#historia">Hisória</a>
+              <a href="#historia">História</a>
             </li>
             <li>
               <a href="#moradores">Moradores</a>
+            </li>
+            <li>
+              <a href="#nossa_casa">Nossa casa</a>
             </li>
           </ul>
         </nav>
