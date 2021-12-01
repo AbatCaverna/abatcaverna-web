@@ -1,28 +1,86 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { GoogleMap, useJsApiLoader, Marker, LoadScript } from '@react-google-maps/api'
+
 import styles from './styles.module.css'
 import { FaWhatsapp } from 'react-icons/fa'
+import useWindow from '../../hooks/useWindow'
+
+// coordenadas da casa na rua Geni Naime Silve, 128, California
+const center = {
+  lat: -19.888587719578457,
+  lng: -44.421200344588584
+}
+
+const markerPosition = {
+  lat: -19.888587719578457,
+  lng: -44.421200344588584
+}
 
 export default function NossaCasa() {
-  const googleUrl = `https://maps.googleapis.com/maps/api/staticmap?center=R.+Geni+Naime+Silva,+128,+Florestal+-+MG,+35690-000
-  &size=600x600
-  &maptype=roadmap
-  &markers=-19.888633925595407,-44.42121602868962
-  &key=${process.env.NEXT_PUBLIC_GOOGLE_KEY}`
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_KEY || ''
+  })
+  const [containerStyle, setContainerStyle] = useState({
+    width: '600px',
+    height: '600px'
+  })
+
+  const window = useWindow()
 
   const urlencodedtext = `Opa%20estou%20interessado%20na%20vaga%20da%20sua%20república`
-  
+
+  function resizeMapByWindowWidht(window_width: number) {
+    if (window_width < 600) {
+      // reduz em 100 pixels pois a contagem nao eh 100% precisa
+      const mapSize = window_width - 100
+      setContainerStyle({
+        width: `${mapSize}px`,
+        height: `${mapSize}px`
+      })
+    } else {
+      // caso a tela couber, redefine o tamanho original
+      setContainerStyle({
+        width: '600px',
+        height: '600px'
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (window && window.width < 600) {
+      const mapSize = window.width - 100
+      setContainerStyle({
+        width: `${mapSize}px`,
+        height: `${mapSize}px`
+      })
+    } else {
+      setContainerStyle({
+        width: '600px',
+        height: '600px'
+      })
+    }
+  }, [window])
   return (
     <section id="nossa_casa" className={styles.nossa_casa}>
       <h2>Nossa casa</h2>
 
       <div className={styles.container}>
-        <Image
-        src={googleUrl}
-        alt="Nossa casa no google kkk"
-        width={600}
-        height={600}
-        />
+        {isLoaded ? (
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={17}
+          >
+            <Marker
+              position={markerPosition}
+            />
+          </GoogleMap>
+        ) : (
+          null
+        )}
 
         <div className={styles.text_container}>
           <ul>
