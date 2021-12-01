@@ -50,17 +50,8 @@ export default function NossaCasa() {
   }
 
   useEffect(() => {
-    if (window && window.width < 600) {
-      const mapSize = window.width - 100
-      setContainerStyle({
-        width: `${mapSize}px`,
-        height: `${mapSize}px`
-      })
-    } else {
-      setContainerStyle({
-        width: '600px',
-        height: '600px'
-      })
+    if (window) {
+      resizeMapByWindowWidht(window.width)
     }
   }, [window])
   return (
@@ -94,7 +85,7 @@ export default function NossaCasa() {
           </ul>
 
           <h3>Temos vagas!</h3>
-          <p>Dúvidas e/ou interesse, entre em contato com um dos morarores:</p>
+          <p>Dúvidas e/ou interesse, entre em contato com um dos moradores:</p>
           <ul className={styles.contact_list}>
             <li>
               <Link href={`https://wa.me/5531992881568?text=${urlencodedtext}`}>
