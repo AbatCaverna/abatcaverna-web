@@ -89,23 +89,35 @@ export default function NossaCasa() {
           <ul className={styles.contact_list}>
             <li>
               <Link href={`https://wa.me/5531992881568?text=${urlencodedtext}`}>
-                <a target="_blank">Matheus (Teta) <FaWhatsapp color="eaeaea"/> </a>
+                <a target="_blank">
+                  <FaWhatsapp color="eaeaea"/> 
+                  Matheus (Teta)
+                </a>
               </Link>
             </li>
             <li>
               <Link href={`https://wa.me/5531993420757?text=${urlencodedtext}`}>
-                <a target="_blank">Takeshi (Coleira) <FaWhatsapp color="eaeaea"/> </a>
+                <a target="_blank">
+                  <FaWhatsapp color="eaeaea"/> 
+                  Takeshi (Coleira)   
+                </a>
               </Link>
             </li>
             <li>
               <Link href={`https://wa.me/5531992449442?text=${urlencodedtext}`}>
-                <a target="_blank">Victor (Cocoricó) <FaWhatsapp color="eaeaea"/> </a>
+                <a target="_blank">
+                  <FaWhatsapp color="eaeaea"/>
+                  Victor (Cocoricó)
+                </a>
               </Link>
                
             </li>
             <li>
               <Link href={`https://wa.me/5531995339124?text=${urlencodedtext}`}>
-                <a target="_blank">Vinícius (Chapoca) <FaWhatsapp color="eaeaea"/> </a>
+                <a target="_blank">
+                  <FaWhatsapp color="eaeaea"/>
+                  Vinícius (Chapoca)
+                </a>
               </Link>
             </li>
           </ul>
