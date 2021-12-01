@@ -1,3 +1,8 @@
+:root {
+  --yelloy: #FFC74A;
+  --light-gray: #eaeaea;
+}
+
 html,
 body {
   padding: 0;

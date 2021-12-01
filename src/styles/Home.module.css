@@ -1,0 +1,22 @@
+.container {
+  padding: 0 2rem;
+  background-color: #0C0B0B;
+  width: 100%;
+}
+
+.main {
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+
+.image {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  object-fit: cover;
+  max-width: 1440px;
+}
+
+
