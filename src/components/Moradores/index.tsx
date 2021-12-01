@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRgbDataURL } from '../../hooks/useBlur';
 import styles from './styles.module.css';
 
 export function Moradores() {
@@ -37,8 +38,21 @@ export function Moradores() {
       dataEntrada: 2021,
       curso: 'Agronomia',
       image: '/moradores/alan.jpeg'
+    },
+    {
+      nome: 'Selina',
+      apelido: 'Selina',
+      dataEntrada: 2019,
+      curso: 'Mascote',
+      image: '/moradores/selina.jpeg'
     }
   ]
+
+  function getBlurImg() {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const img = useRgbDataURL(0, 0, 0)
+    return img
+  }
   return (
     <section id="moradores" className={styles.container}>
       <h2 className={styles.title}>Moradores</h2>
@@ -49,6 +63,8 @@ export function Moradores() {
               <Image 
                 src={morador.image}
                 alt={morador.nome}
+                placeholder="blur"
+                blurDataURL={getBlurImg()}
                 width="185" 
                 height="185" 
               />
