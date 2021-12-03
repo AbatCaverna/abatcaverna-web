@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">ABatCaverna Website</h1>
 
-## Getting Started
+<div align="center">
+  
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/8a31f721-106f-4f21-9b5a-f4cda0060902/deploy-status)](https://app.netlify.com/sites/silly-albattani-9330a5/deploys)
 
-First, run the development server:
+</div>
 
-```bash
-npm run dev
-# or
+
+Repositorio para o site da Republica ABatCaverna.
+
+## ☕ Usando
+
+Para usar, siga estas etapas:
+
+```
+git clone <url>
+cd abatcaverna-web
+yarn
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ou aceese o site https://abatcaverna.app
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 📫 Contribuindo para <nome_do_projeto>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Para contribuir com o projeto, siga estas etapas:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+5. Crie a solicitação de pull.
 
-## Learn More
+Lembrese sempre de pegar as alterações da branch de `dev` para pegar as atualizações mais recentes.
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Colaboradores
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/ViniciusTei.png" width="100px;" alt="Foto do ViniciusTei"/><br>
+        <sub>
+          <b>ViniciusTei</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/LTaka.png" width="100px;" alt="Foto do Ltaka"/><br>
+        <sub>
+          <b>LTaka</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
