@@ -6,6 +6,13 @@ import styles from './styles.module.css';
 export function Moradores() {
   const moradores = [
     {
+      nome: 'Selina',
+      apelido: 'Selina',
+      dataEntrada: 2019,
+      curso: 'Mascote',
+      image: '/moradores/selina.jpeg'
+    },
+    {
       nome: 'Matheus S',
       apelido: 'Teta',
       dataEntrada: 2016,
@@ -44,13 +51,6 @@ export function Moradores() {
       curso: 'Agronomia',
       image: '/moradores/alan.jpeg',
       instagram: 'https://www.instagram.com/rubens5664/'
-    },
-    {
-      nome: 'Selina',
-      apelido: 'Selina',
-      dataEntrada: 2019,
-      curso: 'Mascote',
-      image: '/moradores/selina.jpeg'
     }
   ]
 
