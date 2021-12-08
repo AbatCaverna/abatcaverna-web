@@ -23,7 +23,8 @@ export default async function handler(
   if (req.method === 'GET') {
     const moradores = await database
       .collection("moradores")
-      .find({})
+      .find({ cachaca_para_tomar: { $exists: true } }) // retira selina dos moradores
+      .sort({ cachaca_ja_tomada: -1 }) // ordenas pelos q tomaram mais cachaca
       .toArray();
     
     res.status(200).send(moradores)
