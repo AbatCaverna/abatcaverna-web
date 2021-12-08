@@ -1,8 +1,8 @@
 import Image from 'next/image';
-
+import Link from 'next/link';
 import styles from './styles.module.css';
 import { TiSocialInstagram } from 'react-icons/ti'
-import { GiBatMask } from 'react-icons/gi'
+import { GiBatMask, GiDrinkMe } from 'react-icons/gi'
 
 export function Footer() {
   
@@ -21,6 +21,12 @@ export function Footer() {
 
 
       <div className={styles.social}>
+        <Link href="/cachaca">
+          <a title="Quadro de Cachaça">
+            <GiDrinkMe color="eaeaea" width={32} height={32} />
+
+          </a>
+        </Link>
         <a 
           href="https://rain-diver-f37.notion.site/Estatuto-Abat-Caverna-e04f83cf85cb43a7ac30668e64f3fe33"
           target="_blank"
