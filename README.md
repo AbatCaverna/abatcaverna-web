@@ -56,6 +56,14 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/buMatheus.png" width="100px;" alt="Foto do buMatheus"/><br>
+        <sub>
+          <b>buMatheus</b>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
 
