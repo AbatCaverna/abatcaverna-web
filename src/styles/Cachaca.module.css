@@ -1,0 +1,18 @@
+.container {
+  padding: 0 2rem;
+  width: 100vw;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  color: var(--yelloy);
+}
+
+.rotated_right  {
+  transform: rotate(45deg);
+  width: 100%;
+}
