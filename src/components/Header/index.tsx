@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useWindow from '../../hooks/useWindow';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './styles.module.css';
 
 export function Header() {
@@ -23,6 +24,11 @@ export function Header() {
       {showNav && (
         <nav className={styles.nav}>
           <ul>
+            <li>
+              <Link href="/">
+                <a >Home</a>
+              </Link>
+            </li>
             <li>
               <a href="#historia">História</a>
             </li>
