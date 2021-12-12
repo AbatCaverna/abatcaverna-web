@@ -8,7 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "v4.0.0-beta.4",
+    "@netlify/plugin-nextjs": "3.9.2",
     "@react-google-maps/api": "^2.7.0",
     "axios": "^0.24.0",
     "mongodb": "^4.2.1",
