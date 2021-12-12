@@ -4,4 +4,5 @@ module.exports = {
     domains: ["maps.googleapis.com"],
   },
   reactStrictMode: true,
+  target: 'serverless'
 }
