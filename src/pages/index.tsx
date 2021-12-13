@@ -24,12 +24,12 @@ const Home: NextPage = () => {
         <section className={styles.image}>
 
           <Image 
-            src="/abat banner.svg" 
+            src="/abat-banner.png" 
             alt="Banner republica" 
             placeholder="blur"
             blurDataURL={useRgbDataURL(0, 0, 0)}
             width={1440} 
-            height={900} 
+            height={850} 
           />
 
         </section>

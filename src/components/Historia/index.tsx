@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { useRgbDataURL } from '../../hooks/useBlur';
 import ImageSlideView from '../ImageSlideView';
 import styles from './styles.module.css'
 
@@ -7,11 +5,11 @@ export function Historia() {
   const images = [
     '/casa/casa-nova.jpeg',
     '/historia/conexoes.jpeg',
-    '/casa/1.jpg',
+    '/casa/1.jpeg',
     '/casa/golo-golo.jpeg',
-    '/casa/trote.jpg',
-    '/casa/galera.jpg',
-    '/casa/festa.jpg'
+    '/casa/trote.jpeg',
+    '/casa/galera.jpeg',
+    '/casa/festa.jpeg'
   ];
 
   return (
