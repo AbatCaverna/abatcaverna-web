@@ -11,13 +11,12 @@
     "@react-google-maps/api": "^2.7.0",
     "axios": "^0.24.0",
     "mongodb": "^4.2.1",
-    "next": "12.0.4",
+    "next": "11",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.0.0-rc.1",
     "@types/node": "16.11.7",
     "@types/react": "17.0.35",
     "eslint": "7",
