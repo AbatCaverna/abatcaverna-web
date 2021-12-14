@@ -49,6 +49,7 @@
 .table_image {
   border-radius: 100%;
   object-fit: fill;
+  position: relative;
 }
 
 .image {
@@ -103,7 +104,8 @@
   transform: translate(1px, 1px);
 }
 
-.table_medal {
-  position: absolute !important;
-  top: 0;
+.table_medal{
+  position: absolute;
+  right: 0;
+  bottom: -10px;
 }

@@ -1,16 +1,17 @@
 import ImageSlideView from '../ImageSlideView';
 import styles from './styles.module.css'
 
-export function Historia() {
-  const images = [
-    '/casa/casa-nova.jpeg',
-    '/historia/conexoes.jpeg',
-    '/casa/1.jpeg',
-    '/casa/golo-golo.jpeg',
-    '/casa/trote.jpeg',
-    '/casa/galera.jpeg',
-    '/casa/festa.jpeg'
-  ];
+type Image = {
+  img: string;
+  imgBase64: string;
+}
+
+interface HistoriaProps {
+  images: Array<Image>;
+}
+
+export function Historia({ images }: HistoriaProps) {
+  
 
   return (
     <section id="historia" className={styles.historia}>
