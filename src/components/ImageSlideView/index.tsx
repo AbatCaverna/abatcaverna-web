@@ -3,8 +3,13 @@ import { useEffect, useState } from 'react';
 import { useRgbDataURL } from '../../hooks/useBlur';
 import styles from './styles.module.css';
 
+type Image = {
+  img: string;
+  imgBase64: string;
+}
+
 interface ImageView { 
-  images: Array<string>
+  images: Array<Image>
 }
 
 export default function ImageView({ images }: ImageView) {
@@ -40,14 +45,14 @@ export default function ImageView({ images }: ImageView) {
       {images &&
         images.map((image, index) => (
           index === indexImageOn ? (
-          <div key={image} className={styles.image} >
+          <div key={image.img} className={styles.image} >
             <Image
-              src={image}
-              alt={returnImageName(image)}
+              src={image.img}
+              alt={returnImageName(image.img)}
               objectFit="contain"
               layout="fill"
               placeholder="blur"
-              blurDataURL={getBlurImg()}
+              blurDataURL={image.imgBase64}
             />
           </div>
         ) : (null)

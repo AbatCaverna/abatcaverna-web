@@ -3,11 +3,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { getPlaiceholder } from 'plaiceholder'
 import { Footer } from '../components/Footer'
-
+import { Data } from '../utils/homePageData'
 import { Historia } from '../components/Historia'
 import { Moradores } from '../components/Moradores'
 import NossaCasa from '../components/NossaCasa'
-import { useRgbDataURL } from '../hooks/useBlur'
 import styles from '../styles/Home.module.css'
 
 type Morador = {
@@ -20,101 +19,64 @@ type Morador = {
   instagram?: string;
 }
 
+type Image = {
+  img: string;
+  imgBase64: string;
+}
+
+
 interface MoradorProps {
   moradores: Array<Morador>
+  historyImages: Array<Image>
+  bannerUrl: Image
 }
 
 
 export const getStaticProps: GetStaticProps<MoradorProps> = async () => {
-  const moradores = [
-    {
-      nome: 'Selina',
-      apelido: 'Selina',
-      dataEntrada: 2019,
-      curso: 'Mascote',
-      image: '/moradores/selina.jpeg',
-      base64: ''
-    },
-    {
-      nome: 'Matheus S',
-      apelido: 'Teta',
-      dataEntrada: 2016,
-      curso: 'Ciência da Computação',
-      image: '/moradores/teta.jpeg',
-      instagram: 'https://www.instagram.com/bu.matheus/',
-      base64: ''
-    },
-    {
-      nome: 'Lucas Takeshi',
-      apelido: 'Coleira',
-      dataEntrada: 2016,
-      curso: 'Ciência da Computação',
-      image: '/moradores/coleira.jpeg',
-      instagram: 'https://www.instagram.com/lucastakeshii/',
-      base64: ''
-    },
-    {
-      nome: 'Victor Hugo',
-      apelido: 'Cocorico',
-      dataEntrada: 2018,
-      curso: 'Ciência da Computação',
-      image: '/moradores/cocorico.jpeg',
-      instagram: 'https://www.instagram.com/victorhugo_99/',
-      base64: ''
-    },
-    {
-      nome: 'Vinicius T',
-      apelido: 'Chapoca',
-      dataEntrada: 2019,
-      curso: 'Ciência da Computação',
-      image: '/moradores/chapoca.jpeg',
-      instagram: 'https://www.instagram.com/vinciust/',
-      base64: ''
-    },
-    {
-      nome: 'Rubens',
-      apelido: 'Alan',
-      dataEntrada: 2021,
-      curso: 'Agronomia',
-      image: '/moradores/alan.jpeg',
-      instagram: 'https://www.instagram.com/rubens5664/',
-      base64: ''
-    },
-    {
-      nome: 'Heron',
-      apelido: '?',
-      dataEntrada: 2021,
-      curso: 'Ciência da Computação',
-      image: '/moradores/heron.jpeg',
-      instagram: 'https://www.instagram.com/heron_f4/',
-      base64: ''
-    },
-    {
-      nome: 'Matheus R',
-      apelido: 'Pão',
-      dataEntrada: 2021,
-      curso: 'Engenharia de Alimentos',
-      image: '/moradores/pao.jpeg',
-      instagram: '',
-      base64: ''
-    }
-  ]
+  const { moradores, historyImages } = Data;
+  const banner = {
+    img: "/abat-banner.png",
+    imgBase64: ''
+  }
+
+  const { base64 } = await getPlaiceholder(banner.img);
+  banner.imgBase64 = base64
+
+  // itera sob o tamanho dos array de images = 7
+  // for (let i = 0; i < 7; i+=1) {
+  //   const palceholder = await getPlaiceholder(moradores[i].image);
+  //   moradores[i].base64 = palceholder.base64;
+  //   const { base64: base64History } = await getPlaiceholder(historyImages[i].img);
+
+  //   historyImages[i].imgBase64 = base64History
+  // }
 
   for (const morador of moradores) {
     const { base64 } = await getPlaiceholder(morador.image);
     morador.base64 = base64
   }
 
+  for (const image of historyImages) {
+    const { base64 } = await getPlaiceholder(image.img);
+    image.imgBase64 = base64
+  }
+
 
   return {
     props: {
-      moradores
+      moradores,
+      historyImages,
+      bannerUrl: banner
     },
   };
 };
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ moradores }) => {
-  
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
+  moradores,
+  historyImages,
+  bannerUrl
+}) => {
+  console.log(historyImages)
   return (
     <div className={styles.container}>
       <Head>
@@ -128,16 +90,16 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ morado
         <section className={styles.image}>
 
           <Image 
-            src="/abat-banner.png" 
+            src={bannerUrl.img}
             alt="Banner republica" 
             placeholder="blur"
-            blurDataURL={useRgbDataURL(0, 0, 0)}
+            blurDataURL={bannerUrl.imgBase64}
             width={1440} 
             height={850} 
           />
 
         </section>
-        <Historia />
+        <Historia images={historyImages}/>
         <Moradores moradores={moradores} />
         <NossaCasa />
       </main>

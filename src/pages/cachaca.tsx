@@ -68,6 +68,10 @@ export default function Cachaca({ moradores }: Cachaca) {
 
     }
   }
+  
+  function showMedal(medalIndex: 0 | 1 | 2, moradorIndex: number, drunkCont: number): boolean {
+    return (moradorIndex === medalIndex) && drunkCont > 0
+  }
 
   useEffect(() => {
     if (toDrinkRef) {
@@ -111,30 +115,36 @@ export default function Cachaca({ moradores }: Cachaca) {
                     width="80px" 
                     height="80px"
                   />
-                  {index === 0 &&
-                    <Image 
-                      src="/images/medalha-ouro.png" 
-                      alt="medalha ouro"
-                      className={styles.table_medal}
-                      width="32px" 
-                      height="42px"
-                    />}
-                  {index === 1 &&
-                    <Image 
-                      src="/images/medalha-prata.png" 
-                      alt="medalha prata"
-                      className={styles.table_medal}
-                      width="32px" 
-                      height="42px"
-                    /> }
-                  {index === 2 &&
-                    <Image 
-                      src="/images/medalha-bronze.png" 
-                      alt="medalha bronze"
-                      className={styles.table_medal}
-                      width="32px" 
-                      height="42px"
-                    />} 
+                  {showMedal(0, index, morador.cachaca_ja_tomada) &&
+                    <div className={styles.table_medal}>
+                      <Image 
+                        src="/images/medalha-ouro.png" 
+                        alt="medalha ouro"
+                        width="32px" 
+                        height="42px"
+                      />
+                    </div>
+                    }
+                  {showMedal(1, index, morador.cachaca_ja_tomada) &&
+                    <div className={styles.table_medal}>
+                      <Image 
+                        src="/images/medalha-prata.png" 
+                        alt="medalha prata"
+                        width="32px" 
+                        height="42px"
+                      />
+                    </div>  
+                  }
+                  {showMedal(2, index, morador.cachaca_ja_tomada) &&
+                    <div className={styles.table_medal}>
+                      <Image 
+                        src="/images/medalha-bronze.png" 
+                        alt="medalha bronze"
+                        width="32px" 
+                        height="42px"
+                      />
+                    </div>
+                  } 
                 </div>
                 <button
                   type="button"
