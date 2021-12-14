@@ -31,6 +31,10 @@
   height: 185px;
 }
 
+.image span {
+  border-radius: 100vh;
+}
+
 @media screen and (min-width: 1220px) {
 
   .content {
