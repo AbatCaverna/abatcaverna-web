@@ -76,7 +76,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   historyImages,
   bannerUrl
 }) => {
-  console.log(historyImages)
   return (
     <div className={styles.container}>
       <Head>
