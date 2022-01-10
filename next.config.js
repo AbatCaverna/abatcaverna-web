@@ -1,8 +1,11 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+const withPWA = require('next-pwa')
+
+module.exports = withPWA({
+  pwa: {
+    dest: "public",
+  },
   images: {
     domains: ["maps.googleapis.com"],
   },
-  reactStrictMode: true,
-  target: 'serverless'
-}
+  reactStrictMode: true
+})

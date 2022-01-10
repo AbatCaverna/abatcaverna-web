@@ -1,10 +1,11 @@
-import '../styles/globals.css'
+import { useEffect, useState } from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app'
 import { IconContext } from 'react-icons';
 import { Header } from '../components/Header'
 import Loading from '../components/PageLoader'
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -27,11 +28,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <IconContext.Provider value={{ color: '#FFC74A' }}>
-      <Header />
-      <Component {...pageProps} />
-      {loading && <Loading />}
-    </IconContext.Provider>
+    <>
+      <Head>
+        <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
+      </Head>
+      <IconContext.Provider value={{ color: '#FFC74A' }}>
+        <Header />
+        <Component {...pageProps} />
+        {loading && <Loading />}
+      </IconContext.Provider>
+    </>
   )
 }
 

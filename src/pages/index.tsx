@@ -42,15 +42,6 @@ export const getStaticProps: GetStaticProps<MoradorProps> = async () => {
   const { base64 } = await getPlaiceholder(banner.img);
   banner.imgBase64 = base64
 
-  // itera sob o tamanho dos array de images = 7
-  // for (let i = 0; i < 7; i+=1) {
-  //   const palceholder = await getPlaiceholder(moradores[i].image);
-  //   moradores[i].base64 = palceholder.base64;
-  //   const { base64: base64History } = await getPlaiceholder(historyImages[i].img);
-
-  //   historyImages[i].imgBase64 = base64History
-  // }
-
   for (const morador of moradores) {
     const { base64 } = await getPlaiceholder(morador.image);
     morador.base64 = base64
