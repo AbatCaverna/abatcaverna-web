@@ -3,8 +3,5 @@
 }
 
 .container {
-  position: fixed;
-  bottom: 0;
-  right: 0;
   animation: mymove 2s infinite;
 }

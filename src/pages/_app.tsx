@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app'
 import { IconContext } from 'react-icons';
 import { Header } from '../components/Header'
-import Loading from '../components/PageLoader'
+import Loading from '../components/Loading'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -35,7 +35,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <IconContext.Provider value={{ color: '#FFC74A' }}>
         <Header />
         <Component {...pageProps} />
-        {loading && <Loading />}
+        {loading && (
+          <div className="page_loader">
+            <Loading />
+          </div>
+        )}
       </IconContext.Provider>
     </>
   )

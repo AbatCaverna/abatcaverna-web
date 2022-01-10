@@ -45,3 +45,9 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #9c792d;
 }
+
+.page_loader {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
