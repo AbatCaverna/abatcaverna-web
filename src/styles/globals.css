@@ -11,6 +11,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background: #0C0B0B;
   color: #fff;
+  scroll-behavior: smooth;
 }
 
 a {
