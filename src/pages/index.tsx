@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -7,6 +8,7 @@ import { Data } from '../utils/homePageData'
 import { Historia } from '../components/Historia'
 import { Moradores } from '../components/Moradores'
 import NossaCasa from '../components/NossaCasa'
+import { TiArrowUpOutline } from 'react-icons/ti'
 import styles from '../styles/Home.module.css'
 
 type Morador = {
@@ -67,6 +69,27 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   historyImages,
   bannerUrl
 }) => {
+  const [showBackToTopBtn, setShowBackToTopBtn] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null)
+  
+  function handleBackToTopBtn() {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+    }
+  }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries
+      console.log(entry.rootBounds)
+      setShowBackToTopBtn(!entry.isIntersecting)
+
+    })
+    if (headerRef.current) {
+      observer.observe(headerRef.current)
+    }
+
+  }, [headerRef])
   return (
     <div className={styles.container}>
       <Head>
@@ -77,7 +100,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
       
       <main className={styles.main}>
-        <section className={styles.image}>
+        <section className={styles.image} ref={headerRef}>
 
           <Image 
             src={bannerUrl.img}
@@ -89,9 +112,14 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           />
 
         </section>
-        <Historia images={historyImages}/>
+        <Historia images={historyImages}  />
         <Moradores moradores={moradores} />
         <NossaCasa />
+        {showBackToTopBtn && (
+          <button className={styles.back_top_btn} title="Voltar para o topo" onClick={handleBackToTopBtn}>
+            <TiArrowUpOutline color="eaeaea"/>
+          </button>
+        )}
       </main>
 
       <Footer/>
