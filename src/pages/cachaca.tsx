@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Loading from '../components/Loading'
 import MoradoresService from '../services/MoradoresService'
 import styles from '../styles/Cachaca.module.css'
 import { VscAdd, VscCheck } from "react-icons/vsc";
@@ -27,10 +28,12 @@ export default function Cachaca({ moradores }: Cachaca) {
   const [moradoresData, setMoradoresData] = useState(moradores);
   const [headerLabelOffset, setHeaderLabelOffset] = useState(0);
   const moradoresService = new MoradoresService();
+  const [isLoading, setIsLoading] = useState(false)
 
   // adiciona uma cacha pra conta do morador
   async function handleSum(moradorId: string) {
     try {
+      setIsLoading(true)
       await moradoresService.setCachaca(moradorId)
       setMoradoresData(data => data.map(value => {
         if (value._id === moradorId) {
@@ -39,13 +42,16 @@ export default function Cachaca({ moradores }: Cachaca) {
 
         return value
       }))
+      setIsLoading(false)
     } catch (error) {
       console.log(error)
+      setIsLoading(false)
     }
   }
 
   async function handleDrink(moradorId: string) {
     try {
+      setIsLoading(true)
       await moradoresService.drinkCachaca(moradorId)
       setMoradoresData(data => data.map(value => {
         if (value._id === moradorId) {
@@ -55,8 +61,10 @@ export default function Cachaca({ moradores }: Cachaca) {
 
         return value
       }))
+      setIsLoading(false)
     } catch (error) {
       console.log(error)
+      setIsLoading(false)
     }
   }
 
@@ -163,7 +171,11 @@ export default function Cachaca({ moradores }: Cachaca) {
               </div>
             ))}
           </div>
-
+          {isLoading && (
+            <div className={styles.loading}>
+              <Loading/>
+            </div>
+          )}
         </div>
       </main>
     </div>

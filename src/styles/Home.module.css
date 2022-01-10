@@ -8,6 +8,8 @@
   min-height: 100vh;
   max-width: 1440px;
   margin: 0 auto;
+  position: relative;
+  
 }
 
 
@@ -19,4 +21,18 @@
   max-width: 1440px;
 }
 
+.back_top_btn {
+  background: transparent;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  border: 1px solid var(--light-gray);
+  border-radius: .5rem 0 0 0;
+  padding: .5rem 1rem;
+  animation: enter .2s ease-in;
+}
 
+@keyframes enter {
+  from { right: -3rem; } to {right: 0}
+}
