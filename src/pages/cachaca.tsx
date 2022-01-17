@@ -54,8 +54,10 @@ export default function Cachaca({ moradores }: Cachaca) {
       setIsLoading(true)
       await moradoresService.drinkCachaca(moradorId)
       setMoradoresData(data => data.map(value => {
-        if (value._id === moradorId) {
+        if (value._id === moradorId && value.cachaca_para_tomar > 0) {
           value.cachaca_para_tomar -= 1;
+          value.cachaca_ja_tomada += 1;
+        } else if (value._id === moradorId && value.cachaca_para_tomar === 0){
           value.cachaca_ja_tomada += 1;
         }
 

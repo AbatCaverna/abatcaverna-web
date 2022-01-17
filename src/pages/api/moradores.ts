@@ -44,13 +44,25 @@ export default async function handler(
 
       res.status(200).send('Cachaca adicionada')
     } else if (method_action === 'drunk_cachaca') {
-      await database.collection("moradores").updateOne(
-        { _id: new ObjectId(morador_id) },
-        { $inc: { 
-          cachaca_para_tomar: -1,
-          cachaca_ja_tomada: 1
-        }}
-      )
+      const [morador] = await database.collection("moradores").find({ _id: new ObjectId(morador_id) }).toArray();
+
+      if(morador.cachaca_para_tomar === 0) {
+        await database.collection("moradores").updateOne(
+          { _id: new ObjectId(morador_id) },
+          { $inc: { 
+            cachaca_ja_tomada: 1
+          }}
+        )
+      } else {
+        await database.collection("moradores").updateOne(
+          { _id: new ObjectId(morador_id) },
+          { $inc: { 
+            cachaca_para_tomar: -1,
+            cachaca_ja_tomada: 1
+          }}
+        )
+      }
+      
       res.status(200).send('Cachaca bebida')
     }
     
