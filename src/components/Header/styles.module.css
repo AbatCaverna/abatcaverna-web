@@ -4,6 +4,7 @@
   justify-content: space-between;
   border-bottom: 1px solid #eaeaea;
   padding: 0 2rem;
+  position: relative;
 }
 
 .title {
@@ -30,4 +31,29 @@
 
 .nav ul li:hover {
   text-decoration: underline;
+}
+
+.navBar_container {
+  position: absolute;
+  top: 4rem;
+  right: 3rem;
+
+  background: #000000e1;
+  z-index: 1000;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+}
+
+.navBar_container nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navBar_container nav ul li {
+  margin: 0.5rem 0;
+}
+
+.navBar_container nav ul li:active {
+  color: var(--yelloy);
 }
