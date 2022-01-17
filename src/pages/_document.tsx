@@ -2,6 +2,7 @@ import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/do
 
 const appName = 'ABatCaverna App'
 const appDescription = 'O site da república ABatCaverna de Florestal'
+const bannerImage = 'https://abatcaverna.app/abat-banner.png'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -35,7 +36,7 @@ export default class MyDocument extends Document {
           <meta name='twitter:url' content='https://abatcaverna.app' />
           <meta name='twitter:title' content='ABatCaverna App' />
           <meta name='twitter:description' content='O site da república ABatCaverna de Florestal' />
-          <meta name='twitter:image' content='https://abatcaverna.app/icons/maskable_icon.png' />
+          <meta name='twitter:image' content={bannerImage} />
           <meta name='twitter:creator' content='@AbatCaverna' />
           {/* Facebook meta tags  */}
           <meta property='og:type' content='website' />
@@ -43,7 +44,7 @@ export default class MyDocument extends Document {
           <meta property='og:description' content='O site da república ABatCaverna de Florestal' />
           <meta property='og:site_name' content='ABatCaverna' />
           <meta property='og:url' content='https://abatcaverna.app' />
-          <meta property='og:image' content='https://abatcaverna.app/icons/maskable_icon.png' />
+          <meta property='og:image' content={bannerImage} />
         </Head>
         <body>
           <Main />
