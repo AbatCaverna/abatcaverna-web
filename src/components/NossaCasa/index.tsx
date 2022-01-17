@@ -33,7 +33,7 @@ export default function NossaCasa() {
 
   function resizeMapByWindowWidht(window_width: number) {
     if (window_width < 600) {
-      // reduz em 100 pixels pois a contagem nao eh 100% precisa
+      // reduz em 60 pixels pois a contagem nao eh 100% precisa
       const mapSize = window_width - 60
       setContainerStyle({
         width: `${mapSize}px`,

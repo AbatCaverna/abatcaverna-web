@@ -48,6 +48,6 @@ a {
 
 .page_loader {
   position: fixed;
-  bottom: 0;
+  top: 0;
   right: 0;
 }
