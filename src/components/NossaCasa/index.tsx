@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, LoadScript } from '@react-google-maps/api'
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 
 import styles from './styles.module.css'
 import { FaWhatsapp } from 'react-icons/fa'
@@ -35,7 +34,7 @@ export default function NossaCasa() {
   function resizeMapByWindowWidht(window_width: number) {
     if (window_width < 600) {
       // reduz em 100 pixels pois a contagem nao eh 100% precisa
-      const mapSize = window_width - 100
+      const mapSize = window_width - 60
       setContainerStyle({
         width: `${mapSize}px`,
         height: `${mapSize}px`
