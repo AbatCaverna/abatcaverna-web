@@ -9,7 +9,7 @@ import { MdMenu } from 'react-icons/md';
 export function Header() {
   const window = useWindow();
   const [showNav, setShowNav] = useState(false)
-  const [showNavBar, setShowNavBar] = useState(false)
+  const [showMobileNavBar, setshowMobileNavBar] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
@@ -23,10 +23,10 @@ export function Header() {
 
   // close the navbar when click outside of it
   useEffect(() => {
-    router.events.on('routeChangeComplete', () => setShowNavBar(false)) // closes the navbar when route changes
+    router.events.on('routeChangeComplete', () => setshowMobileNavBar(false)) // closes the navbar when route changes
     const handler = (event: any) => {
       if (!navRef.current?.contains(event.target as Node)) {
-        setShowNavBar(false)
+        setshowMobileNavBar(false)
       }
     }
 
@@ -62,10 +62,10 @@ export function Header() {
           </ul>
         </nav>
       ) : (
-        <MdMenu size="1.5em" onClick={() => {setShowNavBar(prev => !prev);}}/>
+        <MdMenu size="1.5em" onClick={() => {setshowMobileNavBar(!showMobileNavBar);}}/>
       )}
 
-      {showNavBar && (
+      {showMobileNavBar && (
       <div className={styles.navBar_container} ref={navRef}>
         <nav>
           <ul>

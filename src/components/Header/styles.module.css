@@ -42,6 +42,8 @@
   z-index: 1000;
   border-radius: 8px;
   padding: 1rem 1.5rem;
+  animation: enter 300ms ease-in-out;
+  transform-origin: top center;
 }
 
 .navBar_container nav ul {
@@ -56,4 +58,17 @@
 
 .navBar_container nav ul li:active {
   color: var(--yelloy);
+}
+
+
+@keyframes enter {
+  0% {
+    transform: scaleY(0)
+  }
+  80% {
+      transform: scaleY(1.1)
+  }
+  100% {
+      transform: scaleY(1)
+  }
 }
