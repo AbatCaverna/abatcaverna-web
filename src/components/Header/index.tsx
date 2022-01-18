@@ -78,6 +78,11 @@ export function Header() {
             <li>
               <a href="#nossa_casa">Nossa casa</a>
             </li>
+            <li>
+              <Link href="/assistente">
+                <a >ABat Assistente</a>
+              </Link>
+            </li>
           </ul>
         </nav>
       ) : (
@@ -106,6 +111,11 @@ export function Header() {
             </li>
             <li>
                 <a href="#nossa_casa">Nossa casa</a>
+            </li>
+            <li>
+              <Link href="/assistente">
+                <a >ABat Assistente</a>
+              </Link>
             </li>
           </ul>
         </nav>
