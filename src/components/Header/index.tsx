@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './styles.module.css';
-import { MdMenu } from 'react-icons/md';
+import { MdMenu, MdClose } from 'react-icons/md';
 
 export function Header() {
   const window = useWindow();
@@ -12,6 +12,25 @@ export function Header() {
   const [showMobileNavBar, setshowMobileNavBar] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+
+  function handelNavOpen() {
+    setshowMobileNavBar(true)
+
+  }
+
+  function handelNavClose() {
+    if (navRef.current) {
+      navRef.current.classList.remove(styles.mobile_nav_enter)
+      navRef.current.classList.add(styles.mobile_nav_out)
+
+      // espera o tempo da animacao acabar 
+      // para remover o elemento da dom
+      setTimeout(() => {
+        setshowMobileNavBar(false)
+
+      }, 400)
+    }
+  }
 
   useEffect(() => {
     if (window && window.width < 480) {
@@ -26,7 +45,7 @@ export function Header() {
     router.events.on('routeChangeComplete', () => setshowMobileNavBar(false)) // closes the navbar when route changes
     const handler = (event: any) => {
       if (!navRef.current?.contains(event.target as Node)) {
-        setshowMobileNavBar(false)
+        handelNavClose()
       }
     }
 
@@ -62,11 +81,16 @@ export function Header() {
           </ul>
         </nav>
       ) : (
-        <MdMenu size="1.5em" onClick={() => {setshowMobileNavBar(!showMobileNavBar);}}/>
+        <MdMenu size="1.5em" onClick={handelNavOpen}/>
       )}
 
       {showMobileNavBar && (
-      <div className={styles.navBar_container} ref={navRef}>
+      <div className={`${styles.mobile_nav} ${styles.mobile_nav_enter}`} ref={navRef}>
+        <MdClose
+          size="1.5em"
+          className={styles.mobile_nav_close_btn}
+          onClick={handelNavClose}
+        />
         <nav>
           <ul>
             <li>
