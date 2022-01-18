@@ -8,7 +8,7 @@
   height: 400px;
   position: relative;
   animation: fadein 1s ease-in;
-  z-index: 1000;
+  z-index: 2;
 }
 
 @media screen and (max-width: 600px) {
