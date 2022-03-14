@@ -61,15 +61,6 @@ export const Data = {
       image: '/moradores/heron.jpeg',
       instagram: 'https://www.instagram.com/heron_f4/',
       base64: ''
-    },
-    {
-      nome: 'Matheus R',
-      apelido: 'Pão',
-      dataEntrada: 2021,
-      curso: 'Engenharia de Alimentos',
-      image: '/moradores/pao.jpeg',
-      instagram: '',
-      base64: ''
     }
   ],
   historyImages: [
