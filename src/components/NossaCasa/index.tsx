@@ -83,7 +83,7 @@ export default function NossaCasa() {
             <li>Temos uma cachorrinha linda e muito carinhosa</li>
           </ul>
 
-          <h3>Não temos vagas!</h3>
+          <h3>Temos vagas!</h3>
           <p>Dúvidas e/ou interesse, entre em contato com um dos moradores:</p>
           <ul className={styles.contact_list}>
             <li>

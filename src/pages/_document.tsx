@@ -45,6 +45,7 @@ export default class MyDocument extends Document {
           <meta property='og:site_name' content='ABatCaverna' />
           <meta property='og:url' content='https://abatcaverna.app' />
           <meta property='og:image' content={bannerImage} />
+          <meta property="og:locale" content="pt_BR" />
         </Head>
         <body>
           <Main />
