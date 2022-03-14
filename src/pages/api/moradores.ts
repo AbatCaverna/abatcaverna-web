@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { ObjectId } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import ConnectDatabase from '../../services/mongo'
+import connectMongo from '../../services/mongo'
 
 type Morador = {
   _id: string;
@@ -19,7 +19,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const database = (await ConnectDatabase).db('abatcaverna')
+  const { clientPromise } = connectMongo()
+  const database = (await clientPromise).db('abatcaverna')
   if (req.method === 'GET') {
     const moradores = await database
       .collection("moradores")
