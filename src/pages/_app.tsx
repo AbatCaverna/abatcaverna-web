@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app'
 import { IconContext } from 'react-icons';
-import { Header } from '../components/Header'
-import Loading from '../components/Loading'
+import { Header } from '../components/Shared/Header'
+import Loading from '../components/Shared/Loading'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {

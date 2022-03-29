@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRgbDataURL } from '../../hooks/useBlur';
+import { useRgbDataURL } from '../../../hooks/useBlur';
 import styles from './styles.module.css';
 
 type Image = {

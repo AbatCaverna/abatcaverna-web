@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import useWindow from '../../hooks/useWindow';
+import useWindow from '../../../hooks/useWindow';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
