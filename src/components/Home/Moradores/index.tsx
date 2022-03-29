@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from 'next/link';
-import { useRgbDataURL } from '../../hooks/useBlur';
 import styles from './styles.module.css';
 
 type Morador = {
