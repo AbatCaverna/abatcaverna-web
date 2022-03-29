@@ -11,7 +11,7 @@
     "@react-google-maps/api": "^2.7.0",
     "axios": "^0.24.0",
     "mongodb": "^4.2.1",
-    "next": "12",
+    "next": "^12.1.2",
     "next-pwa": "^5.4.4",
     "plaiceholder": "^2.2.0",
     "react": "17.0.2",
