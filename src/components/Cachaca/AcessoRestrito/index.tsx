@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { GoAlert } from 'react-icons/go';
 import AcessoService from '../../../services/AcessoService';
+import Loading from '../../Shared/Loading';
 import styles from './styles.module.css';
 
 interface AcessoRestrito {
@@ -9,6 +10,7 @@ interface AcessoRestrito {
 
 export default function AcessoRestrito({ handleAccess }: AcessoRestrito) {
   const inputRef = useRef<HTMLInputElement>(null)
+  const [loading, setLoading] = useState(false)
   const acessoService = new AcessoService()
 
   async function handleButtonClick() {
@@ -16,10 +18,13 @@ export default function AcessoRestrito({ handleAccess }: AcessoRestrito) {
       const code_input = inputRef.current.value
 
       try {
+        setLoading(true)
         const response = await acessoService.acesso(code_input)
         const { valid } = response.data
+        setLoading(false)
         handleAccess(valid)
       } catch (error) {
+        setLoading(false)
         alert("⚠️ Código inválido")
       }
 
@@ -50,7 +55,7 @@ export default function AcessoRestrito({ handleAccess }: AcessoRestrito) {
         type="button"
         onClick={handleButtonClick}
       >
-        Enter
+        {loading ? <Loading/>: 'Enter'}
       </button>
 
     </div>
