@@ -4,7 +4,7 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 
 import styles from './styles.module.css'
 import { FaWhatsapp } from 'react-icons/fa'
-import useWindow from '../../hooks/useWindow'
+import useWindow from '../../../hooks/useWindow'
 
 // coordenadas da casa na rua Geni Naime Silve, 128, California
 const center = {
