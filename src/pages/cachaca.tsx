@@ -7,6 +7,7 @@ import styles from '../styles/Cachaca.module.css'
 import { VscAdd, VscCheck } from "react-icons/vsc";
 import { useEffect, useRef, useState } from 'react'
 import Modal from '../components/Shared/Modal'
+import AcessoRestrito from '../components/Cachaca/AcessoRestrito'
 
 type Morador = {
   _id: string;
@@ -30,6 +31,7 @@ export default function Cachaca({ moradores }: Cachaca) {
   const [headerLabelOffset, setHeaderLabelOffset] = useState(0);
   const moradoresService = new MoradoresService();
   const [isLoading, setIsLoading] = useState(false)
+  const [cannotAccess, setCannotAccess] = useState(true)
 
   // adiciona uma cacha pra conta do morador
   async function handleSum(moradorId: string) {
@@ -181,8 +183,8 @@ export default function Cachaca({ moradores }: Cachaca) {
           )}
         </div>
       </main>
-      <Modal isOpen={true}>
-        <div>Hello modal</div>
+      <Modal isOpen={cannotAccess}>
+        <AcessoRestrito handleAccess={(ev: boolean) => setCannotAccess(!ev)}/>
       </Modal>
     </div>
   )
