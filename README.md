@@ -20,9 +20,9 @@ yarn
 yarn dev
 ```
 
-Ou aceese o site https://abatcaverna.app
+Ou acesse o site https://abatcaverna.app
 
-## 📫 Contribuindo para <nome_do_projeto>
+## 📫 Contribuindo
 
 Para contribuir com o projeto, siga estas etapas:
 
@@ -32,7 +32,7 @@ Para contribuir com o projeto, siga estas etapas:
 4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
 5. Crie a solicitação de pull.
 
-Lembrese sempre de pegar as alterações da branch de `dev` para pegar as atualizações mais recentes.
+Lembre-se sempre de pegar as alterações da branch de `dev` para pegar as atualizações mais recentes.
 
 ## 🤝 Colaboradores
 
