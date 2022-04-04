@@ -196,7 +196,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const response = await service.getMoradores()
 
     return {
-      props: { moradores: response.data },
+      props: { moradores: response.data.moradores },
     }
   } catch (e) {
     console.error(e)
