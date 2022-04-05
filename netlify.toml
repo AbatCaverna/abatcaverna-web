@@ -1,0 +1,4 @@
+[context.production.environment]
+  NEXTAUTH_URL="https://abatcaverna.app"
+[context.dev.environment]
+  NEXTAUTH_URL="https://dev.abatcaverna.app"
