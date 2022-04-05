@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { ObjectId } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import MoradoresController from '../../../backend/Controller/MoradoresController';
 import connectMongo from '../../../backend/Providers/mongo'
@@ -20,8 +19,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { clientPromise } = connectMongo()
-  const database = (await clientPromise).db('abatcaverna')
+  const { database } = await connectMongo()
   const moradoresController = new MoradoresController(database)
   
   if (req.method === 'GET') {
