@@ -32,6 +32,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
+    "netlify-plugin-inline-functions-env": "^1.0.9",
     "typescript": "4.4.4"
   },
   "config": {
