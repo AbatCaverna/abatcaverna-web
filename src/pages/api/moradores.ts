@@ -2,7 +2,7 @@
 import { ObjectId } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import MoradoresController from '../../../backend/Controller/MoradoresController';
-import connectMongo from '../../services/mongo'
+import connectMongo from '../../../backend/Providers/mongo'
 
 type Morador = {
   _id: string;
