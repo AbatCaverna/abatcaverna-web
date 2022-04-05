@@ -1,3 +1,7 @@
-[build]
-  command = "chmod u+x build.sh && ./build.sh"
+[contex.production]
+  command = "export NEXTAUTH_URL='https://abatcaverna.app' && yarn build"
+  publish = ".next"
+
+[context.branch-deploy]
+  command = "export NEXTAUTH_URL='https://dev.abatcaverna.app' && yarn build"
   publish = ".next"
