@@ -3,3 +3,8 @@
 
 [context.branch-deploy.environment]
   NEXTAUTH_URL="https://dev.abatcaverna.app"
+
+[[plugins]]
+package = "netlify-plugin-inline-functions-env"
+  [plugins.inputs]
+  lifecycle = "onBuild"
