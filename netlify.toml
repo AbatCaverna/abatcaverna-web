@@ -7,4 +7,4 @@
 [[plugins]]
 package = "netlify-plugin-inline-functions-env"
   [plugins.inputs]
-  lifecycle = "onBuild"
+  buildEvent = "onBuild"
