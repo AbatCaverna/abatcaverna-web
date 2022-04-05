@@ -1,10 +1,16 @@
-import { useSession } from 'next-auth/react'
+import { useSession,signOut  } from 'next-auth/react'
 
 export default function LoginPage() {
-  const { data: session, status } = useSession()
+  const { data: session, status,  } = useSession()
 
   if (status === "authenticated") {
-    return <p>Signed in as {session.user?.name}</p>
+    return (
+      <div>
+        <p>Signed in as {session.user?.name}</p>
+        <button onClick={() => signOut()}>Sign out</button>
+      </div>
+
+    )
   }
 
   return (
