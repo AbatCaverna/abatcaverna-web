@@ -6,7 +6,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
     "test": "echo 'No tests yet'",
     "commit": "git add . && npx git-cz"
   },
