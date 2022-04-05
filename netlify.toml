@@ -1,7 +1,5 @@
-[contex.production]
-  command = "export NEXTAUTH_URL='https://abatcaverna.app' && yarn build"
-  publish = ".next"
+[contex.production.environment]
+  NEXTAUTH_URL="https://abatcaverna.app"
 
-[context.branch-deploy]
-  command = "export NEXTAUTH_URL='https://dev.abatcaverna.app' && yarn build"
-  publish = ".next"
+[context.branch-deploy.environment]
+  NEXTAUTH_URL="https://dev.abatcaverna.app"
