@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 
-export default  function connectMongo() {
+export default async function connectMongo() {
   const uri = process.env.MONGODB_URI
   const options = {}
   
@@ -12,6 +12,6 @@ export default  function connectMongo() {
   // separate module, the client can be shared across functions.
   const client = new MongoClient(uri, options)
   const clientPromise = client.connect()
-
-  return { clientPromise }
+  const database = (await clientPromise).db('abatcaverna')
+  return { database }
 }
