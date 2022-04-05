@@ -1,4 +1,3 @@
-[context.production.environment]
-  NEXTAUTH_URL="https://abatcaverna.app"
-[context.branch-deploy.environment]
-  NEXTAUTH_URL="https://dev.abatcaverna.app"
+[build]
+  command = "./build.sh"
+  publish = ".next"
