@@ -41,8 +41,6 @@ export const getStaticProps: GetStaticProps<MoradorProps> = async () => {
     imgBase64: ''
   }
 
-  console.log(process.env.NEXTAUTH_URL)
-
   const { base64 } = await getPlaiceholder(banner.img);
   banner.imgBase64 = base64
 
