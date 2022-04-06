@@ -11,16 +11,17 @@ Repositorio para o site da Republica ABatCaverna.
 
 ## ☕ Usando
 
-Para usar, siga estas etapas:
+Para usar em desenvolvimento, siga estas etapas:
+
+- tenha instalado na sua maquina o Docker e o docker-compose
 
 ```
 git clone <url>
 cd abatcaverna-web
-yarn
-yarn dev
+./run.sh
 ```
 
-Ou acesse o site https://abatcaverna.app
+Para ver o app apenas acesse o site https://abatcaverna.app
 
 ## 📫 Contribuindo
 
