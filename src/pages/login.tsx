@@ -12,6 +12,7 @@ export default function LoginPage() {
   }
   
   if (status === "authenticated") {
+    console.log('user',session.user)
     return (
       <>
         <div>

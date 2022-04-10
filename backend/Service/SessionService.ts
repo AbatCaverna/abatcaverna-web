@@ -35,6 +35,11 @@ export default class MoradoresService {
       
       if (password !== morador.senha) return null;
 
+      if (privateKey === undefined) {
+        console.error(`Error[SERVER](${new Date().toDateString()}): Must provide a NEXTAUTH_SECRET env var`)
+        return null
+      };
+
       const jwt_token = jwt.sign(morador, privateKey, {
         expiresIn: 60 * 60 * 24 * 30, // 30 dias
         algorithm: 'HS512'

@@ -25,7 +25,12 @@ export default NextAuth({
 
         // If no error and we have user data, return it
         if (user) {
-          return user
+          return {
+            name: user.apelido,
+            email: user.nome,
+            image: user.imagem,
+            token: user.token
+          }
         }
         // Return null if user data could not be retrieved
         return null
@@ -34,6 +39,7 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
+      console.log('sigin', user)
       const { database } = await connectMongo()
       const sessionController = new SessionController(database)
 
@@ -60,8 +66,14 @@ export default NextAuth({
       return baseUrl
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      token.jwt_token = user?.token
+      console.log('jwt', token)
+      if (user) token.accessToken = user.token
       return token
+    },
+    async session({ session, token, user }) {
+      console.log('session', token)
+      session.accessToken = token.accessToken
+      return session
     }
   },
 })
