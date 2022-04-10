@@ -2,7 +2,7 @@ import UserRepository from '../Repository/UserRepository'
 import { Role } from '../../src/utils/enum';
 import jwt from 'jsonwebtoken';
 
-const privateKey = 'private key'
+const privateKey = process.env.NEXTAUTH_SECRET
 export default class MoradoresService {
 
   private _userRepository: UserRepository;
@@ -35,7 +35,10 @@ export default class MoradoresService {
       
       if (password !== morador.senha) return null;
 
-      const jwt_token = jwt.sign(morador, privateKey, { algorithm: 'RS256' });
+      const jwt_token = jwt.sign(morador, privateKey, {
+        expiresIn: 60 * 60 * 24 * 30, // 30 dias
+        algorithm: 'HS512'
+      });
       
       return {
         ...morador,

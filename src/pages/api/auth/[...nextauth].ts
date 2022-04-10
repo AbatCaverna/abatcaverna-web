@@ -60,8 +60,7 @@ export default NextAuth({
       return baseUrl
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log('jwt token', token)
-      console.log('jwt user', user)
+      token.jwt_token = user?.token
       return token
     }
   },
