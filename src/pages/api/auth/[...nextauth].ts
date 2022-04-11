@@ -33,7 +33,8 @@ export default NextAuth({
             name: user.apelido,
             email: user.nome,
             image: user.imagem,
-            token: user.token
+            token: user.token,
+            role: Role.cavernoso
           }
         }
         // Return null if user data could not be retrieved
@@ -43,7 +44,6 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      console.log('sigin', user)
       const { database } = await connectMongo()
       const sessionController = new SessionController(database)
 
@@ -69,12 +69,18 @@ export default NextAuth({
       return baseUrl
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      if (user) token.accessToken = user.token
+      if (user) {
+        token.accessToken = user.token
+        token.role = user.role
+      }
       return token
     },
     async session({ session, token, user }) {
       session.accessToken = token.accessToken
-      return session
+      return {
+        ...session,
+        role: token.role
+      }
     }
   },
 })

@@ -81,7 +81,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries
-      console.log(entry.rootBounds)
       setShowBackToTopBtn(!entry.isIntersecting)
 
     })
