@@ -1,7 +1,7 @@
-import { useSession,signOut, signIn } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
+import styles from '../styles/Login.module.css'
 
 export default function LoginPage() {
-  const { data: session, status,  } = useSession()
 
   async function handleSignIn(user: string) {
     if (user === 'usuario') await signIn("google")
@@ -10,27 +10,12 @@ export default function LoginPage() {
       callbackUrl: '/dashboard'
     })
   }
-  
-  if (status === "authenticated") {
-    console.log('user',session.user)
-    return (
-      <>
-        <div>
-          <p>Signed in as {session?.user?.name}</p>
-          <button onClick={() => signOut()}>Sign out</button>
-        </div>
-        
-      </>
-      
-
-    )
-  }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Com qual usuário quer fazer o login</h1>
 
-      <div>
+      <div className={styles.btn_container}>
         <button
           type="button"
           onClick={() => handleSignIn('usuario')}

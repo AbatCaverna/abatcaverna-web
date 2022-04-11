@@ -1,0 +1,41 @@
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn_container {
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  padding: 1rem;
+  width: fit-content;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn_container > button {
+  background-color: transparent;
+  color: #fff;
+  outline: none;
+  border: 1px solid var(--light-gray);
+  width: 180px;
+  height: 45px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.btn_container > button:hover {
+  filter: brightness(0.9);
+}
+
+.btn_container > button:active {
+  transform: translate(1px, 1px);
+}
