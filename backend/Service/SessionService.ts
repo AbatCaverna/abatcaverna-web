@@ -1,6 +1,7 @@
 import UserRepository from '../Repository/UserRepository'
 import { Role } from '../../src/utils/enum';
 import jwt from 'jsonwebtoken';
+import returnHashString from '../Utils/crypto';
 
 const privateKey = process.env.NEXTAUTH_SECRET
 export default class MoradoresService {
@@ -33,7 +34,7 @@ export default class MoradoresService {
       
       if (!morador) return null;
       
-      if (password !== morador.senha) return null;
+      if (returnHashString(password) !== morador.senha) return null;
 
       if (privateKey === undefined) {
         console.error(`Error[SERVER](${new Date().toDateString()}): Must provide a NEXTAUTH_SECRET env var`)

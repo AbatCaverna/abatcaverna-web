@@ -1,4 +1,6 @@
+import Morador from "../Models/Morador";
 import MoradoresRepository from "../Repository/MoradoresRepository";
+import returnHashString from "../Utils/crypto";
 
 export default class MoradoresService {
 
@@ -36,5 +38,22 @@ export default class MoradoresService {
       
       return 'Cachaca bebida'
     }
+  }
+
+  public async createMorador(morador: Morador) {
+    const newMorador = new Morador(
+      morador.nome,
+      morador.apelido,
+      morador.ano_entrada,
+      morador.curso,
+      morador.imagem,
+      morador.instagram,
+      morador.cachaca_para_tomar,
+      morador.cachaca_ja_tomada,
+      returnHashString(morador.senha!)
+    )
+
+    const created = await this._moradorRepository.create(newMorador)
+    return created.insertedId;
   }
 }

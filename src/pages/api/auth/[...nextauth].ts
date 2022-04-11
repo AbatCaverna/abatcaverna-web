@@ -6,6 +6,10 @@ import connectMongo from "../../../../backend/Providers/mongo";
 import { Role } from "../../../utils/enum";
 
 export default NextAuth({
+  theme: {
+    colorScheme: "dark", // "auto" | "dark" | "light"
+    brandColor: "#FFC74A", // Hex color code
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
@@ -61,17 +65,14 @@ export default NextAuth({
     },
     async redirect({ url, baseUrl }) {
       if (url.startsWith(baseUrl)) return url
-      // Allows relative callback URLs
       else if (url.startsWith("/")) return new URL(url, baseUrl).toString()
       return baseUrl
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log('jwt', token)
       if (user) token.accessToken = user.token
       return token
     },
     async session({ session, token, user }) {
-      console.log('session', token)
       session.accessToken = token.accessToken
       return session
     }

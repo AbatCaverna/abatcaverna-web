@@ -53,4 +53,10 @@ export default class MoradoresRepository {
       .collection('moradores')
       .findOne({ apelido: name }) as Morador
   }
+
+  public async create(morador: Morador) {
+    return await this._database
+      .collection("moradores")
+      .insertOne(morador)
+  }
 }
