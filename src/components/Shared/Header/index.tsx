@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './styles.module.css';
 import { MdMenu, MdClose } from 'react-icons/md';
+import { useSession } from 'next-auth/react';
+import ProfileButton from '../ProfileButton';
 
 export function Header() {
   const window = useWindow();
@@ -12,6 +14,7 @@ export function Header() {
   const [showMobileNavBar, setshowMobileNavBar] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+  const { data, status } = useSession()
 
   function handelNavOpen() {
     setshowMobileNavBar(true)
@@ -55,6 +58,12 @@ export function Header() {
       document.removeEventListener('mousedown', handler)
     }
   })
+
+  if (status === 'loading') return (
+    <div>
+      ...
+    </div>
+  )
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>
@@ -78,6 +87,18 @@ export function Header() {
             <li>
               <a href="#nossa_casa">Nossa casa</a>
             </li>
+            {
+              status === "unauthenticated" ? (
+              <li>
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              </li>
+              ) : (
+                <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
+              )
+            }
+
           </ul>
         </nav>
       ) : (
@@ -107,6 +128,17 @@ export function Header() {
             <li>
                 <a href="#nossa_casa">Nossa casa</a>
             </li>
+            {
+              status === "unauthenticated" && data ? (
+              <li>
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              </li>
+              ) : (
+                <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
+              )
+            }
           </ul>
         </nav>
       </div>

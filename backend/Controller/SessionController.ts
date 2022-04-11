@@ -20,4 +20,11 @@ export default class SessionController {
     
     return response
   }
+
+  public async moradorSession(name: string, password: string) {
+
+    const response = await this.sessionService.morador(name, password)
+
+    return response
+  }
 }

@@ -1,5 +1,6 @@
 import { Db } from "mongodb";
 import User from "../Models/User";
+import Morador from "../Models/Morador";
 
 export default class MoradoresRepository {
   private _database: Db
@@ -22,6 +23,15 @@ export default class MoradoresRepository {
     await this._database
       .collection("users")
       .insertOne(newUser)
+  }
+
+  public async getMorador(name: string) {
+    const [morador] = await this._database
+      .collection('moradores')
+      .find({ apelido: name })
+      .toArray() as Morador[]
+
+    return morador
   }
 
 }

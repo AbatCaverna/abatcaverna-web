@@ -10,6 +10,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 # to the /app working directory
 COPY package*.json /app
+COPY yarn.lock /app
 
 # Install dependencies in /app
 RUN yarn install

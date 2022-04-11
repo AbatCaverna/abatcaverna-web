@@ -27,6 +27,8 @@
 
 .nav ul li {
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .nav ul li:hover {

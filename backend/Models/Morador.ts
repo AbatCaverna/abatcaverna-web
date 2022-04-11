@@ -10,6 +10,7 @@ export default class Morador {
     public instagram: string,
     public cachaca_para_tomar: number,
     public cachaca_ja_tomada: number,
+    public senha?: string,
     public _id?: ObjectId,
   ) {}
 }

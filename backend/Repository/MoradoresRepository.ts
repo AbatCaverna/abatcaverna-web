@@ -47,4 +47,16 @@ export default class MoradoresRepository {
       .toArray()) as Morador[];
     return morador;
   }
+
+  public async getMorador(name: string) {
+    return await this._database
+      .collection('moradores')
+      .findOne({ apelido: name }) as Morador
+  }
+
+  public async create(morador: Morador) {
+    return await this._database
+      .collection("moradores")
+      .insertOne(morador)
+  }
 }

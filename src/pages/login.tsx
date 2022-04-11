@@ -1,26 +1,32 @@
-import { useSession,signOut  } from 'next-auth/react'
-import Link from 'next/link'
+import { signIn } from 'next-auth/react'
+import styles from '../styles/Login.module.css'
 
 export default function LoginPage() {
-  const { data: session, status,  } = useSession()
 
-  if (status === "authenticated") {
-    return (
-      <div>
-        <p>Signed in as {session?.user?.name}</p>
-        <button onClick={() => signOut()}>Sign out</button>
-      </div>
+  async function handleSignIn(user: string) {
+    if (user === 'usuario') await signIn("google")
 
-    )
+    if (user === 'cavernoso') await signIn(undefined, {
+      callbackUrl: '/dashboard'
+    })
   }
 
   return (
-    <div>
-      <h1>Authenticate</h1>
-      <Link href="/api/auth/signin">
-        <a>Sign in</a>
-      
-      </Link>
+    <div className={styles.container}>
+      <h1>Com qual usuário quer fazer o login</h1>
+
+      <div className={styles.btn_container}>
+        <button
+          type="button"
+          onClick={() => handleSignIn('usuario')}
+        >Usuário</button>
+        <button
+          type="button"
+          onClick={() => handleSignIn('cavernoso')}
+        >Morador</button>
+
+      </div>
+
     </div>
   )
 }

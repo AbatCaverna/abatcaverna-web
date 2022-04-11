@@ -12,7 +12,7 @@ module.exports = withPWA({
     dest: "public",
   },
   images: {
-    domains: ["maps.googleapis.com"],
+    domains: ["maps.googleapis.com", "lh3.googleusercontent.com"],
   },
   reactStrictMode: true
 })
