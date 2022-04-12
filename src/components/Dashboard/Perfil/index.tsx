@@ -3,6 +3,7 @@ import styles from "./styles.module.css"
 import { RiLockPasswordLine } from "react-icons/ri"
 import { GiBatMask } from "react-icons/gi";
 import MoradoresService from "../../../services/MoradoresService";
+import { useRef } from "react";
 
 interface Perfil {
   user: {
@@ -14,9 +15,20 @@ interface Perfil {
 
 export default function Perfil({ user }: Perfil) {
   const moradoresService = new MoradoresService()
+  const oldPasswordRef = useRef<HTMLInputElement>(null)
+  const newPasswordRef = useRef<HTMLInputElement>(null)
 
   async function handleChange() {
-    await moradoresService.changePassword('Chapoca', 'vinicius1')
+    if (oldPasswordRef.current && newPasswordRef.current) {
+
+      if (oldPasswordRef.current.value !== newPasswordRef.current.value) {
+        alert("As senhas devem ser iguais")
+        return
+      }
+
+      await moradoresService.changePassword(user.name!, newPasswordRef.current.value)
+      alert("Senha alterada com sucesso")
+    }
   }
   return (
     <div>
@@ -32,12 +44,12 @@ export default function Perfil({ user }: Perfil) {
           <h2>Trocar senha</h2>
 
           <div className={styles.input}>
-            <label htmlFor="password"><RiLockPasswordLine/> Senha antiga</label>
-            <input type="password" name="password" id="password" />
+            <label htmlFor="password"><RiLockPasswordLine/> Nova senha</label>
+            <input ref={oldPasswordRef} type="password" name="password" id="password" />
           </div>
           <div className={styles.input}>
-            <label htmlFor="new_password"> <RiLockPasswordLine/>Nova senha</label>
-            <input type="password" name="new_password" id="new_password" />
+            <label htmlFor="new_password"> <RiLockPasswordLine/> Confirmar senha</label>
+            <input ref={newPasswordRef} type="password" name="new_password" id="new_password" />
           </div>
 
           <button type="button" onClick={handleChange}>Trocar</button>
