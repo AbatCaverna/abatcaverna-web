@@ -17,8 +17,8 @@ export default class MoradoresRepository {
     return user;
   }
 
-  public async createUser(name?: string, email?: string, image?: string): Promise<void> {
-    const newUser = new User(name, email, image);
+  public async createUser(name?: string, email?: string, image?: string, stripe_customer_id?: string): Promise<void> {
+    const newUser = new User(name, email, image, stripe_customer_id);
 
     await this._database
       .collection("users")
