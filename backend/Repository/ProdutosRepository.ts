@@ -30,4 +30,22 @@ export default class ProdutosRepository {
 
     return products
   }
+
+  public async createProduct(name: string, value: number, description?: string) {
+    const product_created = await this._stripe.products.create({
+      name,
+      description
+    });
+
+    const price = await this._stripe.prices.create({
+      unit_amount: value,
+      currency: 'brl',
+      product: product_created.id,
+    });
+
+    return {
+      product: product_created,
+      price
+    } 
+  }
 }

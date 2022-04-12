@@ -1,4 +1,5 @@
 import ProdutosRepository from "../Repository/ProdutosRepository"
+import Produto from "../Models/Produto"
 
 export default class ProdutosService {
   private _produtosRepository: ProdutosRepository
@@ -13,5 +14,18 @@ export default class ProdutosService {
     } catch (error) {
       throw new Error("Could not get products")
     }
+  }
+
+  public async createProduct(product: Produto) {
+    try {
+      return await this._produtosRepository.createProduct(
+        product.name,
+        product.value,
+        product.description
+      )
+    } catch (error) {
+      throw new Error("Could not create product")
+    }
+
   }
 }
