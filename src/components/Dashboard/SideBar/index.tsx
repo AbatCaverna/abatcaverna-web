@@ -1,7 +1,10 @@
 import { MdSpaceDashboard } from "react-icons/md"
 import styles from "./styles.module.css"
+interface SideBar {
+  onChangeRoute: (route: string) => void
+}
 
-export default function SideBar() {
+export default function SideBar({ onChangeRoute }: SideBar) {
   return (
     <div className={styles.navbar}>
       <h1>
@@ -11,11 +14,11 @@ export default function SideBar() {
         <ul>
           <strong>Morador</strong>
           <hr />
-          <li>Perfil</li>
+          <li onClick={() => onChangeRoute('perfil')}>Perfil</li>
           <strong>Loja</strong>
           <hr />
-          <li>Produtos</li>
-          <li>Pedidos</li>
+          <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
+          <li onClick={() => onChangeRoute('pedidos')}>Pedidos</li>
         </ul>
       </nav>
     </div>

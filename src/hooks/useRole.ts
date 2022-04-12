@@ -4,8 +4,8 @@ export default function useRole() {
   const { data } = useSession()
 
   if(data?.role !== "cavernoso") {
-    return false
+    return null
   }
 
-  return true
+  return data.user
 }

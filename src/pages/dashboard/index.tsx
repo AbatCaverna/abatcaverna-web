@@ -1,13 +1,14 @@
 
 import Link from "next/link";
+import Perfil from "../../components/Dashboard/Perfil";
 import SideBar from "../../components/Dashboard/SideBar";
 import useRole from "../../hooks/useRole";
 import styles from "../../styles/Dashboard.module.css";
 
 export default function DashboardPage() {
-  const isMorador = useRole()
+  const morador = useRole()
 
-  if(!isMorador) {
+  if(!morador) {
     return (
       <div>
         <h1>Não pode acessar essa pagina</h1>
@@ -18,11 +19,15 @@ export default function DashboardPage() {
     )
   }
 
+  function handleRouteChange(route: string) {
+    console.log(route)
+  }
+
   return (
     <div className={styles.container}>
-      <SideBar/>
+      <SideBar onChangeRoute={handleRouteChange} />
       <main>
-        Dashboard teste
+        <Perfil user={morador}/>
 
       </main>
     </div>
