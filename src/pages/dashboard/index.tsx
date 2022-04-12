@@ -1,6 +1,8 @@
 
 import Link from "next/link";
+import SideBar from "../../components/Dashboard/SideBar";
 import useRole from "../../hooks/useRole";
+import styles from "../../styles/Dashboard.module.css";
 
 export default function DashboardPage() {
   const isMorador = useRole()
@@ -17,8 +19,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <div>
-      Dashboard teste
+    <div className={styles.container}>
+      <SideBar/>
+      <main>
+        Dashboard teste
+
+      </main>
     </div>
   );
 }

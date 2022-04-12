@@ -1,0 +1,34 @@
+.navbar {
+  background-color: #474545;
+  padding: 1rem;
+}
+
+.navbar > h1 {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.navbar_menu {
+  max-width: 150px;
+}
+
+.navbar_menu > ul {
+  list-style: none;
+}
+
+.navbar_menu > ul > li {
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  margin: 16px 0;
+  cursor: pointer;
+}
+
+.navbar_menu > ul > strong {
+  font-size: 12px;
+}
+
+.navbar_menu > ul > hr {
+  margin: 0;
+}
