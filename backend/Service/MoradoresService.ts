@@ -56,4 +56,20 @@ export default class MoradoresService {
     const created = await this._moradorRepository.create(newMorador)
     return created.insertedId;
   }
+
+
+  public async changePassword(name: string, new_password: string) {
+    try {
+      const morador = await this._moradorRepository.getMorador(name)
+      const new_password_hash = returnHashString(new_password)
+
+      if (morador.senha === new_password_hash) {
+        throw new Error("Password must be different from old password")
+      }
+
+      await this._moradorRepository.changePassword(name, new_password_hash)
+    } catch (error) {
+      throw new Error("Could not change password")
+    }
+  }
 }

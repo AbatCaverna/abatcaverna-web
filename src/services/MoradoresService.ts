@@ -28,4 +28,11 @@ export default class MoradoresService {
       morador_id: moradorId
     })
   }
+
+  async changePassword(name: string, new_password: string) {
+    return await this.api.put('/change-password', {
+      name,
+      new_password
+    })
+  }
 }

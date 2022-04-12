@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./styles.module.css"
 import { RiLockPasswordLine } from "react-icons/ri"
 import { GiBatMask } from "react-icons/gi";
+import MoradoresService from "../../../services/MoradoresService";
 
 interface Perfil {
   user: {
@@ -12,6 +13,11 @@ interface Perfil {
 }
 
 export default function Perfil({ user }: Perfil) {
+  const moradoresService = new MoradoresService()
+
+  async function handleChange() {
+    await moradoresService.changePassword('Chapoca', 'vinicius1')
+  }
   return (
     <div>
       <h1>Perfil</h1>
@@ -34,7 +40,7 @@ export default function Perfil({ user }: Perfil) {
             <input type="password" name="new_password" id="new_password" />
           </div>
 
-          <button type="button">Trocar</button>
+          <button type="button" onClick={handleChange}>Trocar</button>
         </div>
       </div>
     </div>
