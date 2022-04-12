@@ -1,13 +1,11 @@
-import { GetStaticProps } from "next";
-import { useSession } from "next-auth/react";
+
 import Link from "next/link";
-import { useRouter } from "next/router";
+import useRole from "../../hooks/useRole";
 
 export default function DashboardPage() {
-  const { data } = useSession()
-  const router = useRouter();
+  const isMorador = useRole()
 
-  if(data?.role !== "cavernoso") {
+  if(!isMorador) {
     return (
       <div>
         <h1>Não pode acessar essa pagina</h1>
