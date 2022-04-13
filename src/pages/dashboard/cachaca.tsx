@@ -1,13 +1,12 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Loading from '../components/Shared/Loading'
-import MoradoresService from '../services/MoradoresService'
-import styles from '../styles/Cachaca.module.css'
+import Loading from '../../components/Shared/Loading'
+import MoradoresService from '../../services/MoradoresService'
+import styles from '../../styles/Cachaca.module.css'
 import { VscAdd, VscCheck } from "react-icons/vsc";
 import { useEffect, useRef, useState } from 'react'
-import Modal from '../components/Shared/Modal'
-import AcessoRestrito from '../components/Cachaca/AcessoRestrito'
+import { getSession } from 'next-auth/react'
 
 type Morador = {
   _id: string;
@@ -31,7 +30,6 @@ export default function Cachaca({ moradores }: Cachaca) {
   const [headerLabelOffset, setHeaderLabelOffset] = useState(0);
   const moradoresService = new MoradoresService();
   const [isLoading, setIsLoading] = useState(false)
-  const [cannotAccess, setCannotAccess] = useState(true)
 
   // adiciona uma cacha pra conta do morador
   async function handleSum(moradorId: string) {
@@ -181,14 +179,22 @@ export default function Cachaca({ moradores }: Cachaca) {
           )}
         </div>
       </main>
-      <Modal isOpen={cannotAccess}>
-        <AcessoRestrito handleAccess={(ev: boolean) => setCannotAccess(!ev)}/>
-      </Modal>
     </div>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+  
+  if (!session || session.role !== "cavernoso") {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+  
   try {
     const service = new MoradoresService()
     const response = await service.getMoradores()

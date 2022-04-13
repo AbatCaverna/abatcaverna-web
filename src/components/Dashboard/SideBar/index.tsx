@@ -19,6 +19,7 @@ export default function SideBar() {
           <strong>Morador</strong>
           <hr />
           <li onClick={() => onChangeRoute('')}>Perfil</li>
+          <li onClick={() => onChangeRoute('cachaca')}>Cachaça</li>
           <strong>Loja</strong>
           <hr />
           <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
