@@ -13,6 +13,7 @@ interface Produtos {
 }
 
 export default function Produtos({ data }: Produtos) {
+  const noImage = "/images/no_image.png";
   function trasnformValue(amount: number) {
     const real = amount / 100;
     const value_string = real.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -23,7 +24,7 @@ export default function Produtos({ data }: Produtos) {
       <div className={styles.header}>
         <h1>Produtos</h1>
         <div>
-          <Link href="/dashboard/create-product">
+          <Link href="/dashboard/criar-produto">
             <a >+ Adicionar produto</a>
           </Link>
         </div>
@@ -33,11 +34,11 @@ export default function Produtos({ data }: Produtos) {
           {data.map(({product, price}) => (
             <li key={product.id}>
               <div className={styles.item}>
-                <img
-                  src={product.images[0]}
+                <Image
+                  src={product.images[0] || noImage}
                   alt="produto"
-                  width={42}
-                  height={42}
+                  width={62}
+                  height={62}
                 />
                 <div>
                   <p>{product.name}</p>
