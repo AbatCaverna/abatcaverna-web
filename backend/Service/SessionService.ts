@@ -2,6 +2,7 @@ import UserRepository from '../Repository/UserRepository'
 import { Role } from '../../src/utils/enum';
 import jwt from 'jsonwebtoken';
 import returnHashString from '../Utils/crypto';
+import Stripe from '../Providers/stripe';
 
 const privateKey = process.env.NEXTAUTH_SECRET
 export default class MoradoresService {
@@ -19,7 +20,11 @@ export default class MoradoresService {
       const user = await this._userRepository.getUserByEmail(email);
 
       if (!user) {
-        await this._userRepository.createUser(name, email, image)
+        const stripe_customer = await Stripe.customers.create({
+          email: email
+        })
+
+        await this._userRepository.createUser(name, email, image, stripe_customer.id)
       }
 
       return true

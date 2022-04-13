@@ -40,10 +40,14 @@
 
 .dropdown {
   position: absolute;
-  bottom: -2.8rem;
+  bottom: -5.8rem;
   left: -40px;
 
   animation: growDown 300ms ease-in-out forwards;
 
   transform-origin: top center;
+}
+
+.dropdown > ul {
+  flex-direction: column;
 }
