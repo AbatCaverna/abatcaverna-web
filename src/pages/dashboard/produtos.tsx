@@ -1,7 +1,7 @@
 
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import Link from "next/link";
+import Link from "next/link"; 
 import { useState } from "react";
 import Stripe from "stripe";
 import Perfil from "../../components/Dashboard/Perfil";
@@ -23,30 +23,18 @@ type ProductsResponse = {
   price: Stripe.Price;
 }[]
 
-interface DashboardPage {
+interface ProdutosPage {
   produtos: ProductsResponse
 }
 
-export default function DashboardPage({ produtos }: DashboardPage) {
-  const morador = useRole()
-
-  if(!morador) {
-    return (
-      <div>
-        <h1>Não pode acessar essa pagina</h1>
-        <Link href="/">
-          <a >Voltar para home</a>
-        </Link>
-      </div>
-    )
-  }
-
+export default function ProdutosPage({ produtos }: ProdutosPage) {
 
   return (
     <div className={styles.container}>
       <SideBar />
       <main>
-        <Perfil user={morador}/>
+        <Produtos data={produtos}/>
+
       </main>
     </div>
   );
@@ -64,8 +52,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
+  const produtosService = new ProdutosService()
+  const response = await produtosService.getAllProducts()
 
   return {
-    props: {},
+    props: {
+      produtos: response.data
+    },
   }
 }

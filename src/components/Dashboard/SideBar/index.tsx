@@ -1,10 +1,14 @@
+import { useRouter } from "next/router";
 import { MdSpaceDashboard } from "react-icons/md"
 import styles from "./styles.module.css"
-interface SideBar {
-  onChangeRoute: (route: string) => void
-}
 
-export default function SideBar({ onChangeRoute }: SideBar) {
+export default function SideBar() {
+  const router = useRouter()
+
+  function onChangeRoute(route: string) {
+    router.push('/dashboard/'+route)
+  }
+
   return (
     <div className={styles.navbar}>
       <h1>
@@ -14,10 +18,10 @@ export default function SideBar({ onChangeRoute }: SideBar) {
         <ul>
           <strong>Morador</strong>
           <hr />
-          <li onClick={() => onChangeRoute('profile')}>Perfil</li>
+          <li onClick={() => onChangeRoute('')}>Perfil</li>
           <strong>Loja</strong>
           <hr />
-          <li onClick={() => onChangeRoute('product')}>Produtos</li>
+          <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
           <li onClick={() => onChangeRoute('pedidos')}>Pedidos</li>
         </ul>
       </nav>
