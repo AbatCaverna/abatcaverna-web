@@ -11,8 +11,12 @@ export default class ProdutosService {
     })
   }
 
-  async getAllProducts() {
+  public async getAllProducts() {
     return await this.api.get('/produtos') 
+  }
+  
+  public async createProduct(name: string, value: number, description?: string) {
+    return await this.api.post('/produtos', { name, description, value })
   }
 
 }

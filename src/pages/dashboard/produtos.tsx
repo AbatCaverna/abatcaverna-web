@@ -1,22 +1,11 @@
 
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import Link from "next/link"; 
-import { useState } from "react";
 import Stripe from "stripe";
-import Perfil from "../../components/Dashboard/Perfil";
 import Produtos from "../../components/Dashboard/Produtos";
 import SideBar from "../../components/Dashboard/SideBar";
-import useRole from "../../hooks/useRole";
 import ProdutosService from "../../services/ProdutosService";
 import styles from "../../styles/Dashboard.module.css";
-
-enum DashboardPages {
-  profile = 'profile',
-  product = 'product'
-}
-
-type DashboardPagesType = keyof typeof DashboardPages
 
 type ProductsResponse = {
   product: Stripe.Response<Stripe.Product>;
