@@ -14,10 +14,10 @@ export default function SideBar({ onChangeRoute }: SideBar) {
         <ul>
           <strong>Morador</strong>
           <hr />
-          <li onClick={() => onChangeRoute('perfil')}>Perfil</li>
+          <li onClick={() => onChangeRoute('profile')}>Perfil</li>
           <strong>Loja</strong>
           <hr />
-          <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
+          <li onClick={() => onChangeRoute('product')}>Produtos</li>
           <li onClick={() => onChangeRoute('pedidos')}>Pedidos</li>
         </ul>
       </nav>
