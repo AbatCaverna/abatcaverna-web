@@ -4,6 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri"
 import { GiBatMask } from "react-icons/gi";
 import MoradoresService from "../../../services/MoradoresService";
 import { useRef } from "react";
+import Input from "../../Shared/Input";
 
 interface Perfil {
   user: {
@@ -42,15 +43,21 @@ export default function Perfil({ user }: Perfil) {
         </div>
         <div className={styles.container_center}>
           <h2>Trocar senha</h2>
+          <Input
+            type="password"
+            name="password"
+            label="Nova senha"
+            icon={RiLockPasswordLine}
+            ref={oldPasswordRef}
+          />
 
-          <div className={styles.input}>
-            <label htmlFor="password"><RiLockPasswordLine/> Nova senha</label>
-            <input ref={oldPasswordRef} type="password" name="password" id="password" />
-          </div>
-          <div className={styles.input}>
-            <label htmlFor="new_password"> <RiLockPasswordLine/> Confirmar senha</label>
-            <input ref={newPasswordRef} type="password" name="new_password" id="new_password" />
-          </div>
+          <Input
+            type="password"
+            name="new_password"
+            label="Confirmar senha"
+            icon={RiLockPasswordLine}
+            ref={newPasswordRef}
+          />
 
           <button type="button" onClick={handleChange}>Trocar</button>
         </div>
