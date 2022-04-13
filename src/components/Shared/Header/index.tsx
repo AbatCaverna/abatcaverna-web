@@ -95,7 +95,11 @@ export function Header() {
                 </Link>
               </li>
               ) : (
-                <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
+                <ProfileButton
+                  name={data?.user?.name!}
+                  image={data?.user?.image!}
+                  role={data?.role as string}
+                />
               )
             }
 
