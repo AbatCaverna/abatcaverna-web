@@ -59,7 +59,7 @@ export default function DashboardPage({ produtos }: DashboardPage) {
       <SideBar onChangeRoute={handleRouteChange} />
       <main>
         {page === DashboardPages.profile && <Perfil user={morador}/>}
-        {page === DashboardPages.product && <Produtos/>}
+        {page === DashboardPages.product && <Produtos data={produtos}/>}
 
       </main>
     </div>
