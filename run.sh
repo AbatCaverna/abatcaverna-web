@@ -1,2 +1,2 @@
-sudo docker-compose up -d --build
+sudo docker-compose up
 sudo docker logs -f web
