@@ -19,6 +19,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
   function addToCart(item: ProductItem) {
     setProducts(prev => [...prev, item])
+    alert("Produto adicionao ao carrinho!")
   }
 
   function removeFromCart(item: ProductItem) {

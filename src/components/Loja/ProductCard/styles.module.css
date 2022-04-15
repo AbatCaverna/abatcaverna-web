@@ -39,8 +39,22 @@
   padding: 8px;
   width: 100%;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .btn_buy:hover {
   filter: brightness(0.9);
+}
+
+.btn_buy:active {
+  transform: translate(1px, 1px);
+}
+
+.btn_container {
+  display: flex;
+  gap: 8px;
+}
+
+.btn_buy:first-child {
+  flex: 1;
 }

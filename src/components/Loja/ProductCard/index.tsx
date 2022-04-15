@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Stripe from "stripe";
 import useCarrinho from "../../../hooks/useCarrinho";
+import { BsFillCartPlusFill } from "react-icons/bs";
 import styles from "./styles.module.css";
 
 type ProductsResponse = {
@@ -36,11 +37,18 @@ export default function ProductCard({ data }: ProductCardProps) {
 
       </div>
       <p>{transformPrice(price.unit_amount)}</p>
-      <button
-        type="button"
-        className={styles.btn_buy}
-        onClick={() => addToCart(data)}
-       >Comprar</button>
+      <div className={styles.btn_container}>
+        <button
+          type="button"
+          className={styles.btn_buy}
+          onClick={() => addToCart(data)}
+        ><BsFillCartPlusFill color="#000" size="1rem"/></button>
+        <button
+          type="button"
+          className={styles.btn_buy}
+        >Comprar</button>
+      </div>
+
     </div>
   );
 }
