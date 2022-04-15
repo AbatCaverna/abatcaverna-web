@@ -30,7 +30,7 @@ export default function Loja({ data }: Loja) {
           <SiHomeassistantcommunitystore size="2rem"/>
           <h1>Loja ABatCaverna</h1>
         </header>
-        <div>
+        <div className={styles.list_items}>
           {data.map((item) => (
             <ProductCard key={item.product.id} data={item} />
           ))}
@@ -47,7 +47,7 @@ export default function Loja({ data }: Loja) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
   
-  if (!session || session.role !== "cavernoso") {
+  if (!session) {
     return {
       redirect: {
         destination: '/',

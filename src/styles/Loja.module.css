@@ -1,5 +1,6 @@
 .container {
   padding: 1rem;
+  overflow: hidden;
 }
 
 .container > header {
@@ -7,3 +8,17 @@
   align-items: center;
   gap: 8px;
 }
+
+.list_items {
+  width: 100%;
+  display: grid;
+  gap: 2rem;
+
+}
+
+@media screen and (min-width: 480px) {
+  .list_items {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
