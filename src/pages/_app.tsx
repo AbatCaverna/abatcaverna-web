@@ -7,6 +7,7 @@ import { IconContext } from 'react-icons';
 import { Header } from '../components/Shared/Header'
 import Loading from '../components/Shared/Loading'
 import '../styles/globals.css'
+import CartProvider from '../contexts/carrinho';
 
 function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   const router = useRouter();
@@ -29,23 +30,25 @@ function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   })
 
   return (
-    <SessionProvider session={session}>
-      <Head>
-        <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
-        />
-      </Head>
-      <IconContext.Provider value={{ color: '#FFC74A' }}>
-        <Header />
-        <Component {...pageProps} />
-        {loading && (
-          <div className="page_loader">
-            <Loading />
-          </div>
-        )}
-      </IconContext.Provider>
-    </SessionProvider>
+    <CartProvider>
+      <SessionProvider session={session}>
+        <Head>
+          <meta
+            name='viewport'
+            content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+          />
+        </Head>
+        <IconContext.Provider value={{ color: '#FFC74A' }}>
+          <Header />
+          <Component {...pageProps} />
+          {loading && (
+            <div className="page_loader">
+              <Loading />
+            </div>
+          )}
+        </IconContext.Provider>
+      </SessionProvider>
+    </CartProvider>
   )
 }
 
