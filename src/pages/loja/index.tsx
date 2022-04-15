@@ -1,9 +1,12 @@
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import Head from 'next/head'
+import { useEffect, useState } from 'react';
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
 import Stripe from 'stripe';
+import CarrinhoIcone from '../../components/Loja/CarrinhoIcone';
 import ProductCard from '../../components/Loja/ProductCard';
+import useWindow from '../../hooks/useWindow';
 import ProdutosService from '../../services/ProdutosService';
 import styles from '../../styles/Loja.module.css'
 
@@ -17,6 +20,16 @@ interface Loja {
 }
 
 export default function Loja({ data }: Loja) {
+  const window = useWindow();
+  const [showCartIcon, setShowCartIcon] = useState(false)
+  
+  useEffect(() => {
+    if (window && window.width < 480) {
+      setShowCartIcon(false)
+    } else {
+      setShowCartIcon(true)
+    }
+  },[window])
 
   return (
     <div>
@@ -29,6 +42,7 @@ export default function Loja({ data }: Loja) {
         <header>
           <SiHomeassistantcommunitystore size="2rem"/>
           <h1>Loja ABatCaverna</h1>
+          {showCartIcon && <CarrinhoIcone />}
         </header>
         <div className={styles.list_items}>
           {data.map((item) => (

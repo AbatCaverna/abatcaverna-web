@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Stripe from "stripe";
+import useCarrinho from "../../../hooks/useCarrinho";
 import styles from "./styles.module.css";
 
 type ProductsResponse = {
@@ -14,6 +15,7 @@ interface ProductCardProps {
 export default function ProductCard({ data }: ProductCardProps) {
   const { product, price } = data
   const noImage = "/images/no_image.png"
+  const { addToCart } = useCarrinho()
 
   function transformPrice(price: number | null) {
     if (!price) return "R$0,00"
@@ -34,7 +36,11 @@ export default function ProductCard({ data }: ProductCardProps) {
 
       </div>
       <p>{transformPrice(price.unit_amount)}</p>
-      <button type="button" className={styles.btn_buy}>Comprar</button>
+      <button
+        type="button"
+        className={styles.btn_buy}
+        onClick={() => addToCart(data)}
+       >Comprar</button>
     </div>
   );
 }
