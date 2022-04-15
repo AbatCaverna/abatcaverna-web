@@ -1,0 +1,46 @@
+.card {
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  padding: 0.75rem;
+  max-width: 350px;
+}
+
+.card > strong {
+  font-size: 1.6rem;
+  display: block;
+  margin: 8px 0 12px 0 ;
+}
+
+.card > p {
+  font-size: 1.5rem;
+}
+
+.card_image {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  height: auto;
+  max-width: 350px;
+}
+
+.card_image > div > span {
+  width: 100%;
+  height: auto;
+}
+
+.btn_buy {
+  background: #FFC74A;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.btn_buy:hover {
+  filter: brightness(0.9);
+}

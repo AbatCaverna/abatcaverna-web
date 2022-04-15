@@ -87,6 +87,11 @@ export function Header() {
             <li>
               <a href="#nossa_casa">Nossa casa</a>
             </li>
+            <li>
+              <Link href="/loja">
+                <a>Loja</a>
+              </Link>
+            </li>
             {
               status === "unauthenticated" ? (
               <li>
@@ -131,6 +136,11 @@ export function Header() {
             </li>
             <li>
                 <a href="#nossa_casa">Nossa casa</a>
+            </li>
+            <li>
+              <Link href="/loja">
+                <a>Loja</a>
+              </Link>
             </li>
             {
               status === "unauthenticated" && data ? (
