@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Stripe from 'stripe';
 import CheckoutService from '../services/CheckoutService';
 import getStripe from '../services/stripejs';
@@ -22,11 +22,13 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
   function addToCart(item: ProductItem) {
     setProducts(prev => [...prev, item])
+    localStorage.setItem('cart', JSON.stringify(products))
     alert("Produto adicionao ao carrinho!")
   }
 
   function removeFromCart(item: ProductItem) {
     const newProductList = products.filter(p => p != item)
+    localStorage.setItem('cart', JSON.stringify(newProductList))
     setProducts(newProductList)
   }
 
@@ -58,6 +60,19 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       throw new Error("Erro ao tentar fazer a compra!")
     }
   }
+
+  /**
+   * Persistimos o carrinho localstorage para
+   * termos acesso aos dados no navegador
+   */
+  useEffect(() => {
+    const products = localStorage.getItem('cart')
+
+    if (products) {
+      const data = JSON.parse(products)
+      setProducts(data)
+    }
+  }, [])
 
   return (
     <CartContext.Provider value={{ products, addToCart, removeFromCart, cartCheckout }}>
