@@ -11,6 +11,7 @@
   position: relative;
   width: 82px;
   height: 82px;
+  margin: 8px;
 }
 
 .table_data > span {
@@ -89,4 +90,10 @@
 
 .btn_checkout:active {
   transform: translate(1px, 1px);
+}
+
+@media screen and (min-width: 640px) {
+  .table {
+    width: 100%;
+  }  
 }

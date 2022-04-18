@@ -3,6 +3,15 @@ import { getSession } from "next-auth/react";
 import Stripe from "stripe";
 import UserRepository from "../Repository/UserRepository";
 
+type Checkout = {
+  price: string,
+  quantity: number
+}
+
+interface CheckoutBody {
+  line_items: Array<Checkout>
+}
+
 export default class CheckoutController {
   private _userRepository: UserRepository;
   private _stripe: Stripe
@@ -22,17 +31,13 @@ export default class CheckoutController {
 
     if (!userFound) res.status(400).send("User does not exist")
 
-    const { priceId } = req.body
+    const { line_items } = req.body as CheckoutBody
 
-    if (!priceId) res.status(400).send("Must send price id")
+    if (!line_items) res.status(400).send("Must send data with array of line items")
 
     const stripeCheckoutSession = await this._stripe.checkout.sessions.create({
       customer: userFound.stripe_customer_id,
-      line_items: [
-          {
-              price: priceId, quantity: 1
-          }
-      ],
+      line_items,
       mode: 'payment',
       allow_promotion_codes: true,
       success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,

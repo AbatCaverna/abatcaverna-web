@@ -7,7 +7,7 @@ import styles from "../../styles/Carrinho.module.css";
 import Link from "next/link";
 
 export default function Carrinho() {
-  const { products } = useCarrinho()
+  const { products, cartCheckout } = useCarrinho()
   const noImage = "/images/no_image.png"
   return (
     <div>
@@ -59,7 +59,7 @@ export default function Carrinho() {
           </div>
         )}
         <div className={styles.btn_checkout_container}>
-          <button type="button" className={styles.btn_checkout}>pagamento</button>
+          <button type="button" className={styles.btn_checkout} onClick={cartCheckout}>pagamento</button>
 
         </div>
         <div className={styles.link_store}>
