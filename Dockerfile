@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16
 
 # Create the directory on the node image 
 # where our Next.js app will live
