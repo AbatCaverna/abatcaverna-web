@@ -1,4 +1,4 @@
-# troubleshoting
+# troubleshooting
 
 ## problemas rodando o programa
 
@@ -17,4 +17,15 @@ Você precisa apenas usar o comando abaixo para dar permissão para o projeto:
 
 ```bash
 sudo chown -R $USER <project-dir>
+```
+
+# Stripe
+
+Como utilizar a cli do stripe para testar os webhooks local
+
+Após [instalar](https://stripe.com/docs/stripe-cli#install) o stripe cli você precisa apenas executar os comandos abaixo para começar a ouvir os canais
+
+```bash
+stripe login --api-key $SECRETE_STRIPE_KEY
+stripe listen --forward-to localhost:3000/api/webhooks
 ```
