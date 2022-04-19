@@ -12,19 +12,9 @@ services:
       - /app/node_modules
     ports:
       - 3000:3000
-    depends_on:
-      - stripe-cli
-    networks:
-      - dev_network
   stripe-cli:
     image: stripe/stripe-cli
     container_name: stripe-cli
-    networks:
-      - dev_network
-    command: listen --api-key ${STRIPE_PRIVATE_KEY} --forward-to web/api/webhook
+    command: listen --api-key ${STRIPE_PRIVATE_KEY} --forward-to web:3000/api/webhooks
 
-networks:
-  dev_network:
-    name: dev_network
-    external: true
 
