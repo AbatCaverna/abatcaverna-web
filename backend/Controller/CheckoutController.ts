@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import Stripe from "stripe";
+import User from "../Models/User";
 import UserRepository from "../Repository/UserRepository";
 
 type Checkout = {
@@ -30,6 +31,20 @@ export default class CheckoutController {
     const userFound = await this._userRepository.getUserByEmail(user?.email!)
 
     if (!userFound) res.status(400).send("User does not exist")
+
+    if (!userFound.stripe_customer_id) {
+      const stripeCustomer = await this._stripe.customers.create({
+        name: userFound.name,
+        email: userFound.email,
+      })
+
+      const user = new User(stripeCustomer.id, userFound.name, userFound.email, userFound.image)
+
+      await this._userRepository.update(user)
+      userFound.stripe_customer_id = stripeCustomer.id
+    }
+
+    if (!userFound.stripe_customer_id) res.status(400).send("User does not exists in stripe")
 
     const { line_items } = req.body as CheckoutBody
 
