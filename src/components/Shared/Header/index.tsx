@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 import { MdMenu, MdClose } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 import ProfileButton from '../ProfileButton';
+import CarrinhoIcone from '../../Loja/CarrinhoIcone';
 
 export function Header() {
   const window = useWindow();
@@ -87,6 +88,11 @@ export function Header() {
             <li>
               <a href="#nossa_casa">Nossa casa</a>
             </li>
+            <li>
+              <Link href="/loja">
+                <a>Loja</a>
+              </Link>
+            </li>
             {
               status === "unauthenticated" ? (
               <li>
@@ -132,6 +138,11 @@ export function Header() {
             <li>
                 <a href="#nossa_casa">Nossa casa</a>
             </li>
+            <li>
+              <Link href="/loja">
+                <a>Loja</a>
+              </Link>
+            </li>
             {
               status === "unauthenticated" && data ? (
               <li>
@@ -143,6 +154,9 @@ export function Header() {
                 <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
               )
             }
+            <li>
+              <CarrinhoIcone/>
+            </li>
           </ul>
         </nav>
       </div>

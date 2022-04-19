@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16
 
 # Create the directory on the node image 
 # where our Next.js app will live
@@ -9,14 +9,14 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json
 # to the /app working directory
-COPY package*.json /app
-COPY yarn.lock /app
-
-# Install dependencies in /app
-RUN yarn install
+COPY package.json .
+COPY yarn.lock .
 
 # Copy the rest of our Next.js folder into /app
-COPY . /app
+COPY . .
+
+# Install dependencies in /app
+RUN yarn
 
 # Ensure port 3000 is accessible to our system
 EXPOSE 3000
