@@ -34,4 +34,15 @@ export default class MoradoresRepository {
     return morador
   }
 
+  public async update(model: User) {
+    await this._database.collection("users").updateOne({
+      email: model.email,
+    }, {
+      $set: {
+        name: model.name,
+        stripe_customer_id: model.stripe_customer_id
+      }
+    })
+  }
+
 }
