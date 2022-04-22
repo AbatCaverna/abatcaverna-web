@@ -60,6 +60,8 @@ export function Header() {
     }
   })
 
+  console.log(status)
+
   if (status === 'loading') return (
     <div>
       ...
@@ -94,7 +96,7 @@ export function Header() {
               </Link>
             </li>
             {
-              status === "unauthenticated" ? (
+              status !== "authenticated" ? (
               <li>
                 <Link href="/login">
                   <a>Login</a>
@@ -144,7 +146,7 @@ export function Header() {
               </Link>
             </li>
             {
-              status === "unauthenticated" && data ? (
+               status !== "authenticated" ?  (
               <li>
                 <Link href="/login">
                   <a>Login</a>
