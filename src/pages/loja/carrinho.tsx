@@ -7,7 +7,7 @@ import styles from "../../styles/Carrinho.module.css";
 import Link from "next/link";
 
 export default function Carrinho() {
-  const { products, cartCheckout } = useCarrinho()
+  const { products, cartCheckout, removeFromCart } = useCarrinho()
   const noImage = "/images/no_image.png"
   return (
     <div>
@@ -48,7 +48,11 @@ export default function Carrinho() {
                       {transformUnitAmount(price.unit_amount)}
                     </td>
                     <td>
-                      <button type="button" className={styles.table_btn_remove}>
+                      <button
+                        type="button"
+                        className={styles.table_btn_remove}
+                        onClick={() => removeFromCart({ product, price })}
+                      >
                         <GoTrashcan size="1.1rem"/>
                       </button>
                     </td>

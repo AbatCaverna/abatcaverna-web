@@ -24,9 +24,13 @@ export default NextAuth({
       },
       async authorize(credentials, req) {
         const { database } = await connectMongo()
-        const sessionController = new SessionController(database)
-        const user = await sessionController.moradorSession(credentials!.username, credentials!.password)
 
+        if (!database) return null
+
+        const sessionController = new SessionController(database)
+
+        const user = await sessionController.moradorSession(credentials!.username, credentials!.password)
+        console.log('[SERVER]: user logged in', user)
         // If no error and we have user data, return it
         if (user) {
           return {
@@ -45,8 +49,11 @@ export default NextAuth({
   callbacks: {
     async signIn({ user }) {
       const { database } = await connectMongo()
-      const sessionController = new SessionController(database)
 
+      if (!database) return false
+      
+      const sessionController = new SessionController(database)
+      console.log('[SERVER]: user logged in', user)
       // Check if the user is current in the database
       // if not, we create it and returns true if it is ok]
       if (user.role === Role.usuario) {
