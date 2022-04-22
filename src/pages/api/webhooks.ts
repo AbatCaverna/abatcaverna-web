@@ -50,6 +50,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
                 `[SERVER](${new Date().toDateString()}): webhook checkout complete`,
                 checkoutSession
               )
+              
               break
             default:
               throw new Error('Unhandled webhook event')
