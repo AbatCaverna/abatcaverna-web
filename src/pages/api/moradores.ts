@@ -36,6 +36,14 @@ export default async function handler(
     res.status(200).send(response)
   }
     
+  if (req.method === 'POST') {
+    const { morador } = req.body
+
+    const response = await moradoresController.store(morador)
+      
+    res.status(200).send(response)
+  }
+    
                
     
 }

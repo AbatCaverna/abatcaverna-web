@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import MoradoresService from '../Service/MoradoresService';
 import MoradoresRepository from '../Repository/MoradoresRepository';
+import Morador from "../Models/Morador";
 import { Db } from 'mongodb';
 
 export default class MoradoresController {
@@ -9,6 +10,16 @@ export default class MoradoresController {
   constructor(db: Db) {
     const repository = new MoradoresRepository(db)
     this.moradoresService = new MoradoresService(repository);
+  }
+
+  public async store(morador: Morador) {
+
+    const response = await this.moradoresService.createMorador(morador);
+    
+    return {
+      message: response ? 'Sucesso' : 'Erro',
+      moradores: response
+    }
   }
   
   public async index() {
