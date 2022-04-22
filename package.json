@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^2.7.0",
+    "@sendgrid/mail": "^7.6.2",
     "@stripe/react-stripe-js": "^1.7.1",
     "@stripe/stripe-js": "^1.27.0",
     "axios": "^0.24.0",
