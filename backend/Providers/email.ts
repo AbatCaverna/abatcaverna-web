@@ -1,20 +1,19 @@
-import {send, setApiKey, MailDataRequired} from '@sendgrid/mail';
+import sendGrid from '@sendgrid/mail';
 const APP_KEY = process.env.SENDGRID_API_KEY || ''
 import fs from 'fs';
 
 
 export class Email {
-  public message: MailDataRequired;
+  public message: sendGrid.MailDataRequired;
 
   constructor() {
     this.message = {
       to: [],
-      from: 'viniteixerap@hotmail.com',
+      from: 'viniciustprates@gmail.com',
       subject: '',
       html: '',
     }
 
-    setApiKey(APP_KEY);
   }
   
   async sendEmail(
@@ -61,12 +60,15 @@ export class Email {
 
     console.log('[SERVER]: trying to send email', this.message.html);
     try {
-      await send(this.message);
+
+      sendGrid.setApiKey(APP_KEY);
+      await sendGrid.send(this.message);
 
       console.log('[SERVER]: Email sent to', to);
 
     } catch (error) {
-      console.error('[SERVER]: Error when trying to send email', error);
+      const err = error as any
+      console.error('[SERVER]: Error when trying to send email', err.response.body);
 
     }
   }
