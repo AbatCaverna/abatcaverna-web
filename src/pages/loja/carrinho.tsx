@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Loader from '../../components/Shared/Loading';
 import useCarrinho from "../../hooks/useCarrinho";
 import transformUnitAmount from "../../utils/trasnformUnitAmout";
 import { GoTrashcan } from "react-icons/go";
@@ -7,7 +8,7 @@ import styles from "../../styles/Carrinho.module.css";
 import Link from "next/link";
 
 export default function Carrinho() {
-  const { products, cartCheckout, removeFromCart } = useCarrinho()
+  const { products, cartCheckout, removeFromCart, loading } = useCarrinho()
   const noImage = "/images/no_image.png"
   return (
     <div>
@@ -71,7 +72,12 @@ export default function Carrinho() {
             <a >Voltar a comprar</a>
           </Link>
         </div>
-
+        {loading && (
+          <div className={styles.loading}>
+            <Loader/>
+            <p>Carregando...</p>
+          </div>
+        )}
       </main>
 
     </div>
