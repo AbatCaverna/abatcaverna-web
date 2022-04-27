@@ -10,6 +10,7 @@ type ProductItem = {
 
 type CartContext = {
   products: Array<ProductItem>
+  loading: boolean
   addToCart: (item: ProductItem) => void
   removeFromCart: (item:  ProductItem) => void
   cartCheckout: () => void
@@ -19,6 +20,7 @@ export const CartContext = createContext({} as CartContext)
 
 export default function CartProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState([] as Array<ProductItem>)
+  const [loading, setLoading] = useState(false)
 
   function addToCart(item: ProductItem) {
     setProducts(prev => [...prev, item])
@@ -27,7 +29,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   }
 
   function removeFromCart(item: ProductItem) {
-    const newProductList = products.filter(p => p != item)
+    const newProductList = products.filter(p => p.price.id != item.price.id)
     localStorage.setItem('cart', JSON.stringify(newProductList))
     setProducts(newProductList)
   }
@@ -40,6 +42,8 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     if (products.length == 0) {
       throw new Error("Carrinho está vazio!")
     }
+
+    setLoading(true)
 
     try {
       const service = new CheckoutService()
@@ -58,6 +62,8 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
     } catch (error) {
       throw new Error("Erro ao tentar fazer a compra!")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -75,7 +81,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <CartContext.Provider value={{ products, addToCart, removeFromCart, cartCheckout }}>
+    <CartContext.Provider value={{ products, addToCart, removeFromCart, cartCheckout, loading }}>
       {children}
     </CartContext.Provider>
   )

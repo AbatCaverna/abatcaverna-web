@@ -12,6 +12,13 @@ export default async function connectMongo() {
   // separate module, the client can be shared across functions.
   const client = new MongoClient(uri, options)
   const clientPromise = client.connect()
-  const database = (await clientPromise).db('abatcaverna')
-  return { database }
+  try {
+    const database = (await clientPromise).db('abatcaverna')
+    console.info(`LOG[SERVER](${new Date().toDateString()}): Database connected!`)
+    return { database }
+  } catch (error) {
+    console.error(`Error[SERVER](${new Date().toDateString()}): Database connection error!`, error)
+    return { }
+  }
+
 }

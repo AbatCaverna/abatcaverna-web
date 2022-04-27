@@ -37,9 +37,15 @@ export default class MoradoresService {
     try {
       const morador = await this._userRepository.getMorador(name)
       
-      if (!morador) return null;
+      if (!morador) {
+        console.info(`Warning[SERVER](${new Date().toDateString()}): User not found!`)
+        return null
+      };
       
-      if (returnHashString(password) !== morador.senha) return null;
+      if (returnHashString(password) !== morador.senha) {
+        console.info(`Warning[SERVER](${new Date().toDateString()}): User incorrect!`)
+        return null
+      };
 
       if (privateKey === undefined) {
         console.error(`Error[SERVER](${new Date().toDateString()}): Must provide a NEXTAUTH_SECRET env var`)
@@ -57,6 +63,7 @@ export default class MoradoresService {
         token: jwt_token
       }
     } catch (error) {
+      console.error(`Error[SERVER](${new Date().toDateString()}): Something went wrong with server.`, error)
       return null
     }
   }

@@ -4,7 +4,9 @@ import styles from '../styles/Login.module.css'
 export default function LoginPage() {
 
   async function handleSignIn(user: string) {
-    if (user === 'usuario') await signIn("google")
+    if (user === 'usuario') await signIn("google", {
+      callbackUrl: '/perfil'
+    })
 
     if (user === 'cavernoso') await signIn(undefined, {
       callbackUrl: '/dashboard'

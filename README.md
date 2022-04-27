@@ -18,7 +18,8 @@ Para usar em desenvolvimento, siga estas etapas:
 ```
 git clone <url>
 cd abatcaverna-web
-./run.sh
+yarn 
+yarn docker
 ```
 
 > Obs: caso não consiga rodar o aqruivo bash por falta de permissão execute o comando ```chmod +x run.sh```

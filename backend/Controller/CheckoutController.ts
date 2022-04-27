@@ -30,7 +30,7 @@ export default class CheckoutController {
 
     const userFound = await this._userRepository.getUserByEmail(user?.email!)
 
-    if (!userFound) res.status(400).send("User does not exist")
+    if (!userFound) res.status(404).send("User does not exist")
 
     if (!userFound.stripe_customer_id) {
       const stripeCustomer = await this._stripe.customers.create({
@@ -44,7 +44,7 @@ export default class CheckoutController {
       userFound.stripe_customer_id = stripeCustomer.id
     }
 
-    if (!userFound.stripe_customer_id) res.status(400).send("User does not exists in stripe")
+    if (!userFound.stripe_customer_id) res.status(404).send("User does not exists in stripe")
 
     const { line_items } = req.body as CheckoutBody
 
@@ -55,11 +55,26 @@ export default class CheckoutController {
       line_items,
       mode: 'payment',
       allow_promotion_codes: true,
-      success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${req.headers.origin}/loja/checkout-sucesso`,
+      cancel_url: `${req.headers.origin}/loja/checkout-erro`,
     })
 
     res.status(200).json({sessionId: stripeCheckoutSession.id})
+
+  }
+  async getSession(req: NextApiRequest, res:NextApiResponse) {
+    const { sessionId } = req.query
+
+    try {
+      const session = await this._stripe.checkout.sessions.retrieve(
+        sessionId as string
+      );
+  
+      res.status(200).json({ session })
+    } catch (error) {
+      res.status(500).json({ message: "Erro!", error })
+    }
+
 
   }
 }

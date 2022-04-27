@@ -12,19 +12,21 @@ services:
       - /app/node_modules
     ports:
       - 3000:3000
-    depends_on:
-      - stripe-cli
-    networks:
-      - dev_network
   stripe-cli:
     image: stripe/stripe-cli
     container_name: stripe-cli
-    networks:
-      - dev_network
-    command: listen --api-key ${STRIPE_PRIVATE_KEY} --forward-to web/api/webhook
+    command: listen --api-key ${STRIPE_PRIVATE_KEY} --forward-to web:3000/api/webhooks
+  # mongodb:
+  #   image: mongo
+  #   container_name: mongodb
+  #   restart: always
+  #   environment:
+  #     - MONGO_INITDB_DATABASE=abatcaverna
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=admin
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
 
-networks:
-  dev_network:
-    name: dev_network
-    external: true
 
