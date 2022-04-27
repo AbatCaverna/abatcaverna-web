@@ -1,0 +1,45 @@
+.container {
+  padding: 1rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.container > header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.container > header > div {
+  flex: 1;
+  text-align: end;
+}
+
+.list_items {
+  width: 100%;
+  display: grid;
+  gap: 2rem;
+
+}
+
+.loading {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(40, 40, 40, 0.7);
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 480px) {
+  .list_items {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+

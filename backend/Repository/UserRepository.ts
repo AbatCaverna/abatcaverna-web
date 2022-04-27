@@ -17,8 +17,8 @@ export default class MoradoresRepository {
     return user;
   }
 
-  public async createUser(name?: string, email?: string, image?: string): Promise<void> {
-    const newUser = new User(name, email, image);
+  public async createUser(name?: string, email?: string, image?: string, stripe_customer_id?: string): Promise<void> {
+    const newUser = new User(name, email, image, stripe_customer_id);
 
     await this._database
       .collection("users")
@@ -32,6 +32,17 @@ export default class MoradoresRepository {
       .toArray() as Morador[]
 
     return morador
+  }
+
+  public async update(model: User) {
+    await this._database.collection("users").updateOne({
+      email: model.email,
+    }, {
+      $set: {
+        name: model.name,
+        stripe_customer_id: model.stripe_customer_id
+      }
+    })
   }
 
 }

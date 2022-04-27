@@ -40,10 +40,21 @@
 
 .dropdown {
   position: absolute;
-  bottom: -2.8rem;
+  bottom: -5.8rem;
   left: -40px;
 
   animation: growDown 300ms ease-in-out forwards;
 
   transform-origin: top center;
+}
+
+.dropdown > ul {
+  flex-direction: column;
+}
+
+@media screen and (max-width: 480px) {
+  .dropdown {
+    bottom: -7.5rem;
+    left: 0;
+  }
 }

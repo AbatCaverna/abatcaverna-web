@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 import { MdMenu, MdClose } from 'react-icons/md';
 import { useSession } from 'next-auth/react';
 import ProfileButton from '../ProfileButton';
+import CarrinhoIcone from '../../Loja/CarrinhoIcone';
 
 export function Header() {
   const window = useWindow();
@@ -59,6 +60,8 @@ export function Header() {
     }
   })
 
+  console.log(status)
+
   if (status === 'loading') return (
     <div>
       ...
@@ -87,15 +90,24 @@ export function Header() {
             <li>
               <a href="#nossa_casa">Nossa casa</a>
             </li>
+            <li>
+              <Link href="/loja">
+                <a>Loja</a>
+              </Link>
+            </li>
             {
-              status === "unauthenticated" ? (
+              status !== "authenticated" ? (
               <li>
                 <Link href="/login">
                   <a>Login</a>
                 </Link>
               </li>
               ) : (
-                <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
+                <ProfileButton
+                  name={data?.user?.name!}
+                  image={data?.user?.image!}
+                  role={data?.role as string}
+                />
               )
             }
 
@@ -128,8 +140,13 @@ export function Header() {
             <li>
                 <a href="#nossa_casa">Nossa casa</a>
             </li>
+            <li>
+              <Link href="/loja">
+                <a>Loja</a>
+              </Link>
+            </li>
             {
-              status === "unauthenticated" && data ? (
+               status !== "authenticated" ?  (
               <li>
                 <Link href="/login">
                   <a>Login</a>
@@ -139,6 +156,9 @@ export function Header() {
                 <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
               )
             }
+            <li>
+              <CarrinhoIcone/>
+            </li>
           </ul>
         </nav>
       </div>

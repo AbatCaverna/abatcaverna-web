@@ -59,4 +59,9 @@ export default class MoradoresRepository {
       .collection("moradores")
       .insertOne(morador)
   }
+
+  public async changePassword(name: string, new_password: string) {
+    await this._database.collection("moradores")
+      .updateOne({ apelido: name }, { $set: { senha: new_password } })
+  }
 }

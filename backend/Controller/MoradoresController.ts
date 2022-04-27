@@ -29,4 +29,16 @@ export default class MoradoresController {
       message: response,
     }
   }
+
+  public async updatePassword(name: string, new_password: string) {
+    try {
+      await this.moradoresService.changePassword(name, new_password);
+      return {
+        message: "Password changed!",
+      }
+    } catch (error) {
+      return error
+    }
+
+  }
 }

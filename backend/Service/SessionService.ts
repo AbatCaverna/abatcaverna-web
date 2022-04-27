@@ -2,6 +2,7 @@ import UserRepository from '../Repository/UserRepository'
 import { Role } from '../../src/utils/enum';
 import jwt from 'jsonwebtoken';
 import returnHashString from '../Utils/crypto';
+import Stripe from '../Providers/stripe';
 
 const privateKey = process.env.NEXTAUTH_SECRET
 export default class MoradoresService {
@@ -19,7 +20,11 @@ export default class MoradoresService {
       const user = await this._userRepository.getUserByEmail(email);
 
       if (!user) {
-        await this._userRepository.createUser(name, email, image)
+        const stripe_customer = await Stripe.customers.create({
+          email: email
+        })
+
+        await this._userRepository.createUser(name, email, image, stripe_customer.id)
       }
 
       return true
@@ -32,9 +37,15 @@ export default class MoradoresService {
     try {
       const morador = await this._userRepository.getMorador(name)
       
-      if (!morador) return null;
+      if (!morador) {
+        console.info(`Warning[SERVER](${new Date().toDateString()}): User not found!`)
+        return null
+      };
       
-      if (returnHashString(password) !== morador.senha) return null;
+      if (returnHashString(password) !== morador.senha) {
+        console.info(`Warning[SERVER](${new Date().toDateString()}): User incorrect!`)
+        return null
+      };
 
       if (privateKey === undefined) {
         console.error(`Error[SERVER](${new Date().toDateString()}): Must provide a NEXTAUTH_SECRET env var`)
@@ -52,6 +63,7 @@ export default class MoradoresService {
         token: jwt_token
       }
     } catch (error) {
+      console.error(`Error[SERVER](${new Date().toDateString()}): Something went wrong with server.`, error)
       return null
     }
   }
