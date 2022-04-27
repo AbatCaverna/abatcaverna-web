@@ -28,12 +28,7 @@ export default function PerfilPage() {
         <div>
           {user?.name}
         </div>
-        <div className={styles.link}>
-          <Link href="/perfil/minhas-compras">
-            <a><FiShoppingBag /> Minhas compras</a>
-          </Link>
-          
-        </div>
+        
       </div>
     </div>
   )
