@@ -20,7 +20,8 @@ export class Email {
   async sendEmail(
     list_items: { titulo: string, preco: string }[],
     user_name: string,
-    to: string | string[]
+    to: string | string[],
+    isIngresso = false
   ) {
 
     let listItem = '<ul>'
@@ -44,7 +45,8 @@ export class Email {
       <br /><br/>
       ${listItem}
       <br /><br/>
-      Para receber seu produto, entre em contato com algum morador da República!
+      
+      <strong>${isIngresso ? 'Fique atento, em breve nós enviaremos seu ingresso para a festa!' : 'Para receber seu produto, entre em contato com algum morador da República!'}</strong>
     </body>
     </html>
     `
@@ -58,7 +60,6 @@ export class Email {
     ${listItem}
     Para receber seu produto, entre em contato com algum morador da República!`
 
-    console.log('[SERVER]: trying to send email');
     try {
 
       sendGrid.setApiKey(APP_KEY);

@@ -2,10 +2,11 @@ import PDFKit from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
 
-export default function createPDF() {
+export default function createPDF(qrcode_uri: string) {
   const pdf = new PDFKit();
 
-  pdf.text('Hello ABatCaverna PDF');
+  pdf.text('Ingresso 6º aniversário ABatCaverna');
+  pdf.image(qrcode_uri);
 
   pdf.pipe(fs.createWriteStream(path.resolve(__dirname, 'abatcaverna.pdf')));
   pdf.end();

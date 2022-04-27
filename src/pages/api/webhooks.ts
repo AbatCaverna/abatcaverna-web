@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Readable } from "stream";
 import Stripe from "stripe";
-import WebhookController from "../../../backend/Controller/WebhookController";
 import { Email } from "../../../backend/Providers/email";
 import stripe from "../../../backend/Providers/stripe"
-import createPDF from "../../../backend/Utils/pdfmaker";
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -99,14 +97,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(500).send(`Webhook error: $customer not found`)
               }
   
-              if (isIngresso) {
-                const pdfFileName = 'abatcaverna.pdf'
-                createPDF()
-                await emailProvider.sendEmailWithAttachment(products, name, email, pdfFileName)
-              } else {
-                await emailProvider.sendEmail(products, name, email)
-  
-              }
+              await emailProvider.sendEmail(products, name, email, isIngresso)
   
               break
             default:
