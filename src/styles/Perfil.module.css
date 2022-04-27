@@ -1,0 +1,16 @@
+.profile_image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.container {
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.link {
+  margin: 4rem 0;
+  text-decoration: underline;
+}
