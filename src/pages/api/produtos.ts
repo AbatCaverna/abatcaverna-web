@@ -15,6 +15,7 @@ export default async function handler(
       
       res.status(200).send(produtos)
     } catch (error) {
+      console.log('[SERVER]: Something went wrong with server', error)
       res.status(500).send(error)
     }
   }
