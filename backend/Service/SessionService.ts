@@ -25,6 +25,7 @@ export default class MoradoresService {
         })
 
         await this._userRepository.createUser(name, email, image, stripe_customer.id)
+        console.log('[SERVER]: Created user in stripe', stripe_customer)
       }
 
       return true

@@ -56,7 +56,8 @@ export default NextAuth({
       console.log('[SERVER]: user logged in', user)
       // Check if the user is current in the database
       // if not, we create it and returns true if it is ok]
-      if (user.role === Role.usuario) {
+      if (user.role === undefined) {
+        console.log('[SERVER]: user')
         const currentUser = {
           name: user.name || '',
           email: user.email || '',
