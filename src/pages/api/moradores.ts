@@ -20,6 +20,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { database } = await connectMongo()
+  
+  if (database === undefined) {
+    return res.status(500).send("Could not connect to database")
+  }
+
   const moradoresController = new MoradoresController(database)
   
   if (req.method === 'GET') {
