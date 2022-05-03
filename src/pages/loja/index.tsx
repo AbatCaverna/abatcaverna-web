@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { signIn, useSession } from 'next-auth/react';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
@@ -70,12 +70,13 @@ export default function Loja({ data }: Loja) {
           {showCartIcon && <CarrinhoIcone />}
         </header>
         <div className={styles.list_items}>
-          {data.map((item) => (
-            <ProductCard key={item.product.id} data={item} handleClick={handleBuyItem} />
-          ))}
           {!data && (
             <div>Não tem produtos à venda</div>
           )}
+          {data?.map((item) => (
+            <ProductCard key={item.product.id} data={item} handleClick={handleBuyItem} />
+          ))}
+          
         </div>
         {loading && (
           <div className={styles.loading}>
@@ -90,13 +91,22 @@ export default function Loja({ data }: Loja) {
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-
+  const session = await getSession(context)
+  const email = session?.user?.email || undefined
   const produtosService = new ProdutosService()
-  const response = await produtosService.getAllProducts()
+
+  let response: any;
+
+  if (email) {
+    response = await produtosService.getAllProductsByUser(email)
+  } else {
+    response = await produtosService.getAllProducts()
+
+  }
 
   return {
     props: {
-      data: response.data
+      data: response?.data || []
     },
   }
 }

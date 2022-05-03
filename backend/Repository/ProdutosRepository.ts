@@ -1,17 +1,38 @@
+import { Db } from 'mongodb';
 import Stripe from 'stripe'
 
 export default class ProdutosRepository {
   private _stripe: Stripe
+  private _database: Db
 
-  constructor(stripe: Stripe) {
+  constructor(stripe: Stripe, db: Db) {
     this._stripe = stripe
+    this._database = db
   }
 
-  public async getAllProducts() {
+  public async getAllProducts(email?: string) {
     const prices = await this._stripe.prices.list({
       limit: 10,
     });
 
+    let ja_comprou_ingresso = false
+
+    if (email !== undefined) {
+      const [compra] = (await this._database
+        .collection("user_orders")
+        .find({ user_email: email })
+        .toArray()) as any[];
+
+  
+      if (compra) {
+        for (const produto of compra.products) {
+          if(produto.isIngresso) {
+            ja_comprou_ingresso = true
+          }
+        }
+      } 
+      
+    }
 
     const products = []
 
@@ -21,6 +42,7 @@ export default class ProdutosRepository {
       );
 
       if(product.active === false) continue
+      if(ja_comprou_ingresso && product.metadata.ingresso) continue
 
       products.push({
         product,

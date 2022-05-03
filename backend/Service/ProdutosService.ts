@@ -8,9 +8,9 @@ export default class ProdutosService {
     this._produtosRepository = produtosRepository
   }
 
-  public async getAllProducts() {
+  public async getAllProducts(email?: string) {
     try {
-      return await this._produtosRepository.getAllProducts()
+      return await this._produtosRepository.getAllProducts(email)
     } catch (error) {
       throw new Error("Could not get products")
     }

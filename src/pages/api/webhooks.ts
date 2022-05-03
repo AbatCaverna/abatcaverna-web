@@ -3,6 +3,7 @@ import { Readable } from "stream";
 import Stripe from "stripe";
 import { Email } from "../../../backend/Providers/email";
 import stripe from "../../../backend/Providers/stripe"
+import connectDatabase  from "../../../backend/Providers/mongo";
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -74,11 +75,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 })
 
                 const item_data = {
+                  price_id: item.price?.id,
                   titulo: item.description || "",
                   preco: (price?.unit_amount! / 100).toLocaleString('pt-BR', {
                     style: 'currency', 
                     currency: 'BRL'
                   }),
+                  isIngresso: false
                 }
 
                 const product = price.product as Stripe.Product
@@ -86,6 +89,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (product.metadata.ingresso) {
                   console.log(`[SERVER](${new Date().toDateString()}): Trying to buy a ticket, creating pdf file...`)
                   isIngresso = true
+                  item_data.isIngresso = true
                 }
 
                 products.push(item_data)
@@ -96,8 +100,40 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               if (!name || !email) {
                 return res.status(500).send(`Webhook error: $customer not found`)
               }
-  
-              await emailProvider.sendEmail(products, name, email, isIngresso)
+
+              const { database } = await connectDatabase()
+
+              if (!database) return res.status(500).send('Could not connect to database')
+
+              try {
+
+                // busco por uma compra do usuario, 
+                const orders = await database.collection("user_orders").find({ user_email: email }).toArray() as any
+
+                console.log('found orders ',orders)
+                if (orders) {
+                  for (const order of orders) {
+                    for (const product of order.products) {
+                      if (product.isIngresso) {
+                        console.log('[SERVER]: Usuario tentou comprar mais de um ingresso')
+                        return res.status(500).send(`Usuário pode comprar apenas um ingresso por conta`)
+                      }
+                    }
+                  }
+                }
+
+                await database.collection("user_orders").insertOne({
+                  user_email: email,
+                  products: products
+                })
+    
+                await emailProvider.sendEmail(products, name, email, isIngresso)
+              } catch (error) {
+                console.log('[SERVER]: Erro handling checkout', error)
+                return res.status(500).send(error)
+              }
+
+             
   
               break
             default:
