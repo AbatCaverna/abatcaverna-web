@@ -12,7 +12,11 @@ export default class ProdutosService {
   }
 
   public async getAllProducts() {
-    return await this.api.get('/produtos') 
+    return await this.api.get(`/produtos`) 
+  }
+
+  public async getAllProductsByUser(email: string) {
+    return await this.api.get(`/produtos/${email}`)
   }
   
   public async createProduct(name: string, value: number, description?: string) {
