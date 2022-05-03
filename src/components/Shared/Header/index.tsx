@@ -60,8 +60,6 @@ export function Header() {
     }
   })
 
-  console.log(status)
-
   if (status === 'loading') return (
     <div>
       ...

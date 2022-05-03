@@ -110,7 +110,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 // busco por uma compra do usuario, 
                 const orders = await database.collection("user_orders").find({ user_email: email }).toArray() as any
 
-                console.log('found orders ',orders)
                 if (orders) {
                   for (const order of orders) {
                     for (const product of order.products) {
