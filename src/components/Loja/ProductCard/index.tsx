@@ -19,11 +19,24 @@ export default function ProductCard({ data, handleClick }: ProductCardProps) {
   const noImage = "/images/no_image.png"
   const { addToCart } = useCarrinho()
 
-  function transformPrice(price: number | null) {
+  function transformPrice(price: number | string | null) {
     if (!price) return "R$0,00"
 
-    const priceValue = price / 100
-    return priceValue.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})
+    if (typeof price === "string") {
+      price = parseFloat(price)
+      return price.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})
+    } else {
+      const priceValue = price / 100
+
+      return priceValue.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})
+    }
+
+  }
+
+  function calculatePriceWIthoutTax(price: number | null, tax: string) {
+    if (!price) return "R$0,00"
+    const priceTotal = (price / 100) - parseFloat(tax)
+    return priceTotal.toLocaleString('pt-BR', { style: "currency", currency: "BRL"})
   }
 
   return (
@@ -37,7 +50,7 @@ export default function ProductCard({ data, handleClick }: ProductCardProps) {
         />
 
       </div>
-      <p>{transformPrice(price.unit_amount)}</p>
+      <p>{transformPrice(price.unit_amount)} <span>({calculatePriceWIthoutTax(price.unit_amount, product.metadata.taxas)} + {transformPrice(product.metadata.taxas)} taxas)</span></p>
       <div className={styles.btn_container}>
         <button
           type="button"
