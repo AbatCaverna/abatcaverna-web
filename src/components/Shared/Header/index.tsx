@@ -80,13 +80,19 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <a href="#historia">História</a>
+              <Link href="/#historia">
+                <a >História</a>
+              </Link>
             </li>
             <li>
-              <a href="#moradores">Moradores</a>
+              <Link href="/#moradores">
+                <a >Moradores</a>
+              </Link>
             </li>
             <li>
-              <a href="#nossa_casa">Nossa casa</a>
+              <Link href="/#nossa_casa">
+                <a >Nossa casa</a>
+              </Link>
             </li>
             <li>
               <Link href="/loja">
@@ -130,13 +136,19 @@ export function Header() {
               </Link>
             </li>
             <li>
-                <a href="#historia">História</a>
+              <Link href="/#historia">
+                <a >História</a>
+              </Link>
             </li>
             <li>
-                <a href="#moradores">Moradores</a>
+              <Link href="/#moradores">
+                <a >Moradores</a>
+              </Link>
             </li>
             <li>
-                <a href="#nossa_casa">Nossa casa</a>
+              <Link href="/#nossa_casa">
+                <a >Nossa casa</a>
+              </Link>
             </li>
             <li>
               <Link href="/loja">
