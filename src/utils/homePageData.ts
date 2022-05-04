@@ -47,7 +47,7 @@ export const Data = {
     {
       nome: 'Rubens',
       apelido: 'Alan',
-      dataEntrada: 2021,
+      dataEntrada: 2022,
       curso: 'Agronomia',
       image: '/moradores/alan.jpeg',
       instagram: 'https://www.instagram.com/rubens5664/',
@@ -56,10 +56,19 @@ export const Data = {
     {
       nome: 'Heron',
       apelido: '?',
-      dataEntrada: 2021,
+      dataEntrada: 2022,
       curso: 'Ciência da Computação',
       image: '/moradores/heron.jpeg',
       instagram: 'https://www.instagram.com/heron_f4/',
+      base64: ''
+    },
+    {
+      nome: 'Gustavo',
+      apelido: '?',
+      dataEntrada: 2022,
+      curso: 'Educação Física',
+      image: '/moradores/gustavo.jpg',
+      instagram: 'https://www.instagram.com/gh.rochaol/',
       base64: ''
     }
   ],
