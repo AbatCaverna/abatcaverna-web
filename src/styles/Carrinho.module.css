@@ -1,0 +1,114 @@
+.main {
+  padding: 1rem;
+  text-align: center;
+}
+
+.main > p > span {
+  color: var(--yelloy);
+}
+
+.table_image {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  margin: 8px;
+}
+
+.table_data > span {
+  font-size: 0.875rem;
+}
+
+.table_btn_remove {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.table_btn_remove:active {
+  transform: translate(1px, 1px);
+}
+.table {
+  border-spacing: 0;
+
+}
+
+.table > thead > tr > td:first-child {
+  border: 1px solid #fff;
+  border-right: none;
+}
+
+.table > thead > tr > td:last-child {
+  border: 1px solid #fff;
+  border-left: none;
+}
+
+.table > thead > tr > td:nth-child(2) {
+  border: 1px solid #fff;
+  border-left: none;
+  border-right: none;
+}
+
+.table > thead > tr > td:nth-child(3) {
+  border: 1px solid #fff;
+  border-left: none;
+  border-right: none;
+}
+
+.table > tbody > tr > td {
+  border-bottom: 1px solid #fff;
+}
+
+.link_store {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  padding: 8px;
+  transform: translateX(-50%);
+}
+
+.btn_checkout_container {
+  padding: 1rem 0;
+  text-align: end;
+}
+
+.btn_checkout {
+  background-color: var(--yelloy);
+  border: none;
+  outline: none;
+  color: #000;
+  padding: 8px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn_checkout:hover {
+  filter: brightness(0.9);
+}
+
+.btn_checkout:active {
+  transform: translate(1px, 1px);
+}
+
+.loading {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(40, 40, 40, 0.7);
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 640px) {
+  .table {
+    width: 100%;
+  }  
+}

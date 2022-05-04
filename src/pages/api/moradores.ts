@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { ObjectId } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import connectMongo from '../../services/mongo'
+import MoradoresController from '../../../backend/Controller/MoradoresController';
+import connectMongo from '../../../backend/Providers/mongo'
 
 type Morador = {
   _id: string;
@@ -19,14 +19,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { clientPromise } = connectMongo()
-  const database = (await clientPromise).db('abatcaverna')
+  const { database } = await connectMongo()
+  
+  if (database === undefined) {
+    return res.status(500).send("Could not connect to database")
+  }
+
+  const moradoresController = new MoradoresController(database)
+  
   if (req.method === 'GET') {
-    const moradores = await database
-      .collection("moradores")
-      .find({ cachaca_para_tomar: { $exists: true } }) // retira selina dos moradores
-      .sort({ cachaca_ja_tomada: -1 }) // ordenas pelos q tomaram mais cachaca
-      .toArray();
+    const moradores = await moradoresController.index()
     
     res.status(200).send(moradores)
   }
@@ -34,41 +36,11 @@ export default async function handler(
   if (req.method === 'PUT') {
     const { method_action, morador_id } = req.body
 
-    if (method_action === 'sum_cachaca') {
-      // define uma nova cachaca para um morador
-      await database.collection("moradores").updateOne(
-        {
-            _id: new ObjectId(morador_id),
-        },
-        { $inc: { cachaca_para_tomar: 1 } }
-    );
-
-      res.status(200).send('Cachaca adicionada')
-    } else if (method_action === 'drunk_cachaca') {
-      const [morador] = await database.collection("moradores").find({ _id: new ObjectId(morador_id) }).toArray();
-
-      if(morador.cachaca_para_tomar === 0) {
-        await database.collection("moradores").updateOne(
-          { _id: new ObjectId(morador_id) },
-          { $inc: { 
-            cachaca_ja_tomada: 1
-          }}
-        )
-      } else {
-        await database.collection("moradores").updateOne(
-          { _id: new ObjectId(morador_id) },
-          { $inc: { 
-            cachaca_para_tomar: -1,
-            cachaca_ja_tomada: 1
-          }}
-        )
-      }
+    const response = await moradoresController.update(method_action, morador_id)
       
-      res.status(200).send('Cachaca bebida')
-    }
+    res.status(200).send(response)
+  }
     
                
     
-  }
-  
 }

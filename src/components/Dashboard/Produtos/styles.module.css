@@ -1,0 +1,30 @@
+.container {
+  width: calc(100vw - 300px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content > ul {
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin: 8px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.item > div > p {
+  font-size: 1.2rem;
+}
+
+.item > div > span {
+  color: var(--light-gray);
+}

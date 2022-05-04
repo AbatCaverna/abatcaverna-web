@@ -11,28 +11,32 @@ Repositorio para o site da Republica ABatCaverna.
 
 ## ☕ Usando
 
-Para usar, siga estas etapas:
+Para usar em desenvolvimento, siga estas etapas:
+
+- tenha instalado na sua maquina o Docker e o docker-compose
 
 ```
 git clone <url>
 cd abatcaverna-web
-yarn
-yarn dev
+yarn 
+yarn docker
 ```
 
-Ou aceese o site https://abatcaverna.app
+> Obs: caso não consiga rodar o aqruivo bash por falta de permissão execute o comando ```chmod +x run.sh```
 
-## 📫 Contribuindo para <nome_do_projeto>
+Para ver o app apenas acesse o site https://abatcaverna.app
+
+## 📫 Contribuindo
 
 Para contribuir com o projeto, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+3. Faça suas alterações e confirme-as: `yarn commit`
 4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
 5. Crie a solicitação de pull.
 
-Lembrese sempre de pegar as alterações da branch de `dev` para pegar as atualizações mais recentes.
+Lembre-se sempre de pegar as alterações da branch de `dev` para pegar as atualizações mais recentes.
 
 ## 🤝 Colaboradores
 

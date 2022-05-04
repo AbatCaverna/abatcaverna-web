@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    restart: always
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe-cli
+    command: listen --api-key ${STRIPE_PRIVATE_KEY} --forward-to web:3000/api/webhooks
+  # mongodb:
+  #   image: mongo
+  #   container_name: mongodb
+  #   restart: always
+  #   environment:
+  #     - MONGO_INITDB_DATABASE=abatcaverna
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=admin
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+
+

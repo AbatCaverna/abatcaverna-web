@@ -5,9 +5,7 @@ export default class MoradoresService {
 
   constructor() {
     this.api = axios.create({
-      baseURL: process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/api'
-        : 'https://abatcaverna.app/api'
+      baseURL: process.env.ABAT_API_URL
     })
   }
 
@@ -26,6 +24,13 @@ export default class MoradoresService {
     return await this.api.put('/moradores', {
       method_action: 'drunk_cachaca', 
       morador_id: moradorId
+    })
+  }
+
+  async changePassword(name: string, new_password: string) {
+    return await this.api.put('/change-password', {
+      name,
+      new_password
     })
   }
 }
