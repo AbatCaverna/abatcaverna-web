@@ -14,6 +14,14 @@ export default class ProdutosController {
 
   public async getAllProducts(req: NextApiRequest, res: NextApiResponse) {
     try {
+      return await this.produtosService.getAllProducts()
+    } catch (error) {
+      return error
+    }
+  }
+
+  public async getAllProductsByEmail(req: NextApiRequest, res: NextApiResponse) {
+    try {
       const { email } = req.query
       if (typeof email !== 'string') return res.status(500).send("error")
       return await this.produtosService.getAllProducts(email)

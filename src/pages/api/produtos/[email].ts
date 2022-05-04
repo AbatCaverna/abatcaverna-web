@@ -18,7 +18,7 @@ export default async function handler(
 
   if (req.method === 'GET') {
     try {
-      const produtos = await produtosController.getAllProducts(req, res)
+      const produtos = await produtosController.getAllProductsByEmail(req, res)
       
       res.status(200).send(produtos)
     } catch (error) {
