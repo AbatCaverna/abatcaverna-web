@@ -107,20 +107,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
               try {
 
-                // busco por uma compra do usuario, 
-                const orders = await database.collection("user_orders").find({ user_email: email }).toArray() as any
-
-                if (orders) {
-                  for (const order of orders) {
-                    for (const product of order.products) {
-                      if (product.isIngresso) {
-                        console.log('[SERVER]: Usuario tentou comprar mais de um ingresso')
-                        return res.status(500).send(`Usuário pode comprar apenas um ingresso por conta`)
-                      }
-                    }
-                  }
-                }
-
                 await database.collection("user_orders").insertOne({
                   user_email: email,
                   products: products
