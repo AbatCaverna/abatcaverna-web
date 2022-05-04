@@ -14,9 +14,7 @@ export default class CheckoutService {
 
   constructor() {
     this.api = axios.create({
-      baseURL: process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/api'
-        : 'https://dev.abatcaverna.app/api'
+      baseURL: process.env.ABAT_API_URL
     })
   }
 
