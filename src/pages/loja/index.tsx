@@ -34,7 +34,9 @@ export default function Loja({ data }: Loja) {
       setLoading(true)
       if (session.status === "unauthenticated") await signIn("google")
 
-      const response = await checkoutService.createCheckoutSession(priceId)
+      const email = session.data?.user?.email!
+
+      const response = await checkoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
   
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })

@@ -6,6 +6,7 @@ type Checkout = {
 }
 
 interface CheckoutBody {
+  email: string
   line_items: Array<Checkout>
 }
 
@@ -20,8 +21,9 @@ export default class CheckoutService {
     })
   }
 
-  async createCheckoutSession(priceId: string) {
+  async createCheckoutSession(priceId: string, email: string) {
     const payload: CheckoutBody = {
+      email,
       line_items: [
         {
           price: priceId,

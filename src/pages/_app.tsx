@@ -30,8 +30,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   })
 
   return (
-    <CartProvider>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <CartProvider>
         <Head>
           <meta
             name='viewport'
@@ -47,8 +47,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
             </div>
           )}
         </IconContext.Provider>
-      </SessionProvider>
-    </CartProvider>
+      </CartProvider>
+    </SessionProvider>
   )
 }
 

@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Stripe from 'stripe';
 import CheckoutService from '../services/CheckoutService';
@@ -21,6 +22,7 @@ export const CartContext = createContext({} as CartContext)
 export default function CartProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState([] as Array<ProductItem>)
   const [loading, setLoading] = useState(false)
+  const session = useSession()
 
   function addToCart(item: ProductItem) {
     setProducts(prev => [...prev, item])
@@ -47,7 +49,12 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
     try {
       const service = new CheckoutService()
+      const email = session.data?.user?.email
+
+      if (!email) throw new Error("User not logged in")
+
       const data = {
+        email,
         line_items: products.map((product) => {
           return {
             price: product.price.id,

@@ -10,6 +10,7 @@ type Checkout = {
 }
 
 interface CheckoutBody {
+  email: string
   line_items: Array<Checkout>
 }
 
@@ -22,13 +23,10 @@ export default class CheckoutController {
     this._stripe = stripe;
   }
   public async index(req: NextApiRequest, res:NextApiResponse) {
-    const session = await getSession({ req })
 
-    if (!session) res.status(403).send("User must be logged in")
+    const { email, line_items } = req.body as CheckoutBody
 
-    const { user } = session!
-
-    const userFound = await this._userRepository.getUserByEmail(user?.email!)
+    const userFound = await this._userRepository.getUserByEmail(email)
 
     if (!userFound) res.status(404).send("User does not exist")
 
@@ -45,8 +43,6 @@ export default class CheckoutController {
     }
 
     if (!userFound.stripe_customer_id) res.status(404).send("User does not exists in stripe")
-
-    const { line_items } = req.body as CheckoutBody
 
     if (!line_items) res.status(400).send("Must send data with array of line items")
 
