@@ -1,15 +1,17 @@
+import LogRocket from "logrocket";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 type ProfileButton = {
-  name: string,
+  name: string
   image: string
+  email: string
   role?: string
 }
-export default function ProfileButton({ name, image, role = "usuario" }: ProfileButton) {
+export default function ProfileButton({ name, image, role = "usuario", email }: ProfileButton) {
   const [showDropdown, setShowDropdown] = useState(false)
   function hadleOpenDropdow () {
     
@@ -21,7 +23,19 @@ export default function ProfileButton({ name, image, role = "usuario" }: Profile
   }
 
 
+  useEffect(() => {
+    // This is an example script - don't forget to change it!
+    if (process.env.NODE_ENV === 'production') {
+      LogRocket.identify(email, {
+        name,
+        email,
+  
+        // Add your own custom user variables here, ie:
+        subscriptionType: 'pro'
+      });
+    }
 
+  }, [email, name])
 
   return (
     <div className={styles.hover_area}>

@@ -18,6 +18,7 @@
     "@stripe/stripe-js": "^1.27.0",
     "axios": "^0.24.0",
     "jsonwebtoken": "^8.5.1",
+    "logrocket": "^3.0.0",
     "mongodb": "^4.2.1",
     "next": "^12.1.2",
     "next-auth": "^4.3.1",
