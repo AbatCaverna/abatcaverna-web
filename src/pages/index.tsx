@@ -8,6 +8,7 @@ import { Data } from '../utils/homePageData'
 import { Historia } from '../components/Home/Historia'
 import { Moradores } from '../components/Home/Moradores'
 import NossaCasa from '../components/Home/NossaCasa'
+import NossaLoja from '../components/Home/NossaLoja'
 import { TiArrowUpOutline } from 'react-icons/ti'
 import styles from '../styles/Home.module.css'
 
@@ -112,6 +113,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
         </section>
         <Historia images={historyImages}  />
+        <NossaLoja/>
         <Moradores moradores={moradores} />
         <NossaCasa />
         {showBackToTopBtn && (
