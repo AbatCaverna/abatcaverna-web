@@ -35,7 +35,7 @@ export default class MoradoresRepository {
   }
 
   public async update(model: User) {
-    await this._database.collection("users").updateOne({
+    return await this._database.collection("users").updateOne({
       email: model.email,
     }, {
       $set: {
