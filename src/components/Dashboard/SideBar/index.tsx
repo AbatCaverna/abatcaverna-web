@@ -1,16 +1,28 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { MdSpaceDashboard } from "react-icons/md"
+import useWindow from "../../../hooks/useWindow";
 import styles from "./styles.module.css"
 
 export default function SideBar() {
   const router = useRouter()
+  const window = useWindow()
+  const [isMobile, setIsMobile] = useState(true)
 
   function onChangeRoute(route: string) {
     router.push('/dashboard/'+route)
   }
 
-  return (
-    <div className={styles.navbar}>
+  useEffect(() => {
+    if(window && window?.width < 580) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }, [window])
+
+  return !isMobile ? (
+    <div className={styles.navbar} onClick={() => setIsMobile(!isMobile)}>
       <h1>
         <MdSpaceDashboard/> Dashboard
       </h1>
@@ -27,6 +39,12 @@ export default function SideBar() {
           <li onClick={() => onChangeRoute('qrcode')}>Scanner QRCode</li>
         </ul>
       </nav>
+    </div>
+  ) : (
+    <div className={styles.navbar_mobile} onClick={() => setIsMobile(!isMobile)}>
+      <h1>
+        <MdSpaceDashboard/>
+      </h1>
     </div>
   );
 }

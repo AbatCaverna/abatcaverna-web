@@ -32,3 +32,13 @@
 .navbar_menu > ul > hr {
   margin: 0;
 }
+
+.navbar_mobile {
+  background-color: #474545;
+  padding: 1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  max-height: 75px;
+}
