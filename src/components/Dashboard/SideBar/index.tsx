@@ -24,6 +24,7 @@ export default function SideBar() {
           <hr />
           <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
           <li onClick={() => onChangeRoute('pedidos')}>Pedidos</li>
+          <li onClick={() => onChangeRoute('qrcode')}>Scanner QRCode</li>
         </ul>
       </nav>
     </div>
