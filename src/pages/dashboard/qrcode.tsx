@@ -1,50 +1,43 @@
-import { useEffect, useRef, useState } from "react";
-import Html5QrcodePlugin from "../../components/Dashboard/QRCodeScanner";
+import { useState } from "react";
 import SideBar from "../../components/Dashboard/SideBar";
 import styles from "../../styles/Dashboard.module.css";
+import styles_code from "../../styles/QRCode.module.css";
+import { QrReader } from 'react-qr-reader';
+
+const SCAN_TEXT_NONE = 'Insira o QRCode'
+const SCAN_TEXT_SUCCESS = 'QRCode válido!'
+const SCAN_TEXT_ERROR = 'QRCode inválido!'
 
 export default function QRCodePage() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [status, setStatus] = useState('Insira o QRCode')
-
-  const getVideo = () => {
-    navigator.mediaDevices
-      .getUserMedia({ video: { width: 300 } })
-      .then(stream => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current?.play();
-        }
-        
-      })
-      .catch(err => {
-        console.error("error:", err);
-      });
-  };
-
-  function onNewScanResult(decodedText: string, decodedResult: object) {
-    // Handle the result here.
-    console.log(decodedText, decodedResult)
-    setStatus(decodedText)
-  }
+  const [status, setStatus] = useState(SCAN_TEXT_NONE)
   
-  useEffect(()=> {
-    getVideo()
-  }, [])
+
+  const handleScan = (text: string) => {
+    setStatus(SCAN_TEXT_SUCCESS)
+    setTimeout(() => setStatus(SCAN_TEXT_NONE), 5000)
+  };
 
   return (
     <div className={styles.container}>
       <SideBar/>
-      <main>
+      <main className={styles_code.container}>
         <h1>Scaneie o qrcode aqui</h1>
-        <Html5QrcodePlugin
-          fps={10}
-          qrbox={250}
-          qrCodeSuccessCallback={onNewScanResult}
-          qrCodeErrorCallback={() => console.log('eerror')}
-          supportedScanTypes={[]}
-        />
-        <p>{status}</p>
+        <div className={styles_code.scan_container}>
+          <QrReader
+            onResult={(result: any, error) => {
+              if (!!result) {
+                handleScan(result?.text);
+              }
+
+              if (!!error) {
+                console.info(error);
+                
+              }
+            }}
+            constraints={{ facingMode: 'user' }}
+          />
+          <p>{status}</p>
+        </div>
       </main>
     </div>
   )
