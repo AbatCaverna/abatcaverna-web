@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { QrReader } from 'react-qr-reader';
 import SideBar from "../../components/Dashboard/SideBar";
+import Loading from "../../components/Shared/Loading";
 import styles from "../../styles/Dashboard.module.css";
 import styles_code from "../../styles/QRCode.module.css";
-import { QrReader } from 'react-qr-reader';
 
 const SCAN_TEXT_NONE = 'Insira o QRCode'
 const SCAN_TEXT_SUCCESS = 'QRCode válido!'
@@ -10,6 +11,7 @@ const SCAN_TEXT_ERROR = 'QRCode inválido!'
 
 export default function QRCodePage() {
   const [status, setStatus] = useState(SCAN_TEXT_NONE)
+  const [loading, setLoading] = useState(false)
   
 
   const handleScan = (text: string) => {
@@ -38,6 +40,12 @@ export default function QRCodePage() {
           />
           <p>{status}</p>
         </div>
+        {loading && (
+            <div className={styles.loading}>
+              <Loading/>
+              <p>Verificando...</p>
+            </div>
+          )}
       </main>
     </div>
   )

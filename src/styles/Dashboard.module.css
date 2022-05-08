@@ -9,3 +9,18 @@
 .container > main {
   padding: 1rem;
 }
+
+.loading {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(40, 40, 40, 0.7);
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+}
