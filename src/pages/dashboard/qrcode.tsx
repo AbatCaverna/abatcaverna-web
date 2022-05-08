@@ -46,7 +46,7 @@ export default function QRCodePage() {
                 handleScan(result?.text);
               }
             }}
-            constraints={{ facingMode: 'user' }}
+            constraints={{ facingMode: 'rear' }}
           />
           <p>{status}</p>
         </div>
