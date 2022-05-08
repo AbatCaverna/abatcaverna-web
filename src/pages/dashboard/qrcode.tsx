@@ -9,6 +9,7 @@ import styles_code from "../../styles/QRCode.module.css";
 const SCAN_TEXT_NONE = 'Insira o QRCode'
 const SCAN_TEXT_SUCCESS = 'QRCode válido!'
 const SCAN_TEXT_ERROR = 'QRCode inválido!'
+const TIME_TO_CHANGE_TEXT = 8000
 
 export default function QRCodePage() {
   const [status, setStatus] = useState(SCAN_TEXT_NONE)
@@ -18,7 +19,7 @@ export default function QRCodePage() {
   async function check(code: string) {
     try {
       setLoading(true)
-      const response = await checkCodeService.check(code)
+      await checkCodeService.check(code)
       setStatus(SCAN_TEXT_SUCCESS)
     } catch (err) {
       setStatus(SCAN_TEXT_ERROR)
@@ -30,7 +31,7 @@ export default function QRCodePage() {
 
   const handleScan = async  (text: string) => {
     await check(text)
-    setTimeout(() => setStatus(SCAN_TEXT_NONE), 5000)
+    setTimeout(() => setStatus(SCAN_TEXT_NONE), TIME_TO_CHANGE_TEXT)
   };
 
   return (
