@@ -2,6 +2,7 @@ import { useState } from "react";
 import { QrReader } from 'react-qr-reader';
 import SideBar from "../../components/Dashboard/SideBar";
 import Loading from "../../components/Shared/Loading";
+import CheckCodeService from "../../services/CheckCodeService";
 import styles from "../../styles/Dashboard.module.css";
 import styles_code from "../../styles/QRCode.module.css";
 
@@ -12,10 +13,23 @@ const SCAN_TEXT_ERROR = 'QRCode inválido!'
 export default function QRCodePage() {
   const [status, setStatus] = useState(SCAN_TEXT_NONE)
   const [loading, setLoading] = useState(false)
+  const checkCodeService = new CheckCodeService()
+
+  async function check(code: string) {
+    try {
+      setLoading(true)
+      const response = await checkCodeService.check(code)
+      setStatus(SCAN_TEXT_SUCCESS)
+    } catch (err) {
+      setStatus(SCAN_TEXT_ERROR)
+    } finally {
+      setLoading(false)
+    }
+  }
   
 
-  const handleScan = (text: string) => {
-    setStatus(SCAN_TEXT_SUCCESS)
+  const handleScan = async  (text: string) => {
+    await check(text)
     setTimeout(() => setStatus(SCAN_TEXT_NONE), 5000)
   };
 
@@ -29,11 +43,6 @@ export default function QRCodePage() {
             onResult={(result: any, error) => {
               if (!!result) {
                 handleScan(result?.text);
-              }
-
-              if (!!error) {
-                console.info(error);
-                
               }
             }}
             constraints={{ facingMode: 'user' }}
