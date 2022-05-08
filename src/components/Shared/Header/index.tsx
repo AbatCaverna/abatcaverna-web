@@ -168,6 +168,7 @@ export function Header() {
                   name={data?.user?.name!}
                   image={data?.user?.image!}
                   email={data?.user?.email!}
+                  role={data?.role as string}
                 />
               )
             }
