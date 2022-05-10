@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Stripe from 'stripe';
 import CheckoutService from '../services/CheckoutService';
@@ -49,12 +49,12 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
     try {
       const service = new CheckoutService()
-      const email = session.data?.user?.email
-
-      if (!email) throw new Error("User not logged in")
-
+      
+      if (session.status === "unauthenticated") await signIn("google")
+      
+      const email = session.data?.user?.email!
       const data = {
-        email,
+        email: email,
         line_items: products.map((product) => {
           return {
             price: product.price.id,
