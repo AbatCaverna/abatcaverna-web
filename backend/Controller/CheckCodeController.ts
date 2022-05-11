@@ -7,9 +7,10 @@ export default class CheckCodeController {
       const { token } = req.body
       const jwt = jsonwebtoken()
       const verify = jwt.decode(token)
-      res.send(verify)
+      console.log(verify)
+      return res.send(verify)
     } catch (error) {
-      res.status(403).send('Invalido')
+      return res.status(403).send('Invalido')
     }
 
   }
