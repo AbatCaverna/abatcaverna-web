@@ -7,8 +7,8 @@ import styles from "../../styles/Dashboard.module.css";
 import styles_code from "../../styles/QRCode.module.css";
 
 const SCAN_TEXT_NONE = 'Insira o QRCode'
-const SCAN_TEXT_SUCCESS = 'QRCode válido!'
-const SCAN_TEXT_ERROR = 'QRCode inválido!'
+const SCAN_TEXT_SUCCESS = '✅ QRCode válido!'
+const SCAN_TEXT_ERROR = '🚫 QRCode inválido!'
 const TIME_TO_CHANGE_TEXT = 8000
 
 export default function QRCodePage() {
