@@ -55,7 +55,7 @@ export const Data = {
     },
     {
       nome: 'Heron',
-      apelido: '?',
+      apelido: 'Timão',
       dataEntrada: 2022,
       curso: 'Ciência da Computação',
       image: '/moradores/heron.jpeg',
@@ -64,7 +64,7 @@ export const Data = {
     },
     {
       nome: 'Gustavo',
-      apelido: '?',
+      apelido: 'Xuxu',
       dataEntrada: 2022,
       curso: 'Educação Física',
       image: '/moradores/gustavo.jpg',
