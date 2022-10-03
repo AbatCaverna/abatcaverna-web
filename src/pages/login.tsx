@@ -1,5 +1,6 @@
 import { signIn } from 'next-auth/react'
-import styles from '../styles/Login.module.css'
+
+import styles from 'styles/Login.module.css'
 
 export default function LoginPage() {
 

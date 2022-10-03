@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { TiSocialInstagram } from 'react-icons/ti';
-import styles from '../../styles/Checkout.module.css';
+
+import styles from 'styles/Checkout.module.css';
 
 export default function CheckoutErro() {
   return (

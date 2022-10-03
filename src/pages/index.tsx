@@ -3,14 +3,17 @@ import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { getPlaiceholder } from 'plaiceholder'
-import { Footer } from '../components/Home/Footer'
-import { Data } from '../utils/homePageData'
-import { Historia } from '../components/Home/Historia'
-import { Moradores } from '../components/Home/Moradores'
-import NossaCasa from '../components/Home/NossaCasa'
-import NossaLoja from '../components/Home/NossaLoja'
 import { TiArrowUpOutline } from 'react-icons/ti'
-import styles from '../styles/Home.module.css'
+
+import { 
+  Footer,
+  Historia,
+  Moradores,
+  NossaCasa,
+  NossaLoja
+} from 'components/Home'
+import styles from 'styles/Home.module.css'
+import { Data } from 'utils/homePageData'
 
 type Morador = {
   nome: string;

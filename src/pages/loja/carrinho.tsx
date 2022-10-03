@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import Loader from '../../components/Shared/Loading';
-import useCarrinho from "../../hooks/useCarrinho";
-import transformUnitAmount from "../../utils/trasnformUnitAmout";
-import { GoTrashcan } from "react-icons/go";
-import styles from "../../styles/Carrinho.module.css";
 import Link from "next/link";
+import { GoTrashcan } from "react-icons/go";
+
+import Loader from 'components/Shared/Loading';
+import useCarrinho from "hooks/useCarrinho";
+import styles from "styles/Carrinho.module.css";
+import transformUnitAmount from "utils/trasnformUnitAmout";
 
 export default function Carrinho() {
   const { products, cartCheckout, removeFromCart, loading } = useCarrinho()
