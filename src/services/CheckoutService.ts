@@ -6,6 +6,7 @@ type Checkout = {
 }
 
 interface CheckoutBody {
+  email: string
   line_items: Array<Checkout>
 }
 
@@ -14,12 +15,15 @@ export default class CheckoutService {
 
   constructor() {
     this.api = axios.create({
-      baseURL: process.env.ABAT_API_URL
+      baseURL: process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000/api'
+      : 'https://abatcaverna.app/api'
     })
   }
 
-  async createCheckoutSession(priceId: string) {
+  async createCheckoutSession(priceId: string, email: string) {
     const payload: CheckoutBody = {
+      email,
       line_items: [
         {
           price: priceId,

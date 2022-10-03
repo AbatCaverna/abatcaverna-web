@@ -1,10 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-interface AcessoResponse  {
-  message: string;
-  valid: boolean;
-}
-export default class AcessoService {
+export default class CheckCodeService {
   private api: AxiosInstance;
 
   constructor() {
@@ -15,8 +11,8 @@ export default class AcessoService {
     })
   }
 
-  public async acesso(code: string) {
-    return await this.api.post<AcessoResponse>('/access', { code }) 
+  public async check(code: string) {
+    return await this.api.post('/check-code', { token: code }) 
   }
 
 }

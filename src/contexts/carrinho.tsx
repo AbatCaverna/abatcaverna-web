@@ -1,3 +1,4 @@
+import { signIn, useSession } from 'next-auth/react';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Stripe from 'stripe';
 import CheckoutService from '../services/CheckoutService';
@@ -21,6 +22,7 @@ export const CartContext = createContext({} as CartContext)
 export default function CartProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState([] as Array<ProductItem>)
   const [loading, setLoading] = useState(false)
+  const session = useSession()
 
   function addToCart(item: ProductItem) {
     setProducts(prev => [...prev, item])
@@ -47,7 +49,12 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
     try {
       const service = new CheckoutService()
+      
+      if (session.status === "unauthenticated") await signIn("google")
+      
+      const email = session.data?.user?.email!
       const data = {
+        email: email,
         line_items: products.map((product) => {
           return {
             price: product.price.id,

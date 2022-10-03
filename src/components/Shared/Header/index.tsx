@@ -110,6 +110,7 @@ export function Header() {
                 <ProfileButton
                   name={data?.user?.name!}
                   image={data?.user?.image!}
+                  email={data?.user?.email!}
                   role={data?.role as string}
                 />
               )
@@ -163,7 +164,12 @@ export function Header() {
                 </Link>
               </li>
               ) : (
-                <ProfileButton name={data?.user?.name!} image={data?.user?.image!} />
+                <ProfileButton
+                  name={data?.user?.name!}
+                  image={data?.user?.image!}
+                  email={data?.user?.email!}
+                  role={data?.role as string}
+                />
               )
             }
             <li>

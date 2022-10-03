@@ -8,6 +8,8 @@ import { Header } from '../components/Shared/Header'
 import Loading from '../components/Shared/Loading'
 import '../styles/globals.css'
 import CartProvider from '../contexts/carrinho';
+import LogRocket from 'logrocket';
+
 
 function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   const router = useRouter();
@@ -29,9 +31,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
       }
   })
 
+  if (process.env.NODE_ENV === 'production') LogRocket.init('ygdgye/dashboard-web-h0qcb');
+
   return (
-    <CartProvider>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <CartProvider>
         <Head>
           <meta
             name='viewport'
@@ -47,8 +51,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
             </div>
           )}
         </IconContext.Provider>
-      </SessionProvider>
-    </CartProvider>
+      </CartProvider>
+    </SessionProvider>
   )
 }
 

@@ -41,6 +41,7 @@ export default class ProdutosRepository {
         price.product.toString()
       );
 
+      if(price.active === false) continue;
       if(product.active === false) continue
       if(ja_comprou_ingresso && product.metadata.ingresso) continue
 
