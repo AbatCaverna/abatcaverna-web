@@ -17,17 +17,27 @@ export default function LoginPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Com qual usuário quer fazer o login</h1>
 
       <div className={styles.btn_container}>
-        <button
-          type="button"
-          onClick={() => handleSignIn('usuario')}
-        >Usuário</button>
-        <button
-          type="button"
-          onClick={() => handleSignIn('cavernoso')}
-        >Morador</button>
+        <h1>Com qual usuário quer fazer o login?</h1>
+        
+        <div>
+          <button
+            type="button"
+            className={styles.btn}
+            onClick={() => handleSignIn('usuario')}
+          >
+            Usuário
+          </button>
+          <button
+            type="button"
+            className={styles.btn}
+            onClick={() => handleSignIn('cavernoso')}
+          >
+            Morador
+          </button>
+        </div>
+       
 
       </div>
       <Link href="/forgot-password">

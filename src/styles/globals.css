@@ -1,6 +1,8 @@
 :root {
   --yelloy: #FFC74A;
   --light-gray: #eaeaea;
+  --bg: #0C0B0B;
+  --light-bg: #181716;
 }
 
 html,
@@ -17,6 +19,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:hover {
+  filter: brightness(0.9);
+  color: var(--yelloy);
 }
 
 * {

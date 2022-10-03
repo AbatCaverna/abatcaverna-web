@@ -5,11 +5,12 @@
 }
 
 .btn_container {
-  border: 1px solid var(--light-gray);
+  /* border: 1px solid var(--light-gray); */
+  background-color: var(--light-bg);
   border-radius: 8px;
   padding: 1rem;
   width: fit-content;
-  margin: 0 auto;
+  margin: 3rem auto 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -18,11 +19,17 @@
   gap: 1rem;
 }
 
-.btn_container > button {
-  background-color: transparent;
-  color: #fff;
+.btn_container > h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  padding: 0.5rem;
+}
+
+.btn {
+  background-color: var(--yelloy);
+  color: var(--light-bg);
   outline: none;
-  border: 1px solid var(--light-gray);
+  border: 1px solid var(--light-bg);
   width: 180px;
   height: 45px;
   border-radius: 8px;
@@ -32,10 +39,14 @@
   transition: filter .2s;
 }
 
-.btn_container > button:hover {
+.btn:hover {
   filter: brightness(0.9);
 }
 
-.btn_container > button:active {
+.btn:active {
   transform: translate(1px, 1px);
+}
+
+.btn:last-child {
+  margin-left: 8px;
 }
