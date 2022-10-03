@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 
 import styles from 'styles/Login.module.css'
 
@@ -29,7 +30,9 @@ export default function LoginPage() {
         >Morador</button>
 
       </div>
-
+      <Link href="/forgot-password">
+        <a>Esqueci minha senha</a>
+      </Link>
     </div>
   )
 }
