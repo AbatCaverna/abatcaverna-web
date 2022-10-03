@@ -1,9 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import CheckoutController from '../../../backend/Controller/CheckoutController';
-import connectMongo from '../../../backend/Providers/mongo';
-import stripe from '../../../backend/Providers/stripe';
-import UserRepository from '../../../backend/Repository/UserRepository';
+
+import CheckoutController from 'backend/Controller/CheckoutController';
+import connectMongo from 'backend/Providers/mongo';
+import stripe from 'backend/Providers/stripe';
+import UserRepository from 'backend/Repository/UserRepository';
 
 export default async function handler(
   req: NextApiRequest,

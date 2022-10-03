@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Readable } from "stream";
 import Stripe from "stripe";
-import { Email } from "../../../backend/Providers/email";
-import stripe from "../../../backend/Providers/stripe"
-import connectDatabase  from "../../../backend/Providers/mongo";
+
+import { Email } from "backend/Providers/email";
+import stripe from "backend/Providers/stripe"
+import connectDatabase  from "backend/Providers/mongo";
 
 async function buffer(readable: Readable) {
   const chunks = [];

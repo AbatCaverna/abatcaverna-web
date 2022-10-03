@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import MoradoresController from '../../../backend/Controller/MoradoresController';
-import connectMongo from '../../../backend/Providers/mongo';
+
+import MoradoresController from 'backend/Controller/MoradoresController';
+import connectMongo from 'backend/Providers/mongo';
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   const { database } = await connectMongo()

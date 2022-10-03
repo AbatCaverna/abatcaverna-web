@@ -9,7 +9,8 @@
     "test": "echo 'No tests yet'",
     "commit": "git add . && npx git-cz",
     "docker": "./run.sh",
-    "docker:down": "sudo docker-compose down"
+    "docker:down": "sudo docker-compose down",
+    "docker:build": "./build.sh"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.7.0",
