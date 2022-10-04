@@ -3,10 +3,11 @@ import { IconType } from "react-icons"
 import styles from "./styles.module.css"
 
 interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  label: string
   name: string
   type: string
-  icon: IconType
+  label?: string
+  icon?: IconType
+  inputStyle?: "default" | "large"
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
@@ -14,13 +15,14 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
   name,
   type,
   icon,
+  inputStyle = "default",
   ...rest
 }, ref) => {
   const Icon = icon
   return (
     <div className={styles.input}>
-      <label htmlFor={name}><Icon /> {label}</label>
-      <input ref={ref} type={type} name={name} id={name} {...rest} />
+      {label && <label htmlFor={name}>{Icon && <Icon />} {label}</label>}
+      <input className={inputStyle === "large" ? styles.large : ""} ref={ref} type={type} name={name} id={name} autoComplete="off" {...rest} />
     </div>
   );
 }
