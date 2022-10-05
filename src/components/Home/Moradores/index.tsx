@@ -16,7 +16,7 @@ interface MoradorProps {
   moradores: Array<Morador>
 }
 
-export function Moradores({ moradores }: MoradorProps) {
+export default function Moradores({ moradores }: MoradorProps) {
 
   return (
     <section id="moradores" className={styles.container}>

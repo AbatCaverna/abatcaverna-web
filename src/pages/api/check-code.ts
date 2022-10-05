@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import CheckCodeController from '../../../backend/Controller/CheckCodeController';
+
+import CheckCodeController from 'backend/Controller/CheckCodeController';
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   const checkCodeController = new CheckCodeController()

@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 import { TiSocialInstagram } from 'react-icons/ti'
 import { GiBatMask, GiDrinkMe } from 'react-icons/gi'
 
-export function Footer() {
+function Footer() {
   
   return (
     <footer className={styles.footer}>
@@ -47,3 +47,5 @@ export function Footer() {
     </footer>
   )
 }
+
+export default Footer

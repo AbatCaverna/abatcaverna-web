@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import AcessoController from '../../../backend/Controller/AcessoController';
+
+import AcessoController from 'backend/Controller/AcessoController';
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   const aceesoController = new AcessoController()

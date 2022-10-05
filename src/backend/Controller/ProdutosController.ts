@@ -1,9 +1,12 @@
+import { NextApiRequest, NextApiResponse } from "next"
+import { Db } from "mongodb"
 import Stripe from "stripe"
+
+import { ProductResponse, ProductsResponse } from "types"
+
 import ProdutosRepository from "../Repository/ProdutosRepository"
 import ProdutosService from "../Service/ProdutosService"
 import Produto from "../Models/Produto"
-import { NextApiRequest, NextApiResponse } from "next"
-import { Db } from "mongodb"
 
 export default class ProdutosController {
   private produtosService: ProdutosService
@@ -12,7 +15,7 @@ export default class ProdutosController {
     this.produtosService = new ProdutosService(produtosRepo)
   }
 
-  public async getAllProducts(req: NextApiRequest, res: NextApiResponse) {
+  public async getAllProducts(req: NextApiRequest, res: NextApiResponse): Promise<ProductsResponse | unknown> {
     try {
       return await this.produtosService.getAllProducts()
     } catch (error) {
@@ -20,7 +23,7 @@ export default class ProdutosController {
     }
   }
 
-  public async getAllProductsByEmail(req: NextApiRequest, res: NextApiResponse) {
+  public async getAllProductsByEmail(req: NextApiRequest, res: NextApiResponse): Promise<ProductsResponse | unknown> {
     try {
       const { email } = req.query
       if (typeof email !== 'string') return res.status(500).send("error")
@@ -30,7 +33,7 @@ export default class ProdutosController {
     }
   }
 
-  public async createProduct({ name, description, value}: Produto) {
+  public async createProduct({ name, description, value}: Produto): Promise<ProductResponse | unknown> {
     try {
       return await this.produtosService.createProduct({ name, description, value })
     } catch (error) {

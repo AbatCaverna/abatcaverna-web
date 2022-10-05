@@ -1,0 +1,7 @@
+.container {
+  background-color: var(--light-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  width: fit-content;
+  margin: 3rem auto 0 auto;
+}

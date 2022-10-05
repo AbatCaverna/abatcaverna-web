@@ -1,9 +1,10 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import SessionController from "../../../../backend/Controller/SessionController"
-import connectMongo from "../../../../backend/Providers/mongo";
-import { Role } from "../../../utils/enum";
+
+import SessionController from "backend/Controller/SessionController"
+import connectMongo from "backend/Providers/mongo";
+import { Role } from "utils/enum";
 
 export default NextAuth({
   theme: {

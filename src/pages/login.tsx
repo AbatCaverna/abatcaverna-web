@@ -1,5 +1,9 @@
 import { signIn } from 'next-auth/react'
-import styles from '../styles/Login.module.css'
+import Link from 'next/link'
+import Head from 'next/head'
+
+import { Card } from 'components/Shared'
+import styles from 'styles/Login.module.css'
 
 export default function LoginPage() {
 
@@ -15,20 +19,36 @@ export default function LoginPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Com qual usuário quer fazer o login</h1>
+      
+      <Head>
+        <title>ABatCaverna | Login</title>
+      </Head>
 
-      <div className={styles.btn_container}>
-        <button
-          type="button"
-          onClick={() => handleSignIn('usuario')}
-        >Usuário</button>
-        <button
-          type="button"
-          onClick={() => handleSignIn('cavernoso')}
-        >Morador</button>
-
-      </div>
-
+      <Card className={styles.btn_container}>
+        <>
+          <h1>Com qual usuário quer fazer o login?</h1>
+          
+          <div>
+            <button
+              type="button"
+              className={styles.btn}
+              onClick={() => handleSignIn('usuario')}
+            >
+              Usuário
+            </button>
+            <button
+              type="button"
+              className={styles.btn}
+              onClick={() => handleSignIn('cavernoso')}
+            >
+              Morador
+            </button>
+          </div>
+        </>
+      </Card>
+      <Link href="/forgot-password">
+        <a>Esqueci minha senha</a>
+      </Link>
     </div>
   )
 }

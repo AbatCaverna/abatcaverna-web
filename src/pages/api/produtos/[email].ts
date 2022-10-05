@@ -1,8 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import ProdutosController from '../../../../backend/Controller/ProdutosController';
-import Stripe from '../../../../backend/Providers/stripe';
-import connectMongo from '../../../../backend/Providers/mongo'
+
+import ProdutosController from 'backend/Controller/ProdutosController';
+import connectMongo from 'backend/Providers/mongo'
+import Stripe from 'backend/Providers/stripe';
 
 export default async function handler(
   req: NextApiRequest,

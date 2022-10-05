@@ -1,8 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useSession } from "next-auth/react"
-import { FiShoppingBag } from "react-icons/fi";
-import styles from '../../styles/Perfil.module.css'
+
+import styles from 'styles/Perfil.module.css'
 
 export default function PerfilPage() {
   const session = useSession()

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
+import LogRocket from 'logrocket';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { IconContext } from 'react-icons';
-import { Header } from '../components/Shared/Header'
-import Loading from '../components/Shared/Loading'
-import '../styles/globals.css'
-import CartProvider from '../contexts/carrinho';
-import LogRocket from 'logrocket';
 
+import { Header } from 'components/Shared/Header'
+import Loading from 'components/Shared/Loading'
+import CartProvider from 'contexts/carrinho';
+
+import 'styles/globals.css';
 
 function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   const router = useRouter();

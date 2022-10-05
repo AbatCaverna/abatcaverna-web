@@ -1,6 +1,8 @@
-import UserRepository from '../Repository/UserRepository'
-import { Role } from '../../src/utils/enum';
 import jwt from 'jsonwebtoken';
+
+import { Role } from 'utils/enum';
+
+import UserRepository from '../Repository/UserRepository';
 import returnHashString from '../Utils/crypto';
 import Stripe from '../Providers/stripe';
 

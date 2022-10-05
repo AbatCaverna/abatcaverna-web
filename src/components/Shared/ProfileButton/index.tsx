@@ -2,7 +2,7 @@ import LogRocket from "logrocket";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 
 type ProfileButton = {
@@ -12,7 +12,9 @@ type ProfileButton = {
   role?: string
 }
 export default function ProfileButton({ name, image, role = "usuario", email }: ProfileButton) {
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const [showDropdown, setShowDropdown] = useState(false)
+
   function hadleOpenDropdow () {
     
     setShowDropdown(!showDropdown)
@@ -37,26 +39,39 @@ export default function ProfileButton({ name, image, role = "usuario", email }: 
 
   }, [email, name])
 
+  //close the dropdown when click outside of it
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (showDropdown) {
+          setShowDropdown(!showDropdown)
+        }
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef, showDropdown]);
+
   return (
-    <div className={styles.hover_area}>
-      <div onClick={hadleOpenDropdow} className={`${styles.container} ${styles.container_styles}`}>
+    <div ref={dropdownRef}>
+      <div onClick={hadleOpenDropdow} className={`${styles.container} ${styles.container_item_styles}`}>
         <Image src={`${image}`} alt="User" width={32} height={32} />
         <p>{name}</p>
       {showDropdown && (
         <div className={`${styles.dropdown}`}>
           <ul>
-          <li className={styles.container_styles}>
+            <li className={styles.container_item_styles}>
               <Link href={role === "cavernoso" ? "/dashboard" : "/perfil"}>
                 <a >{role === "cavernoso" ? "Dashboard" : "Perfil"}</a>
               </Link>
             </li>
-            <li onClick={handleLogOut} className={styles.container_styles}>Sair</li>
+            <li onClick={handleLogOut} className={styles.container_item_styles}>Sair</li>
           </ul>
         </div>
       )}
-
       </div>
-
     </div>
 
   );

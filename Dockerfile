@@ -14,7 +14,6 @@ COPY yarn.lock .
 
 # Copy the rest of our Next.js folder into /app
 COPY . .
-COPY mongo.sh /docker-entrypoint-initdb.d/
 
 # Install dependencies in /app
 RUN yarn

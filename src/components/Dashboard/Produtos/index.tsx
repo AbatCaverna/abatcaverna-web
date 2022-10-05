@@ -1,12 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import Stripe from "stripe";
-import styles from "./styles.module.css";
 
-type ProductsResponse = {
-  product: Stripe.Response<Stripe.Product>;
-  price: Stripe.Price;
-}[]
+import { ProductsResponse } from "types";
+
+import styles from "./styles.module.css";
 
 interface Produtos {
   data: ProductsResponse

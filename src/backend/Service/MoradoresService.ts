@@ -61,11 +61,12 @@ export default class MoradoresService {
   public async changePassword(name: string, new_password: string) {
     try {
       const morador = await this._moradorRepository.getMorador(name)
-      const new_password_hash = returnHashString(new_password)
-
-      if (morador.senha === new_password_hash) {
-        throw new Error("Password must be different from old password")
+      
+      if (!morador) {
+        throw new Error("User not found")
       }
+
+      const new_password_hash = returnHashString(new_password)
 
       await this._moradorRepository.changePassword(name, new_password_hash)
     } catch (error) {

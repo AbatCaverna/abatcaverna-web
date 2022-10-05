@@ -4,14 +4,15 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
 import Stripe from 'stripe';
-import CarrinhoIcone from '../../components/Loja/CarrinhoIcone';
-import ProductCard from '../../components/Loja/ProductCard';
-import Loader from '../../components/Shared/Loading';
-import useWindow from '../../hooks/useWindow';
-import CheckoutService from '../../services/CheckoutService';
-import ProdutosService from '../../services/ProdutosService';
-import getStripe from "../../services/stripejs";
-import styles from '../../styles/Loja.module.css'
+
+import CarrinhoIcone from 'components/Loja/CarrinhoIcone';
+import ProductCard from 'components/Loja/ProductCard';
+import Loader from 'components/Shared/Loading';
+import useWindow from 'hooks/useWindow';
+import CheckoutService from 'services/CheckoutService';
+import ProdutosService from 'services/ProdutosService';
+import getStripe from "services/stripejs";
+import styles from 'styles/Loja.module.css'
 
 type ProductsResponse = {
   product: Stripe.Response<Stripe.Product>;

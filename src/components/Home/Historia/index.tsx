@@ -10,7 +10,7 @@ interface HistoriaProps {
   images: Array<Image>;
 }
 
-export function Historia({ images }: HistoriaProps) {
+export default function Historia({ images }: HistoriaProps) {
   
 
   return (

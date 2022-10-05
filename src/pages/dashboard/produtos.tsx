@@ -2,15 +2,12 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Stripe from "stripe";
-import Produtos from "../../components/Dashboard/Produtos";
-import SideBar from "../../components/Dashboard/SideBar";
-import ProdutosService from "../../services/ProdutosService";
-import styles from "../../styles/Dashboard.module.css";
 
-type ProductsResponse = {
-  product: Stripe.Response<Stripe.Product>;
-  price: Stripe.Price;
-}[]
+import Produtos from "components/Dashboard/Produtos";
+import SideBar from "components/Dashboard/SideBar";
+import ProdutosService from "services/ProdutosService";
+import styles from "styles/Dashboard.module.css";
+import { ProductsResponse } from "types";
 
 interface ProdutosPage {
   produtos: ProductsResponse
