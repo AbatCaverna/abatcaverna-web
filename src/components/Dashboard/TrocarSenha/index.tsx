@@ -19,7 +19,6 @@ export default function TrocarSenha({ name, hashCode }: Props) {
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
-  console.log(router.pathname)
 
   async function handleChange() {
     if (oldPasswordRef.current && newPasswordRef.current) {
