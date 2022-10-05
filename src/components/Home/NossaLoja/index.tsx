@@ -1,3 +1,4 @@
+import useAlert from "hooks/useAlert";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
@@ -17,6 +18,7 @@ export default function NossaLoja() {
   const [produtos, setProdutos] = useState([] as Produtos[])
   const [loading, setLoading] = useState(false)
   const session = useSession()
+  const { setAlert } = useAlert()
 
   async function handleBuyButton(priceId: string) {
     try {
@@ -33,7 +35,11 @@ export default function NossaLoja() {
       
     } catch (error) {
       console.log('redirect to checkout error',error)
-      alert(`Error! ${error}`)
+      setAlert({
+        message: error as string,
+        title: 'Error!',
+        type: "error"
+      })
     } finally {
       setLoading(false)
     }
@@ -49,6 +55,7 @@ export default function NossaLoja() {
   useEffect(() => {
     fetchProducts()
   }, [])
+  
   return (
     <section id="nossa-loja">
       <h2 className={styles.title}>Nossa Loja</h2>

@@ -4,6 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri"
 
 import { Button, Input } from "components/Shared"
 import MoradoresService from "services/MoradoresService"
+import useAlert from "hooks/useAlert"
 
 import styles from "./styles.module.css"
 
@@ -19,17 +20,24 @@ export default function TrocarSenha({ name, hashCode }: Props) {
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
+  const { setAlert } = useAlert()
 
   async function handleChange() {
     if (oldPasswordRef.current && newPasswordRef.current) {
 
       if (oldPasswordRef.current.value !== newPasswordRef.current.value) {
-        alert("As senhas devem ser iguais")
+        setAlert({
+          message: "As senhas devem ser iguais",
+          type: "warning"
+        })
         return
       }
 
       if (oldPasswordRef.current.value.length === 0 || newPasswordRef.current.value.length === 0) {
-        alert("As senhas nao podem estar vazias")
+        setAlert({
+          message: "As senhas nao podem estar vazias",
+          type: "warning"
+        })
         return
       }
 
@@ -37,14 +45,19 @@ export default function TrocarSenha({ name, hashCode }: Props) {
       try {
         await moradoresService.changePassword(name ?? nameRef.current!.value, newPasswordRef.current.value, hashCode)
         
-        alert("Senha alterada com sucesso")
-        
+        setAlert({
+          message: "Senha alterada com sucesso",
+          type: "success"
+        })
         if (router.pathname === '/forgot-password') {
           router.push('/login')
         }
 
       } catch (error) {
-        alert("Algo deu errao na troca de senha")
+        setAlert({
+          message: "Algo deu errao na troca de senha",
+          type: "error"
+        })
       } finally {
         setLoading(false)
       }

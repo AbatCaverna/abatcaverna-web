@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { QrReader } from 'react-qr-reader';
 
-import SideBar from "components/Dashboard/SideBar";
+import SideBar from "components/Dashboard/SharedComponents/SideBar";
 import Loading from "components/Shared/Loading";
 import CheckCodeService from "services/CheckCodeService";
 import styles from "styles/Dashboard.module.css";
 import styles_code from "styles/QRCode.module.css";
+import { DashboardLayout } from "components/Dashboard/SharedComponents";
 
 const SCAN_TEXT_NONE = 'Insira o QRCode'
 const SCAN_TEXT_SUCCESS = '✅ QRCode válido!'
@@ -36,28 +37,25 @@ export default function QRCodePage() {
   };
 
   return (
-    <div className={styles.container}>
-      <SideBar/>
-      <main className={styles_code.container}>
-        <h1>Scaneie o qrcode aqui</h1>
-        <div className={styles_code.scan_container}>
-          <QrReader
-            onResult={(result: any, error) => {
-              if (!!result) {
-                handleScan(result?.text);
-              }
-            }}
-            constraints={{ facingMode: 'environment' }}
-          />
-          <p>{status}</p>
-        </div>
-        {loading && (
-            <div className={styles.loading}>
-              <Loading/>
-              <p>Verificando...</p>
-            </div>
-          )}
-      </main>
-    </div>
+    <DashboardLayout mainClassName={styles_code.container}>
+      <h1>Scaneie o qrcode aqui</h1>
+      <div className={styles_code.scan_container}>
+        <QrReader
+          onResult={(result: any, error) => {
+            if (!!result) {
+              handleScan(result?.text);
+            }
+          }}
+          constraints={{ facingMode: 'environment' }}
+        />
+        <p>{status}</p>
+      </div>
+      {loading && (
+          <div className={styles.loading}>
+            <Loading/>
+            <p>Verificando...</p>
+          </div>
+      )}
+    </DashboardLayout>
   )
 }

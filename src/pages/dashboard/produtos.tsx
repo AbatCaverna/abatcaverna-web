@@ -1,12 +1,10 @@
 
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import Stripe from "stripe";
 
+import { DashboardLayout } from "components/Dashboard/SharedComponents";
 import Produtos from "components/Dashboard/Produtos";
-import SideBar from "components/Dashboard/SideBar";
 import ProdutosService from "services/ProdutosService";
-import styles from "styles/Dashboard.module.css";
 import { ProductsResponse } from "types";
 
 interface ProdutosPage {
@@ -16,19 +14,15 @@ interface ProdutosPage {
 export default function ProdutosPage({ produtos }: ProdutosPage) {
 
   return (
-    <div className={styles.container}>
-      <SideBar />
-      <main>
+    <DashboardLayout>
         <Produtos data={produtos}/>
-
-      </main>
-    </div>
+    </DashboardLayout>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
-  
+
   if (!session || session.role !== "cavernoso") {
     return {
       redirect: {

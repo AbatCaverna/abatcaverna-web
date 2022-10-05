@@ -1,16 +1,19 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
 
+import { TrocarSenha } from 'components/Dashboard/SharedComponents'
 import { Button, Card, Input } from 'components/Shared'
 import { RecoverPasswordService } from 'services'
+import useAlert from 'hooks/useAlert'
+
 import styles from 'styles/ForgotPassword.module.css'
-import TrocarSenha from 'components/Dashboard/TrocarSenha'
 
 export default function ForgotPasswordPage() {
   const inputRef = useRef<HTMLInputElement>(null)
   const revocerService = new RecoverPasswordService()
   const [step, setStep] = useState<'code' | 'password'>('code')
   const [hashCode, setHashCode] = useState<string | undefined>(undefined)
+  const { setAlert } = useAlert()
 
   async function handleRecuperarSenha() {
     if (inputRef.current && inputRef.current.value) {
@@ -21,11 +24,17 @@ export default function ForgotPasswordPage() {
           setHashCode(response.data.hashCode)
           setStep('password')
         } else {
-          alert('Nao verificado')
+          setAlert({
+            message: 'Nao verificado',
+            type: "error"
+          })
         }
         
       } catch (error) {
-        alert('Nao verificado')
+        setAlert({
+          message: 'Nao verificado',
+          type: "error"
+        })
       }
     }
   }

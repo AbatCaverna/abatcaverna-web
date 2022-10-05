@@ -1,0 +1,72 @@
+@keyframes grow {
+  0% {
+    transform: scaleX(0)
+  }
+  80% {
+      transform: scaleX(1.1)
+  }
+  100% {
+      transform: scaleX(1)
+  }
+}
+
+@keyframes growBack {
+  0% {
+    transform: scaleX(1)
+  }
+  80% {
+      transform: scaleX(1.1)
+  }
+  100% {
+      transform: scaleX(0)
+  }
+}
+
+.container {
+  position: fixed;
+  top: 8px;
+  left: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  min-height: 44px;
+  min-width: 200px;
+
+  transform-origin: left center;
+}
+
+.enterAnimation {
+  animation: grow 300ms ease-in-out forwards;
+}
+
+.leaveAnimation {
+  animation: growBack 300ms ease-in-out forwards;
+}
+
+.info {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.warning {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+.success {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.dark {
+  background-color: #f3f4f6;
+  color: #374151;
+}
