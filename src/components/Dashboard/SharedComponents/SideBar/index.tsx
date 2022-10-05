@@ -24,7 +24,7 @@ export default function SideBar() {
   }, [window])
 
   return !isMobile ? (
-    <div className={styles.navbar} onClick={() => setIsMobile(!isMobile)}>
+    <div className={styles.navbar} onClick={() => isMobile && setIsMobile(!isMobile)}>
       <h1>
         <MdSpaceDashboard/> Dashboard
       </h1>
@@ -37,7 +37,7 @@ export default function SideBar() {
           <strong>Loja</strong>
           <hr />
           <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
-          <li onClick={() => onChangeRoute('pedidos')}>Pedidos</li>
+          <li className={styles.navbar_menu_item_disabled}>Pedidos</li>
           <li onClick={() => onChangeRoute('qrcode')}>Scanner QRCode</li>
         </ul>
       </nav>

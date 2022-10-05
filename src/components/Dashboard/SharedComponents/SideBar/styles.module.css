@@ -33,6 +33,11 @@
   margin: 0;
 }
 
+.navbar_menu_item_disabled {
+  cursor: not-allowed !important;
+  filter: brightness(0.6);
+}
+
 .navbar_mobile {
   background-color: #474545;
   padding: 1;
