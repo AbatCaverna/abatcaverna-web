@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdSpaceDashboard } from "react-icons/md"
-import useWindow from "../../../hooks/useWindow";
+
+import useWindow from "hooks/useWindow";
+
 import styles from "./styles.module.css"
 
 export default function SideBar() {

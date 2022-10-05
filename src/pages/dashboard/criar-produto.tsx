@@ -1,14 +1,10 @@
 import CriarProduto from "components/Dashboard/CriarProduto";
-import SideBar from "components/Dashboard/SideBar";
-import styles from  "styles/Dashboard.module.css";
+import { DashboardLayout } from "components/Dashboard/SharedComponents";
 
 export default function CriarProdutoPage() {
   return (
-    <div className={styles.container}>
-      <SideBar />
-      <main>
-        <CriarProduto/>
-      </main>
-    </div>
+    <DashboardLayout>
+      <CriarProduto/>
+    </DashboardLayout>
   );
 }

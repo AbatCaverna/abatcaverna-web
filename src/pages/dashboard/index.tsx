@@ -3,10 +3,9 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 
+import { DashboardLayout } from "components/Dashboard/SharedComponents";
 import Perfil from "components/Dashboard/Perfil";
-import SideBar from "components/Dashboard/SideBar";
 import useRole from "hooks/useRole";
-import styles from "styles/Dashboard.module.css";
 
 export default function DashboardPage() {
   const morador = useRole()
@@ -24,12 +23,9 @@ export default function DashboardPage() {
 
 
   return (
-    <div className={styles.container}>
-      <SideBar />
-      <main>
-        <Perfil user={morador}/>
-      </main>
-    </div>
+    <DashboardLayout>
+      <Perfil user={morador}/>
+    </DashboardLayout>
   );
 }
 
