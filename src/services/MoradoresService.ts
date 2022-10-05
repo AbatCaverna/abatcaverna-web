@@ -29,10 +29,11 @@ export default class MoradoresService {
     })
   }
 
-  async changePassword(name: string, new_password: string) {
+  async changePassword(name: string, new_password: string, hashCode?: string) {
     return await this.api.put('/change-password', {
       name,
-      new_password
+      new_password,
+      hashCode
     })
   }
 }

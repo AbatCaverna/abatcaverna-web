@@ -9,9 +9,10 @@ import PageLoader from "components/Shared/Loading"
 
 interface Props {
   name?: string
+  hashCode?: string
 }
 
-export default function TrocarSenha({ name }: Props) {
+export default function TrocarSenha({ name, hashCode }: Props) {
   const moradoresService = new MoradoresService()
   const [loading, setLoading] = useState(false)
   const oldPasswordRef = useRef<HTMLInputElement>(null)
@@ -28,7 +29,7 @@ export default function TrocarSenha({ name }: Props) {
 
       setLoading(true)
       try {
-        await moradoresService.changePassword(name ?? nameRef.current!.value, newPasswordRef.current.value)
+        await moradoresService.changePassword(name ?? nameRef.current!.value, newPasswordRef.current.value, hashCode)
         alert("Senha alterada com sucesso")
         
       } catch (error) {

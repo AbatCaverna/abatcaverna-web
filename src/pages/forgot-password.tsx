@@ -10,6 +10,7 @@ export default function ForgotPasswordPage() {
   const inputRef = useRef<HTMLInputElement>(null)
   const revocerService = new RecoverPasswordService()
   const [step, setStep] = useState<'code' | 'password'>('code')
+  const [hashCode, setHashCode] = useState<string | undefined>(undefined)
 
   async function handleRecuperarSenha() {
     if (inputRef.current && inputRef.current.value) {
@@ -17,6 +18,7 @@ export default function ForgotPasswordPage() {
         const response = await revocerService.checkRecoverCode(inputRef.current.value)
 
         if (response.status === 200) {
+          setHashCode(response.data.hashCode)
           setStep('password')
         } else {
           alert('Nao verificado')
@@ -54,7 +56,7 @@ export default function ForgotPasswordPage() {
           )}
 
           {step === 'password' && (
-            <TrocarSenha/>
+            <TrocarSenha hashCode={hashCode} />
           )}
         </div>
       </Card>

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
+import returnHashString from 'backend/Utils/crypto'
 import MoradoresController from 'backend/Controller/MoradoresController';
 import connectMongo from 'backend/Providers/mongo';
 
@@ -14,11 +15,22 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   const moradoresController = new MoradoresController(database)
   
   if (req.method === 'PUT') {
-    const session = await getSession({ req })
+    const isRecover = !!req.body.hashCode
 
-    if (!session) res.status(403).send("User not authenticated")
+    // se nao vem da tela de recuperar senha entao
+    // precisamos verificar se o usuario esta autenticado
+    if (!isRecover) {
+      const session = await getSession({ req })
 
-    if (session?.role !== "cavernoso") res.status(403).send("User not allowed")
+      if (!session) res.status(403).send("User not authenticated")
+  
+      if (session?.role !== "cavernoso") res.status(403).send("User not allowed")
+    } else {
+      // caso contrario verificamos se o hashCode eh valido
+      if (req.body.hashCode !== returnHashString(process.env.ABAT_RECOVER_CODE!)) {
+        return res.status(403).send("User not allowed")
+      }
+    }
 
     const { name, new_password } = req.body
 
@@ -29,8 +41,5 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     } catch (error) {
       res.status(500).send(error)
     }
-
-
-
   }
 }
