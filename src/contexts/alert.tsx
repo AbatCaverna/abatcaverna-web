@@ -8,7 +8,7 @@ type AlertContextType = {
 type Alert = {
   message: string
   title?: string
-  type?: 'info' | 'error' | 'warning' | 'success'
+  type?: 'info' | 'error' | 'warning' | 'success' | 'dark'
   timeOnScreen?: number
 }
 
@@ -19,14 +19,17 @@ export default function AlertProvider({ children }: { children: ReactNode }) {
 
   function setAlert(alert: Alert) {
     setAlertData(alert)
+
     setTimeout(() => {
       setAlertData(undefined)
-    }, alert.timeOnScreen ?? 1000)
+    }, alert.timeOnScreen ?? 1500)
   }
 
   return (
     <AlertContext.Provider value={{ setAlert }}>
+      
       {children}
+
       {alertData && (
         <Alert
           message={alertData.message}
@@ -34,6 +37,7 @@ export default function AlertProvider({ children }: { children: ReactNode }) {
           type={alertData.type}
         />
       )}
+      
     </AlertContext.Provider>
   )
 }
