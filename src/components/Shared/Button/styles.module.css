@@ -3,7 +3,8 @@
   color: var(--light-bg);
   outline: none;
   border: 1px solid var(--light-bg);
-  width: 180px;
+  min-width: 180px;
+  width: 100%;
   height: 45px;
   border-radius: 8px;
   font-size: 1.2rem;
@@ -18,6 +19,12 @@
 
 .btn:active {
   transform: translate(1px, 1px);
+}
+
+.small {
+  width: fit-content !important;
+  min-width: 0 !important;
+  padding: 0 12px;
 }
 
 
