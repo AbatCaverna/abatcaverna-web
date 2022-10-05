@@ -29,7 +29,7 @@ export default function TrocarSenha({ name, hashCode }: Props) {
         return
       }
 
-      if (oldPasswordRef.current.value.length > 0 || newPasswordRef.current.value.length > 0) {
+      if (oldPasswordRef.current.value.length === 0 || newPasswordRef.current.value.length === 0) {
         alert("As senhas nao podem estar vazias")
         return
       }
@@ -81,7 +81,7 @@ export default function TrocarSenha({ name, hashCode }: Props) {
         ref={newPasswordRef}
       />
 
-      <Button type="button" onClick={handleChange}>{loading ? '...' : 'Trocar'}</Button>
+      <Button type="button" loading={loading} onClick={handleChange}>Trocar</Button>
     </div>
   )
 }
