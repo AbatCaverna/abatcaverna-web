@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.container_center > button {
+/* .container_center > button {
   background: var(--yellow);
   color: #fff;
   font-weight: bold;
@@ -10,4 +10,4 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-}
+} */

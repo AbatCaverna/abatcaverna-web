@@ -1,12 +1,11 @@
 import { useRef, useState } from "react"
+import { useRouter } from "next/router"
 import { RiLockPasswordLine } from "react-icons/ri"
 
-import { Input } from "components/Shared"
+import { Button, Input } from "components/Shared"
 import MoradoresService from "services/MoradoresService"
 
 import styles from "./styles.module.css"
-import PageLoader from "components/Shared/Loading"
-import { useRouter } from "next/router"
 
 interface Props {
   name?: string
@@ -27,6 +26,11 @@ export default function TrocarSenha({ name, hashCode }: Props) {
 
       if (oldPasswordRef.current.value !== newPasswordRef.current.value) {
         alert("As senhas devem ser iguais")
+        return
+      }
+
+      if (oldPasswordRef.current.value.length > 0 || newPasswordRef.current.value.length > 0) {
+        alert("As senhas nao podem estar vazias")
         return
       }
 
@@ -77,7 +81,7 @@ export default function TrocarSenha({ name, hashCode }: Props) {
         ref={newPasswordRef}
       />
 
-      <button type="button" onClick={handleChange}>{loading ? '...' : 'Trocar'}</button>
+      <Button type="button" onClick={handleChange}>{loading ? '...' : 'Trocar'}</Button>
     </div>
   )
 }
