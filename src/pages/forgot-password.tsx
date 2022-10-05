@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
 
+import { TrocarSenha } from 'components/Dashboard/SharedComponents'
 import { Button, Card, Input } from 'components/Shared'
 import { RecoverPasswordService } from 'services'
-import TrocarSenha from 'components/Dashboard/TrocarSenha'
 import useAlert from 'hooks/useAlert'
 
 import styles from 'styles/ForgotPassword.module.css'

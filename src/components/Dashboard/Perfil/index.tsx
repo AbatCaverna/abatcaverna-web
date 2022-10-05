@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import TrocarSenha from "../TrocarSenha";
+import TrocarSenha from "../SharedComponents/TrocarSenha";
 
 import styles from "./styles.module.css"
 interface Perfil {
