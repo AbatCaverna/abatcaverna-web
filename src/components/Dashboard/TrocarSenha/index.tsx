@@ -6,6 +6,7 @@ import MoradoresService from "services/MoradoresService"
 
 import styles from "./styles.module.css"
 import PageLoader from "components/Shared/Loading"
+import { useRouter } from "next/router"
 
 interface Props {
   name?: string
@@ -13,11 +14,13 @@ interface Props {
 }
 
 export default function TrocarSenha({ name, hashCode }: Props) {
+  const router = useRouter()
   const moradoresService = new MoradoresService()
   const [loading, setLoading] = useState(false)
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
+  console.log(router.pathname)
 
   async function handleChange() {
     if (oldPasswordRef.current && newPasswordRef.current) {
@@ -30,8 +33,13 @@ export default function TrocarSenha({ name, hashCode }: Props) {
       setLoading(true)
       try {
         await moradoresService.changePassword(name ?? nameRef.current!.value, newPasswordRef.current.value, hashCode)
+        
         alert("Senha alterada com sucesso")
         
+        if (router.pathname === '/forgot-password') {
+          router.push('/login')
+        }
+
       } catch (error) {
         alert("Algo deu errao na troca de senha")
       } finally {
