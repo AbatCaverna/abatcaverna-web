@@ -1,8 +1,10 @@
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { signIn, useSession } from 'next-auth/react';
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Stripe from 'stripe';
-import CheckoutService from '../services/CheckoutService';
-import getStripe from '../services/stripejs';
+
+import useAlert from 'hooks/useAlert';
+import CheckoutService from 'services/CheckoutService';
+import getStripe from 'services/stripejs';
 
 type ProductItem = {
   product: Stripe.Response<Stripe.Product>;
@@ -23,11 +25,15 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState([] as Array<ProductItem>)
   const [loading, setLoading] = useState(false)
   const session = useSession()
+  const { setAlert } = useAlert()
 
   function addToCart(item: ProductItem) {
     setProducts(prev => [...prev, item])
     localStorage.setItem('cart', JSON.stringify(products))
-    alert("Produto adicionao ao carrinho!")
+    setAlert({
+      message: "Produto adicionao ao carrinho!",
+      type: "success"
+    })
   }
 
   function removeFromCart(item: ProductItem) {

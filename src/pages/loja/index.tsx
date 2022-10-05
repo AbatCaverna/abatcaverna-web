@@ -13,6 +13,7 @@ import CheckoutService from 'services/CheckoutService';
 import ProdutosService from 'services/ProdutosService';
 import getStripe from "services/stripejs";
 import styles from 'styles/Loja.module.css'
+import useAlert from 'hooks/useAlert';
 
 type ProductsResponse = {
   product: Stripe.Response<Stripe.Product>;
@@ -29,6 +30,7 @@ export default function Loja({ data }: Loja) {
   const [loading, setLoading] = useState(false)
   const checkoutService = new CheckoutService()
   const session = useSession()
+  const { setAlert } = useAlert()
 
   async function handleBuyItem(priceId: string) {
     try {
@@ -44,7 +46,11 @@ export default function Loja({ data }: Loja) {
       
     } catch (error) {
       console.log('redirect to checkout error',error)
-      alert(`Error! ${error}`)
+      setAlert({
+        message: error as string,
+        title: 'Error!',
+        type: "error"
+      })
     } finally {
       setLoading(false)
     }

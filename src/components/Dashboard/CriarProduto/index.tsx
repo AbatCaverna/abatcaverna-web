@@ -1,10 +1,13 @@
-import Input from "../../Shared/Input";
-import { TiTag } from "react-icons/ti";
-import { MdAttachMoney } from "react-icons/md"
-import styles from "./styles.module.css"
 import { useRef } from "react";
-import ProdutosService from "../../../services/ProdutosService";
 import { useRouter } from "next/router";
+import { MdAttachMoney } from "react-icons/md"
+import { TiTag } from "react-icons/ti";
+
+import Input from "components/Shared/Input";
+import ProdutosService from "services/ProdutosService";
+import useAlert from "hooks/useAlert";
+
+import styles from "./styles.module.css"
 
 export default function CriarProduto() {
   const nameRef = useRef<HTMLInputElement>(null)
@@ -12,6 +15,7 @@ export default function CriarProduto() {
   const valueRef = useRef<HTMLInputElement>(null)
   const produtosService = new ProdutosService()
   const router = useRouter()
+  const { setAlert } = useAlert()
 
   async function handleCreateProduct() {
     try {
@@ -36,7 +40,10 @@ export default function CriarProduto() {
 
       router.push('/dashboard/produtos')
     } catch (error) {
-      alert("Erro ao criar um produto")
+      setAlert({
+        message: "Erro ao criar um produto",
+        type: "error"
+      })
     }
   }
   return (
