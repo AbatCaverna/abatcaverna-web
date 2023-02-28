@@ -6,15 +6,15 @@ import styles from './styles.module.css'
 import { FaWhatsapp } from 'react-icons/fa'
 import useWindow from '../../../hooks/useWindow'
 
-// coordenadas da casa na rua Geni Naime Silve, 128, California
+// coordenadas da casa cruzeiro , 368, California
 const center = {
-  lat: -19.888587719578457,
-  lng: -44.421200344588584
+  lat: -19.8923114,
+  lng: -44.4323548
 }
 
 const markerPosition = {
-  lat: -19.888587719578457,
-  lng: -44.421200344588584
+  lat: -19.8923114,
+  lng: -44.4323548
 }
 
 export default function NossaCasa() {
@@ -83,7 +83,7 @@ export default function NossaCasa() {
             <li>Temos uma cachorrinha linda e muito carinhosa</li>
           </ul>
 
-          <h3>Não temos vagas!</h3>
+          <h3> Temos vagas!</h3>
           <p>Dúvidas e/ou interesse, entre em contato com um dos moradores:</p>
           <ul className={styles.contact_list}>
             <li>
