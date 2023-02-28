@@ -127,3 +127,7 @@
   position: absolute;
   left: .5rem;
 }
+.Apelido {
+  color:rgba(0, 0, 0, 0.75);
+  font-size: xx-large;
+}

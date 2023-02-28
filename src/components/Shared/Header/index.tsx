@@ -80,6 +80,11 @@ export function Header() {
               </Link>
             </li>
             <li>
+              <Link href="/cachaca-rank">
+                <a >Cachaça</a>
+              </Link>
+            </li>
+            <li>
               <Link href="/#historia">
                 <a >História</a>
               </Link>
@@ -134,6 +139,11 @@ export function Header() {
             <li>
                <Link href="/">
                   <a >Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/cachaca-rank">
+                <a >Cachaça</a>
               </Link>
             </li>
             <li>

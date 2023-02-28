@@ -21,7 +21,7 @@ function Footer() {
 
 
       <div className={styles.social}>
-        <Link href="/cachaca">
+        <Link href="/cachaca-rank">
           <a title="Quadro de Cachaça">
             <GiDrinkMe color="eaeaea" width={32} height={32} />
 
