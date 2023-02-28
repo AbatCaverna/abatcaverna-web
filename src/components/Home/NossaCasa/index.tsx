@@ -74,12 +74,12 @@ export default function NossaCasa() {
 
         <div className={styles.text_container}>
           <ul>
-            <li>Casa localizada no Califórnia (bairro mais perto da UFV)</li>
+            <li>Casa localizada no centro </li>
             <li>Quartos para dividir ou individual</li>
             <li>Casa mobiliada (fora o quarto)</li>
-            <li>5 banheiros</li>
+            <li>4 quartos</li>
+            <li>2 banheiros</li>
             <li>Sala com enorme mesa para estudos</li>
-            <li>Ambiente de lazer (salão de festa e campo de vôlei)</li>
             <li>Temos uma cachorrinha linda e muito carinhosa</li>
           </ul>
 
