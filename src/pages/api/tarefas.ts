@@ -8,7 +8,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
     if (!session) res.status(403).send("User not authenticated")
   
-    if (session?.role !== "cavernoso") res.status(403).send("User not allowed")
+    if ((session as any)?.role !== "cavernoso") res.status(403).send("User not allowed")
 
     const response = await axios.get('https://sheets.googleapis.com/v4/spreadsheets/1eniERI_dsWKZRbEDgz-ag3QeybOZ-QAQPePGamoWy6o/values/Tarefas!A16:B22?key=AIzaSyBB-jM92j_bQ0llcA3nUv6nlPdtIQLTlKI')
     

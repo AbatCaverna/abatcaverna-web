@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   console.log('session', session)
 
-  if (!session || session.role !== "cavernoso") {
+  if (!session || (session as any).role !== "cavernoso") {
     return {
       redirect: {
         destination: '/',
