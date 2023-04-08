@@ -4,9 +4,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import Loading from 'components/Shared/Loading'
-import MoradoresService from 'services/MoradoresService'
-import styles from 'styles/Cachaca.module.css'
 import useMoradoresQuery from 'query/moradoresQuery'
+
+import styles from 'styles/Cachaca.module.css'
 
 type Morador = {
   _id: string;
