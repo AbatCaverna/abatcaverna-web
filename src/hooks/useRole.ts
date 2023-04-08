@@ -3,9 +3,9 @@ import { useSession } from "next-auth/react"
 export default function useRole() {
   const { data } = useSession()
 
-  if(data?.role !== "cavernoso") {
+  if((data as any)?.role !== "cavernoso") {
     return null
   }
 
-  return data.user
+  return data?.user
 }

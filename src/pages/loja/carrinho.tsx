@@ -33,27 +33,27 @@ export default function Carrinho() {
                 </tr>
               </thead>
               <tbody>
-                {products.map(({ product, price }) => (
+                {products.map((product) => (
                   <tr key={product.id}>
                     <td>
                       <div className={styles.table_image}>
-                        <Image src={product.images[0] || noImage} alt="Produto" layout="fill" />
+                        <Image src={product.image || noImage} alt="Produto" layout="fill" />
                       </div>
                     </td>
                     <td>
                       <div className={styles.table_data}>
                         <p>{product.name}</p>
-                        <span>{product.description}</span>
+                        <span></span>
                       </div>
                     </td>
                     <td>
-                      {transformUnitAmount(price.unit_amount)}
+                      {transformUnitAmount(product.price)}
                     </td>
                     <td>
                       <button
                         type="button"
                         className={styles.table_btn_remove}
-                        onClick={() => removeFromCart({ product, price })}
+                        onClick={() => removeFromCart(product)}
                       >
                         <GoTrashcan size="1.1rem"/>
                       </button>
