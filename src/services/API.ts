@@ -6,4 +6,19 @@ const API_INSTANCE = axios.create({
     : 'https://abatcavernaapi.azurewebsites.net'
 })
 
+API_INSTANCE.interceptors.request.use(
+  async (request) => {
+    const local = localStorage.getItem('session')
+
+    if (local) {
+      const { accessToken } = JSON.parse(local)
+      request.headers!.Authorization = accessToken
+    }
+  
+
+    return request
+  },
+  error => Promise.reject(error)
+)
+
 export default API_INSTANCE

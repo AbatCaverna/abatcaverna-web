@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Loading from 'components/Shared/Loading'
 import MoradoresService from 'services/MoradoresService'
 import styles from 'styles/Cachaca.module.css'
+import useMoradoresQuery from 'query/moradoresQuery'
 
 type Morador = {
   _id: string;
@@ -26,7 +27,7 @@ export default function CachacaRank({ moradores }: CachacaRank) {
   const [moradoresData, setMoradoresData] = useState(moradores);
   const [headerLabelOffset, setHeaderLabelOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false)
-
+  const { isFetching } = useMoradoresQuery(setMoradoresData)
   // Calcula o posicionamento da tela do header 'Vou beber'
   // para ficar alinhado com o numero
   function calculateHeaderElementPlacement(value?: number) {
@@ -129,17 +130,7 @@ export default function CachacaRank({ moradores }: CachacaRank) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {  
-  try {
-    const service = new MoradoresService()
-    const response = await service.getMoradores()
-
-    return {
-      props: { moradores: response.data.moradores },
-    }
-  } catch (e) {
-    console.error(e)
-    return {
-      props: { isConnected: false },
-    }
+  return {
+    props: { },
   }
 }

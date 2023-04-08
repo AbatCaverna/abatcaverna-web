@@ -1,39 +1,32 @@
-import axios, { AxiosInstance } from 'axios';
+import API from './API'
 
-export default class MoradoresService {
-  private api: AxiosInstance;
-
-  constructor() {
-    this.api = axios.create({
-      baseURL: process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3000/api'
-      : 'https://abatcaverna.app/api'
-    })
-  }
+const MoradoresService = {
 
   async getMoradores() {
-    return await this.api.get('/moradores') 
-  }
+    return await API.get('/moradores') 
+  },
 
   async setCachaca(moradorId: string) {
-    return await this.api.put('/moradores',  {
+    return await API.put('/moradores',  {
       method_action: 'sum_cachaca', 
       morador_id: moradorId
     })
-  }
+  },
 
   async drinkCachaca(moradorId: string) {
-    return await this.api.put('/moradores', {
+    return await API.put('/moradores', {
       method_action: 'drunk_cachaca', 
       morador_id: moradorId
     })
-  }
+  },
 
   async changePassword(name: string, new_password: string, hashCode?: string) {
-    return await this.api.put('/change-password', {
+    return await API.put('/moradores/change-password', {
       name,
       new_password,
       hashCode
     })
   }
 }
+
+export default MoradoresService
