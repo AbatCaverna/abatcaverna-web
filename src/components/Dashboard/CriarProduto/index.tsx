@@ -13,7 +13,7 @@ export default function CriarProduto() {
   const nameRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLInputElement>(null)
   const valueRef = useRef<HTMLInputElement>(null)
-  const produtosService = new ProdutosService()
+
   const router = useRouter()
   const { setAlert } = useAlert()
 
@@ -32,7 +32,7 @@ export default function CriarProduto() {
         value: Number(value)
       }
       
-      await produtosService.createProduct(
+      await ProdutosService.createProduct(
         payload.name,
         payload.value,
         payload.description

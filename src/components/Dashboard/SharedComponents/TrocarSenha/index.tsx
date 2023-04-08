@@ -15,7 +15,6 @@ interface Props {
 
 export default function TrocarSenha({ name, hashCode }: Props) {
   const router = useRouter()
-  const moradoresService = new MoradoresService()
   const [loading, setLoading] = useState(false)
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
@@ -43,7 +42,7 @@ export default function TrocarSenha({ name, hashCode }: Props) {
 
       setLoading(true)
       try {
-        await moradoresService.changePassword(name ?? nameRef.current!.value, newPasswordRef.current.value, hashCode)
+        await MoradoresService.changePassword(name ?? nameRef.current!.value, newPasswordRef.current.value, hashCode)
         
         setAlert({
           message: "Senha alterada com sucesso",

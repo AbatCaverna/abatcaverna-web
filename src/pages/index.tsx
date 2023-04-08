@@ -14,6 +14,7 @@ import {
 } from 'components/Home'
 import styles from 'styles/Home.module.css'
 import { Data } from 'utils/homePageData'
+import useSessionToStorage from 'hooks/useSessionToStorage'
 
 type Morador = {
   nome: string;
@@ -93,6 +94,9 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     }
 
   }, [headerRef])
+
+  useSessionToStorage()
+  
   return (
     <div className={styles.container}>
       <Head>

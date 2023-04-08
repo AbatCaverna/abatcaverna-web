@@ -1,24 +1,18 @@
-import Image from "next/image";
-import Stripe from "stripe";
-import { BsFillCartPlusFill } from "react-icons/bs";
+import Image from "next/image"
+import { BsFillCartPlusFill } from "react-icons/bs"
 
-import useCarrinho from "hooks/useCarrinho";
+import { Button, Card } from "components/Shared"
+import useCarrinho from "hooks/useCarrinho"
+import { Product } from "services/ProdutosService"
 
-import styles from "./styles.module.css";
-import { Button, Card } from "components/Shared";
-
-type ProductsResponse = {
-  product: Stripe.Response<Stripe.Product>;
-  price: Stripe.Price;
-}
+import styles from "./styles.module.css"
 
 interface ProductCardProps {
-  data: ProductsResponse
+  data: Product
   handleClick: (priceId: string) => void
 }
 
 export default function ProductCard({ data, handleClick }: ProductCardProps) {
-  const { product, price } = data
   const noImage = "/images/no_image.png"
   const { addToCart } = useCarrinho()
 
@@ -48,16 +42,16 @@ export default function ProductCard({ data, handleClick }: ProductCardProps) {
       minWidth: '295px',
     }}>
       <>
-        <strong className={styles.card_title}>{product.name}</strong>
+        <strong className={styles.card_title}>{data.name}</strong>
         <div className={styles.card_image}>
           <Image
-            src={product.images[0] || noImage}
+            src={data.image || noImage}
             alt="Produto"
             layout="fill"
           />
 
         </div>
-        <p className={styles.card_price}>{transformPrice(price.unit_amount)} <span>({calculatePriceWIthoutTax(price.unit_amount, product.metadata.taxas)} + {transformPrice(product.metadata.taxas)} taxas)</span></p>
+        <p className={styles.card_price}>{transformPrice(data.price)} <span>({calculatePriceWIthoutTax(data.price, data.tax)} + {transformPrice(data.tax)} taxas)</span></p>
         <div className={styles.btn_container}>
           <Button
             type="button"
@@ -66,7 +60,7 @@ export default function ProductCard({ data, handleClick }: ProductCardProps) {
           ><BsFillCartPlusFill color="#000" size="1rem"/></Button>
           <Button
             type="button"
-            onClick={() => handleClick(data.price.id)}
+            onClick={() => handleClick(data.stripe_price_id)}
           >Comprar</Button>
         </div>
       </>

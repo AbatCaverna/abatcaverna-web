@@ -6,9 +6,12 @@ import Link from "next/link";
 import { DashboardLayout } from "components/Dashboard/SharedComponents";
 import Perfil from "components/Dashboard/Perfil";
 import useRole from "hooks/useRole";
+import useSessionToStorage from "hooks/useSessionToStorage";
 
 export default function DashboardPage() {
   const morador = useRole()
+  
+  useSessionToStorage()
 
   if(!morador) {
     return (
@@ -21,7 +24,6 @@ export default function DashboardPage() {
     )
   }
 
-
   return (
     <DashboardLayout>
       <Perfil user={morador}/>
@@ -32,7 +34,7 @@ export default function DashboardPage() {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
   
-  if (!session || session.role !== "cavernoso") {
+  if (!session || (session as any).role !== "cavernoso") {
     return {
       redirect: {
         destination: '/',

@@ -1,28 +1,38 @@
-import axios, { AxiosInstance } from 'axios';
+import API from './API'
 
-import { ProductsResponse } from 'types'
+export type Product = {
+  id: string
+  stripe_id: string
+  image: string
+  name: string
+  tax: string
+  price: number
+  stripe_price_id: string
+}
 
-export default class ProdutosService {
-  private api: AxiosInstance;
+type ProductsResponse = {
+  message: string
+  products: Product[]
+}
 
-  constructor() {
-    this.api = axios.create({
-      baseURL: process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3000/api'
-      : 'https://abatcaverna.app/api'
-    })
-  }
+const ProdutosService = {
 
-  public async getAllProducts() {
-    return await this.api.get<ProductsResponse>(`/produtos`) 
-  }
+  async getAllProducts() {
+    return await API.get<ProductsResponse>(`/produtos`)
+  },
 
-  public async getAllProductsByUser(email: string) {
-    return await this.api.get<ProductsResponse>(`/produtos/${email}`)
-  }
+  async getAllProductsByUser(email: string) {
+    return await API.get<ProductsResponse>(`/produtos/${email}`)
+  },
   
-  public async createProduct(name: string, value: number, description?: string) {
-    return await this.api.post('/produtos', { name, description, value })
+  async createProduct(name: string, value: number, description?: string, image?: string) {
+    return await API.post('/produtos', { name, description, value, image })
+  },
+
+  async uploadProductImage(photo: File) {
+    return await API.post('/produtos/upload-file', { photo })
   }
 
 }
+
+export default ProdutosService

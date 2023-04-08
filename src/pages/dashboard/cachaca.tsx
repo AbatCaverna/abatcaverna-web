@@ -9,6 +9,7 @@ import Loading from 'components/Shared/Loading'
 import MoradoresService from 'services/MoradoresService'
 import styles from 'styles/Cachaca.module.css'
 import { DashboardLayout } from 'components/Dashboard/SharedComponents'
+import useMoradoresQuery from 'query/moradoresQuery'
 
 type Morador = {
   _id: string;
@@ -22,22 +23,19 @@ type Morador = {
   cachaca_ja_tomada: number;
 }
 
-interface Cachaca {
-  moradores: Array<Morador>
-}
 
-export default function Cachaca({ moradores }: Cachaca) {
-  const toDrinkRef = useRef<Array<HTMLParagraphElement | null>>([]);
-  const [moradoresData, setMoradoresData] = useState(moradores);
-  const [headerLabelOffset, setHeaderLabelOffset] = useState(0);
-  const moradoresService = new MoradoresService();
+export default function Cachaca() {
+  const toDrinkRef = useRef<Array<HTMLParagraphElement | null>>([])
+  const [moradoresData, setMoradoresData] = useState([] as Morador[])
+  const [headerLabelOffset, setHeaderLabelOffset] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+  const { isFetching } = useMoradoresQuery(setMoradoresData)
 
   // adiciona uma cacha pra conta do morador
   async function handleSum(moradorId: string) {
     try {
       setIsLoading(true)
-      await moradoresService.setCachaca(moradorId)
+      await MoradoresService.setCachaca(moradorId)
       setMoradoresData(data => data.map(value => {
         if (value._id === moradorId) {
           value.cachaca_para_tomar += 1;
@@ -54,7 +52,7 @@ export default function Cachaca({ moradores }: Cachaca) {
   async function handleDrink(moradorId: string) {
     try {
       setIsLoading(true)
-      await moradoresService.drinkCachaca(moradorId)
+      await MoradoresService.drinkCachaca(moradorId)
       setMoradoresData(data => data.map(value => {
         if (value._id === moradorId && value.cachaca_para_tomar > 0) {
           value.cachaca_para_tomar -= 1;
@@ -91,6 +89,12 @@ export default function Cachaca({ moradores }: Cachaca) {
     }
 
   }, [toDrinkRef])
+
+  if (isFetching) {
+    return (
+      <div>Loading...</div>
+    )
+  }
 
   return (
     <DashboardLayout mainClassName={styles.container}>
@@ -186,7 +190,7 @@ export default function Cachaca({ moradores }: Cachaca) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
   
-  if (!session || session.role !== "cavernoso") {
+  if (!session || (session as any).role !== "cavernoso") {
     return {
       redirect: {
         destination: '/',
@@ -195,17 +199,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
   
-  try {
-    const service = new MoradoresService()
-    const response = await service.getMoradores()
-
-    return {
-      props: { moradores: response.data.moradores },
-    }
-  } catch (e) {
-    console.error(e)
-    return {
-      props: { isConnected: false },
-    }
+  return {
+    props: { },
   }
 }

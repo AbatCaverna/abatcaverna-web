@@ -1,33 +1,29 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { signIn, useSession } from 'next-auth/react';
-import Stripe from 'stripe';
 
 import useAlert from 'hooks/useAlert';
 import CheckoutService from 'services/CheckoutService';
+import { Product } from 'services/ProdutosService';
 import getStripe from 'services/stripejs';
 
-type ProductItem = {
-  product: Stripe.Response<Stripe.Product>;
-  price: Stripe.Price;
-}
 
 type CartContext = {
-  products: Array<ProductItem>
+  products: Array<Product>
   loading: boolean
-  addToCart: (item: ProductItem) => void
-  removeFromCart: (item:  ProductItem) => void
+  addToCart: (item: Product) => void
+  removeFromCart: (item:  Product) => void
   cartCheckout: () => void
 }
 
 export const CartContext = createContext({} as CartContext)
 
 export default function CartProvider({ children }: { children: ReactNode }) {
-  const [products, setProducts] = useState([] as Array<ProductItem>)
+  const [products, setProducts] = useState([] as Array<Product>)
   const [loading, setLoading] = useState(false)
   const session = useSession()
   const { setAlert } = useAlert()
 
-  function addToCart(item: ProductItem) {
+  function addToCart(item: Product) {
     setProducts(prev => [...prev, item])
     localStorage.setItem('cart', JSON.stringify(products))
     setAlert({
@@ -36,8 +32,8 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  function removeFromCart(item: ProductItem) {
-    const newProductList = products.filter(p => p.price.id != item.price.id)
+  function removeFromCart(item: Product) {
+    const newProductList = products.filter(p => p.stripe_price_id != item.stripe_price_id)
     localStorage.setItem('cart', JSON.stringify(newProductList))
     setProducts(newProductList)
   }
@@ -63,7 +59,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         email: email,
         line_items: products.map((product) => {
           return {
-            price: product.price.id,
+            price: product.stripe_price_id,
             quantity: 1
           }
         })
