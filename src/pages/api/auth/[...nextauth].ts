@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import SessionController from "backend/Controller/SessionController"
 import connectMongo from "backend/Providers/mongo";
 import { Role } from "utils/enum";
+import { SessionService } from "services";
 
 export default NextAuth({
   theme: {
@@ -23,25 +24,25 @@ export default NextAuth({
         username: { label: "Username", type: "text", placeholder: "abat" },
         password: {  label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
-        const { database } = await connectMongo()
+      async authorize(credentials, req): Promise<any> {
+        if (!credentials) return null
 
-        if (!database) return null
+        const response = await SessionService.loginMorador(credentials.username, credentials.password)
+        
+        if (response) {
+          console.log('[SERVER]: user logged in', response)
+          
+          const { user } = response.data
 
-        const sessionController = new SessionController(database)
-
-        const user = await sessionController.moradorSession(credentials!.username, credentials!.password)
-        console.log('[SERVER]: user logged in', user)
-        // If no error and we have user data, return it
-        if (user) {
           return {
-            name: user.apelido,
-            email: user.nome,
+            name: user.nome,
+            email: user.email,
             image: user.imagem,
             token: user.token,
-            role: Role.cavernoso
+            role: user.role
           }
         }
+        
         // Return null if user data could not be retrieved
         return null
       }
@@ -49,24 +50,19 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      const { database } = await connectMongo()
-
-      if (!database) return false
-      
-      const sessionController = new SessionController(database)
-      console.log('[SERVER]: user logged in', user)
       // Check if the user is current in the database
       // if not, we create it and returns true if it is ok]
-      if (user.role === undefined) {
+      if ((user as any).role === undefined) {
         console.log('[SERVER]: user')
         const currentUser = {
           name: user.name || '',
           email: user.email || '',
-          image: user.image || ''
+          image: user.image || '',
+          role: Role.usuario
         }
 
-        const response = await sessionController.index(currentUser)
-        return response
+        const response = await SessionService.loginUser(currentUser)
+        return !!response.data.user
       }
 
       return true
@@ -79,13 +75,13 @@ export default NextAuth({
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
-        token.accessToken = user.token
-        token.role = user.role
+        token.accessToken = (user as any).token
+        token.role = (user as any).role
       }
       return token
     },
     async session({ session, token, user }) {
-      session.accessToken = token.accessToken
+      (session as any).accessToken = token.accessToken
       return {
         ...session,
         role: token.role
