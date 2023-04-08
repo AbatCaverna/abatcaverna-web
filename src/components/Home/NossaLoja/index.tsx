@@ -3,19 +3,14 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
 import CheckoutService from "../../../services/CheckoutService";
-import ProdutosService from "../../../services/ProdutosService";
+import ProdutosService, { Product } from "../../../services/ProdutosService";
 import getStripe from "../../../services/stripejs";
 import ProductCard from "../../Loja/ProductCard";
 import Loader from "../../Shared/Loading";
 import styles from "./styles.module.css";
 
-type Produtos = {
-  product: Stripe.Response<Stripe.Product>;
-  price: Stripe.Price;
-}
-
 export default function NossaLoja() {
-  const [produtos, setProdutos] = useState([] as Produtos[])
+  const [produtos, setProdutos] = useState([] as Product[])
   const [loading, setLoading] = useState(false)
   const session = useSession()
   const { setAlert } = useAlert()
@@ -46,9 +41,8 @@ export default function NossaLoja() {
   }
 
   function fetchProducts() {
-    const produtcService = new ProdutosService()
-    produtcService.getAllProducts().then((response) => {
-      setProdutos(response.data)
+    ProdutosService.getAllProducts().then((response) => {
+      setProdutos(response.data.products)
     })
   }
 
@@ -62,7 +56,7 @@ export default function NossaLoja() {
       <div className={styles.flex}>
         {produtos.map((produto) => (
           <ProductCard
-            key={produto.price.id}
+            key={produto.id}
             data={produto}
             handleClick={handleBuyButton}
             />

@@ -3,25 +3,19 @@ import { getSession, signIn, useSession } from 'next-auth/react';
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
-import Stripe from 'stripe';
 
 import CarrinhoIcone from 'components/Loja/CarrinhoIcone';
 import ProductCard from 'components/Loja/ProductCard';
 import Loader from 'components/Shared/Loading';
 import useWindow from 'hooks/useWindow';
 import CheckoutService from 'services/CheckoutService';
-import ProdutosService from 'services/ProdutosService';
+import ProdutosService, { Product } from 'services/ProdutosService';
 import getStripe from "services/stripejs";
 import styles from 'styles/Loja.module.css'
 import useAlert from 'hooks/useAlert';
 
-type ProductsResponse = {
-  product: Stripe.Response<Stripe.Product>;
-  price: Stripe.Price;
-}[]
-
 interface Loja {
-  data: ProductsResponse
+  data: Product[]
 }
 
 export default function Loja({ data }: Loja) {
@@ -83,7 +77,7 @@ export default function Loja({ data }: Loja) {
             <div>Não tem produtos à venda</div>
           )}
           {data?.map((item) => (
-            <ProductCard key={item.product.id} data={item} handleClick={handleBuyItem} />
+            <ProductCard key={item.id} data={item} handleClick={handleBuyItem} />
           ))}
           
         </div>
@@ -102,20 +96,19 @@ export default function Loja({ data }: Loja) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context)
   const email = session?.user?.email || undefined
-  const produtosService = new ProdutosService()
 
   let response: any;
 
   if (email) {
-    response = await produtosService.getAllProductsByUser(email)
+    response = await ProdutosService.getAllProductsByUser(email)
   } else {
-    response = await produtosService.getAllProducts()
+    response = await ProdutosService.getAllProducts()
 
   }
 
   return {
     props: {
-      data: response?.data || []
+      data: response?.data.products || []
     },
   }
 }

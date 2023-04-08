@@ -21,7 +21,9 @@ export default function ProdutosPage({ produtos }: ProdutosPage) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
+  const session = await getSession({ req: context.req })
+
+  console.log('session', session)
 
   if (!session || session.role !== "cavernoso") {
     return {
@@ -32,8 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  const produtosService = new ProdutosService()
-  const response = await produtosService.getAllProducts()
+  const response = await ProdutosService.getAllProducts()
 
   return {
     props: {
