@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ProductsResponse } from "types";
+import { ProductsResponse } from "services/ProdutosService";
 
 import styles from "./styles.module.css";
 
@@ -10,6 +10,7 @@ interface Produtos {
 }
 
 export default function Produtos({ data }: Produtos) {
+  const { products } = data
   const noImage = "/images/no_image.png";
   function trasnformValue(amount: number) {
     const real = amount / 100;
@@ -28,18 +29,18 @@ export default function Produtos({ data }: Produtos) {
       </div>
       <div className={styles.content}>
         <ul>
-          {data.map(({product, price}) => (
+          {products.map((product) => (
             <li key={product.id}>
               <div className={styles.item}>
                 <Image
-                  src={product.images[0] || noImage}
+                  src={product.image || noImage}
                   alt="produto"
                   width={62}
                   height={62}
                 />
                 <div>
                   <p>{product.name}</p>
-                  <span>{trasnformValue(price.unit_amount!)}</span>
+                  <span>{trasnformValue(product.price!)}</span>
                 </div>
               </div>
             </li>

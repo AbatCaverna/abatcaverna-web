@@ -10,7 +10,7 @@ export type Product = {
   stripe_price_id: string
 }
 
-type ProductsResponse = {
+export type ProductsResponse = {
   message: string
   products: Product[]
 }
@@ -25,12 +25,17 @@ const ProdutosService = {
     return await API.get<ProductsResponse>(`/produtos/${email}`)
   },
   
-  async createProduct(name: string, value: number, description?: string, image?: string) {
-    return await API.post('/produtos', { name, description, value, image })
+  async createProduct(name: string, value: number, description?: string, images?: string[]) {
+    return await API.post('/produtos', { name, description, value, images })
   },
 
   async uploadProductImage(photo: File) {
-    return await API.post('/produtos/upload-file', { photo })
+    const form = new FormData()
+    form.append('photo', photo)
+
+    return await API.post('/produtos/upload-file', form, { headers: {
+      'Content-Type': 'multipart/form-data'
+    }})
   }
 
 }

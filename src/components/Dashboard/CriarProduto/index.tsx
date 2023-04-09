@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { MdAttachMoney } from "react-icons/md"
+import Image from "next/image";
+import { MdAttachMoney, MdFileUpload } from "react-icons/md"
 import { TiTag } from "react-icons/ti";
 
 import Input from "components/Shared/Input";
+import { Button } from "components/Shared";
 import ProdutosService from "services/ProdutosService";
 import useAlert from "hooks/useAlert";
 
@@ -16,6 +18,16 @@ export default function CriarProduto() {
 
   const router = useRouter()
   const { setAlert } = useAlert()
+  const [file, setFile] = useState<File>();
+  const [preview, setPreview] = useState<string>()
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+      const objectUrl = URL.createObjectURL(e.target.files[0])
+      setPreview(objectUrl)
+    }
+  }
 
   async function handleCreateProduct() {
     try {
@@ -31,11 +43,19 @@ export default function CriarProduto() {
         description: descriptionRef.current?.value,
         value: Number(value)
       }
-      
+
+      let image = ''
+
+      if (file) {
+        const imageUpload = await ProdutosService.uploadProductImage(file)
+        image = imageUpload.data.image_url
+      }
+
       await ProdutosService.createProduct(
         payload.name,
         payload.value,
-        payload.description
+        payload.description,
+        [image]
       )
 
       router.push('/dashboard/produtos')
@@ -52,6 +72,18 @@ export default function CriarProduto() {
       <div className={styles.content}>
         <h2>Detalhes do produto</h2>
         <div>
+
+          {preview && (
+            <Image src={preview} alt="Upload previe" width={250} height={350}/>
+          )}
+
+          <Input
+            type="file"
+            name="file"
+            label="Insira uma imagem do prodtuo"
+            icon={MdFileUpload}
+            onChange={handleFileChange}
+          />
           <Input
             type="text"
             name="name"
@@ -73,7 +105,7 @@ export default function CriarProduto() {
             icon={MdAttachMoney}
             ref={valueRef}
           />
-          <button type="button" onClick={handleCreateProduct}>Criar produto</button>
+          <Button type="button" onClick={handleCreateProduct}>Criar produto</Button>
         </div>
       </div>
     </div>
