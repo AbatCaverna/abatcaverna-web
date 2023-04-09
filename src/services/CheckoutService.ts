@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import API from './API'
 
 type Checkout = {
   price: string,
@@ -10,16 +10,7 @@ interface CheckoutBody {
   line_items: Array<Checkout>
 }
 
-export default class CheckoutService {
-  private api: AxiosInstance;
-
-  constructor() {
-    this.api = axios.create({
-      baseURL: process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3000/api'
-      : 'https://abatcaverna.app/api'
-    })
-  }
+const CheckoutService = {
 
   async createCheckoutSession(priceId: string, email: string) {
     const payload: CheckoutBody = {
@@ -31,11 +22,13 @@ export default class CheckoutService {
         }
       ]
     }
-    return await this.api.post('/checkout', payload) 
-  }
+    return await API.post('/checkout', payload) 
+  },
 
   async createCartCheckoutSession(payload: CheckoutBody) {
-    return await this.api.post('/checkout', payload) 
+    return await API.post('/checkout', payload) 
   }
 
 }
+
+export default CheckoutService

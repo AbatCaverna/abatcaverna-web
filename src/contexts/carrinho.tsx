@@ -49,9 +49,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
 
     setLoading(true)
 
-    try {
-      const service = new CheckoutService()
-      
+    try {      
       if (session.status === "unauthenticated") await signIn("google")
       
       const email = session.data?.user?.email!
@@ -65,7 +63,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         })
       }
 
-      const response = await service.createCartCheckoutSession(data)
+      const response = await CheckoutService.createCartCheckoutSession(data)
       const stripe = await getStripe()
   
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })

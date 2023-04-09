@@ -5,7 +5,7 @@ function useSessionToStorage() {
   const session = useSession()
 
   useEffect(() => {
-    if (session) {
+    if (session && localStorage) {
       localStorage.setItem('session', JSON.stringify(session.data))
     }
   }, [session])

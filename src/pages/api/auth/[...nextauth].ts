@@ -50,18 +50,7 @@ export default NextAuth({
     async signIn({ user }) {
       // Check if the user is current in the database
       // if not, we create it and returns true if it is ok]
-      if ((user as any).role === undefined) {
-        console.log('[SERVER]: user')
-        const currentUser = {
-          name: user.name || '',
-          email: user.email || '',
-          image: user.image || '',
-          role: Role.usuario
-        }
-
-        const response = await SessionService.loginUser(currentUser)
-        return !!response.data.user
-      }
+      if(user) return true
 
       return true
 
@@ -73,8 +62,25 @@ export default NextAuth({
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
-        token.accessToken = (user as any).token
-        token.role = (user as any).role
+        if ((user as any).role === undefined) {
+          const currentUser = {
+            name: user.name || '',
+            email: user.email || '',
+            image: user.image || '',
+            role: Role.usuario
+          }
+  
+          const response = await SessionService.loginUser(currentUser)
+          console.log('user logged', response.data)
+
+          token.accessToken = response.data.user.token
+          token.role = currentUser.role
+          return token
+        } else {
+          token.accessToken = (user as any).token
+          token.role = (user as any).role
+        }
+
       }
       return token
     },

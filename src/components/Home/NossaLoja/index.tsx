@@ -8,9 +8,9 @@ import getStripe from "../../../services/stripejs";
 import ProductCard from "../../Loja/ProductCard";
 import Loader from "../../Shared/Loading";
 import styles from "./styles.module.css";
+import useProdutosQuery from "query/produtosQuery";
 
 export default function NossaLoja() {
-  const [produtos, setProdutos] = useState([] as Product[])
   const [loading, setLoading] = useState(false)
   const session = useSession()
   const { setAlert } = useAlert()
@@ -18,12 +18,11 @@ export default function NossaLoja() {
   async function handleBuyButton(priceId: string) {
     try {
       setLoading(true)
-      const checkoutService = new CheckoutService()
       if (session.status === "unauthenticated") await signIn("google")
 
       const email = session.data?.user?.email!
 
-      const response = await checkoutService.createCheckoutSession(priceId, email)
+      const response = await CheckoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
   
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
@@ -40,28 +39,20 @@ export default function NossaLoja() {
     }
   }
 
-  function fetchProducts() {
-    ProdutosService.getAllProducts().then((response) => {
-      setProdutos(response.data.products)
-    })
-  }
-
-  useEffect(() => {
-    fetchProducts()
-  }, [])
+  const { data, isFetching } = useProdutosQuery()
   
   return (
     <section id="nossa-loja">
       <h2 className={styles.title}>Nossa Loja</h2>
       <div className={styles.flex}>
-        {produtos.map((produto) => (
+        {data?.data.products.map((produto) => (
           <ProductCard
             key={produto.id}
             data={produto}
             handleClick={handleBuyButton}
             />
         ))}
-        {loading && (
+        {(isFetching || loading) && (
           <div className={styles.loading}>
             <Loader/>
             <p>Carregando...</p>

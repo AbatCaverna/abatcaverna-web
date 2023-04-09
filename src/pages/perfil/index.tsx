@@ -1,10 +1,14 @@
 import Image from 'next/image'
 import { useSession } from "next-auth/react"
 
+import useSessionToStorage from 'hooks/useSessionToStorage'
+
 import styles from 'styles/Perfil.module.css'
 
 export default function PerfilPage() {
   const session = useSession()
+
+  useSessionToStorage()
 
   if (session.status !== "authenticated") {
     return (

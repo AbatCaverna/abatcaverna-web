@@ -13,18 +13,17 @@ import ProdutosService, { Product } from 'services/ProdutosService';
 import getStripe from "services/stripejs";
 import styles from 'styles/Loja.module.css'
 import useAlert from 'hooks/useAlert';
+import useProdutosQuery from 'query/produtosQuery';
 
-interface Loja {
-  data: Product[]
-}
 
-export default function Loja({ data }: Loja) {
-  const window = useWindow();
+export default function Loja() {
+  const window = useWindow()
   const [showCartIcon, setShowCartIcon] = useState(false)
   const [loading, setLoading] = useState(false)
-  const checkoutService = new CheckoutService()
   const session = useSession()
   const { setAlert } = useAlert()
+
+  const { data, isLoading } = useProdutosQuery(session.data?.user.email)
 
   async function handleBuyItem(priceId: string) {
     try {
@@ -33,7 +32,7 @@ export default function Loja({ data }: Loja) {
 
       const email = session.data?.user?.email!
 
-      const response = await checkoutService.createCheckoutSession(priceId, email)
+      const response = await CheckoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
   
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
@@ -73,15 +72,15 @@ export default function Loja({ data }: Loja) {
           {showCartIcon && <CarrinhoIcone />}
         </header>
         <div className={styles.list_items}>
-          {!data && (
+          {data?.data.products.length === 0 && (
             <div>Não tem produtos à venda</div>
           )}
-          {data?.map((item) => (
+          {data?.data.products.map((item) => (
             <ProductCard key={item.id} data={item} handleClick={handleBuyItem} />
           ))}
           
         </div>
-        {loading && (
+        {(isLoading || loading) && (
           <div className={styles.loading}>
             <Loader/>
             <p>Carregando...</p>
@@ -97,18 +96,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context)
   const email = session?.user?.email || undefined
 
-  let response: any;
+  // let response: any;
 
-  if (email) {
-    response = await ProdutosService.getAllProductsByUser(email)
-  } else {
-    response = await ProdutosService.getAllProducts()
+  // if (email) {
+  //   response = await ProdutosService.getAllProductsByUser(email)
+  // } else {
+  //   response = await ProdutosService.getAllProducts()
 
-  }
+  // }
 
   return {
-    props: {
-      data: response?.data.products || []
-    },
+    props: {},
   }
 }
