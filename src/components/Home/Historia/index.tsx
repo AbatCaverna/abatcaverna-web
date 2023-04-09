@@ -22,9 +22,11 @@ export default function Historia({ images }: HistoriaProps) {
           Somos uma república de Florestal MG, idealizada em 2016 e fundada em 2017. 
           Fomos criados não apenas para ser uma república mas uma família, amigos e irmãos.
         </p>
-        <ImageSlideView
-          images={images}
-        />
+        {images && (
+          <ImageSlideView
+            images={images}
+          />
+        )}
       </div>
     </section>
   )
