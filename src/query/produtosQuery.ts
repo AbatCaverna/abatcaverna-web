@@ -7,7 +7,7 @@ function useProdutosQuery(email?: string | null) {
     ['products', email], 
     email ? () => ProdutosService.getAllProductsByUser(email) : ProdutosService.getAllProducts,
     {
-      enabled: !!email
+      refetchOnWindowFocus: !!email
     }
   )
 }
