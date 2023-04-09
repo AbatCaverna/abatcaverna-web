@@ -8,9 +8,10 @@ const API_INSTANCE = axios.create({
 
 API_INSTANCE.interceptors.request.use(
   async (request) => {
-    const local = localStorage.getItem('session')
+    const local = localStorage && localStorage.getItem('session')
 
     if (local) {
+      console.log('local', local)
       const { accessToken } = JSON.parse(local)
       request.headers!.Authorization = accessToken
     }
