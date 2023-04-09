@@ -4,8 +4,7 @@ import { getSession } from "next-auth/react";
 
 import { DashboardLayout } from "components/Dashboard/SharedComponents";
 import Produtos from "components/Dashboard/Produtos";
-import ProdutosService from "services/ProdutosService";
-import { ProductsResponse } from "types";
+import ProdutosService, { ProductsResponse } from "services/ProdutosService";
 
 interface ProdutosPage {
   produtos: ProductsResponse

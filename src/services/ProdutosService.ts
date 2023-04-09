@@ -10,7 +10,7 @@ export type Product = {
   stripe_price_id: string
 }
 
-type ProductsResponse = {
+export type ProductsResponse = {
   message: string
   products: Product[]
 }
