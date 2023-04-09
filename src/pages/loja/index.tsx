@@ -20,7 +20,6 @@ export default function Loja() {
   const window = useWindow()
   const [showCartIcon, setShowCartIcon] = useState(false)
   const [loading, setLoading] = useState(false)
-  const checkoutService = new CheckoutService()
   const session = useSession()
   const { setAlert } = useAlert()
 
@@ -33,7 +32,7 @@ export default function Loja() {
 
       const email = session.data?.user?.email!
 
-      const response = await checkoutService.createCheckoutSession(priceId, email)
+      const response = await CheckoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
   
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })

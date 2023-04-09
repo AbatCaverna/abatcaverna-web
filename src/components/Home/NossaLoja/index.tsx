@@ -18,12 +18,11 @@ export default function NossaLoja() {
   async function handleBuyButton(priceId: string) {
     try {
       setLoading(true)
-      const checkoutService = new CheckoutService()
       if (session.status === "unauthenticated") await signIn("google")
 
       const email = session.data?.user?.email!
 
-      const response = await checkoutService.createCheckoutSession(priceId, email)
+      const response = await CheckoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
   
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
