@@ -13,27 +13,27 @@ import Loading from 'components/Shared/Loading'
 import AlertProvider from 'contexts/alert'
 import CartProvider from 'contexts/carrinho'
 
-import 'styles/globals.css';
+import 'styles/global.css';
 
-function MyApp({ Component, pageProps: { session, ...pageProps} }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter()
 
   const [queryClient] = useState(() => new QueryClient())
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-      const handleStart = (url: any) => (url !== router.asPath) && setLoading(true);
-      const handleComplete = () => setLoading(false);
+    const handleStart = (url: any) => (url !== router.asPath) && setLoading(true);
+    const handleComplete = () => setLoading(false);
 
-      router.events.on('routeChangeStart', handleStart)
-      router.events.on('routeChangeComplete', handleComplete)
-      router.events.on('routeChangeError', handleComplete)
+    router.events.on('routeChangeStart', handleStart)
+    router.events.on('routeChangeComplete', handleComplete)
+    router.events.on('routeChangeError', handleComplete)
 
-      return () => {
-          router.events.off('routeChangeStart', handleStart)
-          router.events.off('routeChangeComplete', handleComplete)
-          router.events.off('routeChangeError', handleComplete)
-      }
+    return () => {
+      router.events.off('routeChangeStart', handleStart)
+      router.events.off('routeChangeComplete', handleComplete)
+      router.events.off('routeChangeError', handleComplete)
+    }
   })
 
   if (process.env.NODE_ENV === 'production') LogRocket.init('ygdgye/dashboard-web-h0qcb');
