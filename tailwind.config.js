@@ -22,6 +22,11 @@ module.exports = {
         "light-gray": "#eaeaea",
         bg: "#0C0B0B",
         "light-bg": "#181716",
+        primary: 'var(--primary)',
+        "primary-foreground": 'var(--primary-foreground)',
+        secondary: 'var(--secondary)',
+        "secondary-foreground": '#0f131d',
+        ring: "var(--ring)",
       },
       borderRadius: {
         lg: "var(--radius)",

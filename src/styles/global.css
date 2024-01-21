@@ -5,12 +5,32 @@
 @layer base {
   :root {
     /* cores antigas   */
-    --yelloy: #FFC74A;
+    --yellow: #FFC74A;
     --light-gray: #eaeaea;
     --bg: #0C0B0B;
     --light-bg: #181716;
 
     --radius: 0.5rem;
+
+    /* Primary colors for buttons */
+    --primary: var(--yellow);
+    --primary-foreground: var(--light-gray);
+
+    /* Secondary colors for buttons */
+    --secondary: var(--light-gray);
+    --secondary-foreground: "#0f131d";
+
+    /* Used for focus ring */
+    --ring: "#8492a6";
+    
+    --background: var(--bg);
+    --foreground: var(--light-gray);
+  
+    --border: var(--light-gray);
+    --input: var(--light-gray);
+    /* Button destructive */
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
   }
  
   .dark {
@@ -28,7 +48,7 @@
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background: var(--bg);
-    color: #fff;
+    color: var(--foreground);
     scroll-behavior: smooth;
   }
   a {
@@ -38,7 +58,7 @@
 
   a:hover {
     filter: brightness(0.9);
-    color: var(--yelloy);
+    color: var(--yellow);
   }
   /* Custom scrollbar a*/
 
@@ -55,7 +75,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--yelloy);
+    background: var(--yellow);
   }
 
   /* Handle on hover */

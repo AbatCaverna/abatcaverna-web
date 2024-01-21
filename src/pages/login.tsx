@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import styles from 'styles/Login.module.css'
+import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Card,
@@ -46,13 +47,13 @@ export default function LoginPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <button
-                type="button"
-                className={styles.btn}
+              <Button
+                className="text-2xl uppercase font-light"
+                size="lg"
                 onClick={() => handleSignIn('usuario')}
               >
                 Usuário
-              </button>
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -65,13 +66,13 @@ export default function LoginPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <button
-                type="button"
-                className={styles.btn}
+              <Button
+                className="text-2xl uppercase font-light"
+                size="lg"
                 onClick={() => handleSignIn('cavernoso')}
               >
                 Morador
-              </button>
+              </Button>
             </CardContent>
             <CardFooter className="flex items-center justify-center">
               <Link href="/forgot-password">
