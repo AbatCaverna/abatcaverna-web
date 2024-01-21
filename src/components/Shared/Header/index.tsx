@@ -131,7 +131,7 @@ type NavigationProps = {
 function Navigation({ orientation = 'horizontal', items }: NavigationProps) {
   return (
     <NavigationMenu orientation={orientation}>
-      <NavigationMenuList className="flex-col items-start">
+      <NavigationMenuList className={orientation === 'vertical' ? 'flex-col items-start' : ''}>
         {items.map(item => (
           <NavigationMenuItem key={item.key}>
             <Link href={item.href} passHref>
