@@ -96,32 +96,33 @@ export default function TrocarSenha({ name, hashCode }: Props) {
                 <FormLabel> <RiLockPasswordLine className="inline" /> Nova senha</FormLabel>
                 <FormControl>
                   <Input className="text-light-bg" type="password" {...field} />
+                  <Button size="icon" type="outline"></></Button>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <FormField
-            control={formInstance.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel><RiLockPasswordLine className="inline" /> Confirmar Senha</FormLabel>
-                <FormControl>
-                  <Input className="text-light-bg" type="password"{...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <FormField
+          control={formInstance.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel><RiLockPasswordLine className="inline" /> Confirmar Senha</FormLabel>
+              <FormControl>
+                <Input className="text-light-bg" type="password"{...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-          <Button type="submit" size="lg" className="w-full text-lg">
-            {loading && <AiOutlineReload className="mr-2 animate-spin" />}
-            Trocar
-          </Button>
-        </form>
-      </Form>
-    </div>
+        <Button type="submit" size="lg" className="w-full text-lg">
+          {loading && <AiOutlineReload className="mr-2 animate-spin" />}
+          Trocar
+        </Button>
+      </form>
+    </Form>
+    </div >
   )
 }

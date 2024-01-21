@@ -17,7 +17,7 @@ import useAlert from 'hooks/useAlert'
 export default function ForgotPasswordPage() {
   const inputRef = useRef<HTMLInputElement>(null)
   const revocerService = new RecoverPasswordService()
-  const [step, setStep] = useState<'code' | 'password'>('password')
+  const [step, setStep] = useState<'code' | 'password'>('code')
   const [hashCode, setHashCode] = useState<string | undefined>(undefined)
   const { setAlert } = useAlert()
 
