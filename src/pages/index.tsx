@@ -11,10 +11,10 @@ import {
   Moradores,
   NossaCasa,
   NossaLoja
-} from 'components/Home'
-import styles from 'styles/Home.module.css'
-import { Data } from 'utils/homePageData'
+} from 'domain/Home'
 import useSessionToStorage from 'hooks/useSessionToStorage'
+import { Data } from 'utils/homePageData'
+import styles from 'styles/Home.module.css'
 
 type Morador = {
   nome: string;

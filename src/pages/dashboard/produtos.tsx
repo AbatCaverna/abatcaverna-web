@@ -2,8 +2,8 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 
-import { DashboardLayout } from "components/Dashboard/SharedComponents";
-import Produtos from "components/Dashboard/Produtos";
+import { DashboardLayout } from "domain/Dashboard/SharedComponents";
+import Produtos from "domain/Dashboard/Produtos";
 import ProdutosService, { ProductsResponse } from "services/ProdutosService";
 
 interface ProdutosPage {
@@ -14,7 +14,7 @@ export default function ProdutosPage({ produtos }: ProdutosPage) {
 
   return (
     <DashboardLayout>
-        <Produtos data={produtos}/>
+      <Produtos data={produtos} />
     </DashboardLayout>
   );
 }

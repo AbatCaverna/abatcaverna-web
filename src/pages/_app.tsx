@@ -8,10 +8,9 @@ import { IconContext } from 'react-icons';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import { Header } from 'components/Shared/Header'
-import Loading from 'components/Shared/Loading'
 import AlertProvider from 'contexts/alert'
 import CartProvider from 'contexts/carrinho'
+import { Header, Loading } from 'domain/Shared'
 
 import 'styles/global.css';
 

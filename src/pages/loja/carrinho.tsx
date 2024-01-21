@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { GoTrashcan } from "react-icons/go";
 
-import Loader from 'components/Shared/Loading';
+import Loader from 'domain/Shared/Loading';
 import useCarrinho from "hooks/useCarrinho";
 import styles from "styles/Carrinho.module.css";
 import transformUnitAmount from "utils/trasnformUnitAmout";
@@ -55,7 +55,7 @@ export default function Carrinho() {
                         className={styles.table_btn_remove}
                         onClick={() => removeFromCart(product)}
                       >
-                        <GoTrashcan size="1.1rem"/>
+                        <GoTrashcan size="1.1rem" />
                       </button>
                     </td>
                   </tr>
@@ -70,12 +70,12 @@ export default function Carrinho() {
         </div>
         <div className={styles.link_store}>
           <Link href="/loja" >
-            <a >Voltar a comprar</a>
+            Voltar a comprar
           </Link>
         </div>
         {loading && (
           <div className={styles.loading}>
-            <Loader/>
+            <Loader />
             <p>Carregando...</p>
           </div>
         )}

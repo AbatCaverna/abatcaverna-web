@@ -1,4 +1,4 @@
-import Alert from "components/Shared/Alert";
+import Alert from "domain/Shared/Alert";
 import { createContext, ReactNode, useReducer, useState } from "react";
 
 type AlertContextType = {
@@ -27,7 +27,7 @@ export default function AlertProvider({ children }: { children: ReactNode }) {
 
   return (
     <AlertContext.Provider value={{ setAlert }}>
-      
+
       {children}
 
       {alertData && (
@@ -37,7 +37,7 @@ export default function AlertProvider({ children }: { children: ReactNode }) {
           type={alertData.type}
         />
       )}
-      
+
     </AlertContext.Provider>
   )
 }

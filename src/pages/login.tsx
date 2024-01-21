@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import Head from 'next/head'
 
-import styles from 'styles/Login.module.css'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
@@ -13,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { useState } from 'react'
 
 export default function LoginPage() {
   const [openTab, setOpenTab] = useState('usuario')
@@ -76,7 +75,7 @@ export default function LoginPage() {
             </CardContent>
             <CardFooter className="flex items-center justify-center">
               <Link href="/forgot-password">
-                <a>Esqueci minha senha</a>
+                Esqueci minha senha
               </Link>
             </CardFooter>
           </Card>
