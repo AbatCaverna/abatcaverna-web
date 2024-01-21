@@ -27,6 +27,7 @@ module.exports = {
         secondary: 'var(--secondary)',
         "secondary-foreground": '#0f131d',
         ring: "var(--ring)",
+        input: "hsl(var(--input))",
       },
       borderRadius: {
         lg: "var(--radius)",
