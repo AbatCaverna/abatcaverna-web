@@ -1,40 +1,26 @@
-import { useEffect, useState, useRef } from 'react';
-import useWindow from '../../../hooks/useWindow';
-import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState, useRef, useMemo, ReactElement } from 'react';
+import { MdMenu } from 'react-icons/md';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './styles.module.css';
-import { MdMenu, MdClose } from 'react-icons/md';
-import { useSession } from 'next-auth/react';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+
 import ProfileButton from '../ProfileButton';
 import CarrinhoIcone from '../../Loja/CarrinhoIcone';
+import useWindow from '../../../hooks/useWindow';
+
+type NavItems = {
+  key: string
+  href: string
+  label: string
+  render?: () => ReactElement | null
+}
 
 export function Header() {
   const window = useWindow();
   const [showNav, setShowNav] = useState(false)
-  const [showMobileNavBar, setshowMobileNavBar] = useState(false)
-  const navRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
   const { data, status } = useSession()
-
-  function handelNavOpen() {
-    setshowMobileNavBar(true)
-
-  }
-
-  function handelNavClose() {
-    if (navRef.current) {
-      navRef.current.classList.remove(styles.mobile_nav_enter)
-      navRef.current.classList.add(styles.mobile_nav_out)
-
-      // espera o tempo da animacao acabar 
-      // para remover o elemento da dom
-      setTimeout(() => {
-        setshowMobileNavBar(false)
-
-      }, 400)
-    }
-  }
 
   useEffect(() => {
     if (window && window.width < 480) {
@@ -42,153 +28,118 @@ export function Header() {
     } else {
       setShowNav(true)
     }
-  },[window])
+  }, [window])
 
-  // close the navbar when click outside of it
-  useEffect(() => {
-    router.events.on('routeChangeComplete', () => setshowMobileNavBar(false)) // closes the navbar when route changes
-    const handler = (event: any) => {
-      if (!navRef.current?.contains(event.target as Node)) {
-        handelNavClose()
+  const items: NavItems[] = useMemo(() => {
+    return [
+      {
+        key: 'home',
+        href: '/',
+        label: 'Home'
+      },
+      {
+        key: 'rank',
+        href: '/cachaca-rank',
+        label: 'Cachaça',
+      },
+      {
+        key: 'historia',
+        href: '/#historia',
+        label: 'História'
+      },
+      {
+        key: 'moradores',
+        href: '/#moradores',
+        label: 'Moradores',
+      },
+      {
+        key: 'nossa_casa',
+        href: '/#nossa_casa',
+        label: 'Nosa casa'
+      },
+      {
+        key: 'loja',
+        href: '/loja',
+        label: 'Loja'
+      },
+      {
+        key: 'login',
+        href: '/login',
+        label: 'Login',
+        render: () => {
+          if (status !== "authenticated") return null
+          return (
+            <ProfileButton
+              name={data?.user?.name!}
+              image={data?.user?.image!}
+              email={data?.user?.email!}
+              role={(data as any)?.role as string}
+            />
+          )
+        }
       }
-    }
-
-    document.addEventListener('mousedown', handler)
-
-    return () => {
-      document.removeEventListener('mousedown', handler)
-    }
-  })
+    ]
+  }, [status, data])
 
   if (status === 'loading') return (
     <div>
       ...
     </div>
   )
+
+  if (!showNav) {
+    return (
+      <header className="flex items-center justify-between px-8 relative border-b-light-gray border-b-2 py-2">
+        <h1 className="text-yellow text-2xl flex items-center gap-2">
+          <Image src="/favicon-96x96.png" alt="Abat Logo" width={45} height={45} />
+          AbatCaverna
+        </h1>
+        <Sheet>
+          <SheetTrigger><MdMenu size="1.5em" /></SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>
+                <h1 className="text-yellow text-2xl flex items-center gap-2">
+                  <Image src="/favicon-96x96.png" alt="Abat Logo" width={45} height={45} />
+                  AbatCaverna
+                </h1>
+              </SheetTitle>
+            </SheetHeader>
+            <Navigation items={items} orientation="vertical" />
+          </SheetContent>
+        </Sheet>
+      </header>
+    )
+  }
+
   return (
-    <header className={styles.header}>
-      <h1 className={styles.title}>
+    <header className="flex items-center justify-between px-8 relative border-b-light-gray border-b-2 py-2">
+      <h1 className="text-yellow text-2xl flex items-center gap-2">
         <Image src="/favicon-96x96.png" alt="Abat Logo" width={45} height={45} />
         AbatCaverna
       </h1>
-      {showNav ? (
-        <nav className={styles.nav}>
-          <ul>
-            <li>
-              <Link href="/">
-                <a >Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/cachaca-rank">
-                <a >Cachaça</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#historia">
-                <a >História</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#moradores">
-                <a >Moradores</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#nossa_casa">
-                <a >Nossa casa</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/loja">
-                <a>Loja</a>
-              </Link>
-            </li>
-            {
-              status !== "authenticated" ? (
-              <li>
-                <Link href="/login">
-                  <a>Login</a>
-                </Link>
-              </li>
-              ) : (
-                <ProfileButton
-                  name={data?.user?.name!}
-                  image={data?.user?.image!}
-                  email={data?.user?.email!}
-                  role={(data as any)?.role as string}
-                />
-              )
-            }
-
-          </ul>
-        </nav>
-      ) : (
-        <MdMenu size="1.5em" onClick={handelNavOpen}/>
-      )}
-
-      {showMobileNavBar && (
-      <div className={`${styles.mobile_nav} ${styles.mobile_nav_enter}`} ref={navRef}>
-        <MdClose
-          size="1.5em"
-          className={styles.mobile_nav_close_btn}
-          onClick={handelNavClose}
-        />
-        <nav>
-          <ul>
-            <li>
-               <Link href="/">
-                  <a >Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/cachaca-rank">
-                <a >Cachaça</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#historia">
-                <a >História</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#moradores">
-                <a >Moradores</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#nossa_casa">
-                <a >Nossa casa</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/loja">
-                <a>Loja</a>
-              </Link>
-            </li>
-            {
-               status !== "authenticated" ?  (
-              <li>
-                <Link href="/login">
-                  <a>Login</a>
-                </Link>
-              </li>
-              ) : (
-                <ProfileButton
-                  name={data?.user?.name!}
-                  image={data?.user?.image!}
-                  email={data?.user?.email!}
-                  role={(data as any)?.role as string}
-                />
-              )
-            }
-            <li>
-              <CarrinhoIcone/>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      )}
+      <Navigation items={items} />
     </header>
+  )
+}
+
+type NavigationProps = {
+  items: NavItems[]
+  orientation?: 'horizontal' | 'vertical'
+}
+
+function Navigation({ orientation = 'horizontal', items }: NavigationProps) {
+  return (
+    <NavigationMenu orientation={orientation}>
+      <NavigationMenuList className="flex-col items-start">
+        {items.map(item => (
+          <NavigationMenuItem key={item.key}>
+            <Link href={item.href} passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>{item.label}</NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
