@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 
-import styles from './styles.module.css'
 import { FaWhatsapp } from 'react-icons/fa'
 import useWindow from '../../../hooks/useWindow'
 
@@ -54,10 +53,10 @@ export default function NossaCasa() {
     }
   }, [window])
   return (
-    <section id="nossa_casa" className={styles.nossa_casa}>
-      <h2>Nossa casa</h2>
+    <section id="nossa_casa" className="prose w-full max-w-screen-2xl">
+      <h2 className="text-yellow">Nossa casa</h2>
 
-      <div className={styles.container}>
+      <div className="flex justify-between px-2">
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
@@ -72,7 +71,7 @@ export default function NossaCasa() {
           null
         )}
 
-        <div className={styles.text_container}>
+        <div className="text-white">
           <ul>
             <li>Casa localizada no centro </li>
             <li>Quartos para dividir ou individual</li>
@@ -83,38 +82,38 @@ export default function NossaCasa() {
             <li>Temos uma cachorrinha linda e muito carinhosa</li>
           </ul>
 
-          <h3> Temos vagas!</h3>
+          <h3 className="text-center text-yellow text-3xl"> Temos vagas!</h3>
           <p>Dúvidas e/ou interesse, entre em contato com um dos moradores:</p>
-          <ul className={styles.contact_list}>
-            <li>
+          <ul className="list-none">
+            <li className="pointer mx-2">
               <Link href={`https://wa.me/5531992881568?text=${urlencodedtext}`}>
-                <a target="_blank">
-                  <FaWhatsapp color="eaeaea"/> 
+                <a target="_blank" className="text-white flex items-center gap-2">
+                  <FaWhatsapp color="eaeaea" />
                   Matheus (Teta)
                 </a>
               </Link>
             </li>
-            <li>
+            <li className="pointer mx-2">
               <Link href={`https://wa.me/5531993420757?text=${urlencodedtext}`}>
-                <a target="_blank">
-                  <FaWhatsapp color="eaeaea"/> 
-                  Takeshi (Coleira)   
+                <a target="_blank" className="text-white flex items-center gap-2">
+                  <FaWhatsapp color="eaeaea" />
+                  Takeshi (Coleira)
                 </a>
               </Link>
             </li>
-            <li>
+            <li className="pointer mx-2">
               <Link href={`https://wa.me/5531992449442?text=${urlencodedtext}`}>
-                <a target="_blank">
-                  <FaWhatsapp color="eaeaea"/>
+                <a target="_blank" className="text-white flex items-center gap-2">
+                  <FaWhatsapp color="eaeaea" />
                   Victor (Cocoricó)
                 </a>
               </Link>
-               
+
             </li>
-            <li>
+            <li className="pointer mx-2">
               <Link href={`https://wa.me/5531995339124?text=${urlencodedtext}`}>
-                <a target="_blank">
-                  <FaWhatsapp color="eaeaea"/>
+                <a target="_blank" className="text-white flex items-center gap-2">
+                  <FaWhatsapp color="eaeaea" />
                   Vinícius (Chapoca)
                 </a>
               </Link>
@@ -122,7 +121,7 @@ export default function NossaCasa() {
           </ul>
         </div>
       </div>
-      
+
 
     </section>
   )

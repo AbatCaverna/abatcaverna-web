@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { getPlaiceholder } from 'plaiceholder'
 import { TiArrowUpOutline } from 'react-icons/ti'
 
-import { 
+import {
   Footer,
   Historia,
   Moradores,
@@ -69,14 +69,14 @@ export const getStaticProps: GetStaticProps<MoradorProps> = async () => {
   };
 };
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   moradores,
   historyImages,
   bannerUrl
 }) => {
   const [showBackToTopBtn, setShowBackToTopBtn] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null)
-  
+
   function handleBackToTopBtn() {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
@@ -96,7 +96,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   }, [headerRef])
 
   useSessionToStorage()
-  
+
   return (
     <div className={styles.container}>
       <Head>
@@ -105,33 +105,33 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+
       <main className={styles.main}>
         <section className={styles.image} ref={headerRef}>
 
-          <Image 
+          <Image
             src={bannerUrl.img}
-            alt="Banner republica" 
+            alt="Banner republica"
             placeholder="blur"
             blurDataURL={bannerUrl.imgBase64}
-            width={1440} 
-            height={850} 
+            width={1440}
+            height={850}
           />
 
         </section>
-        <Historia images={historyImages}  />
-        <NossaLoja/>
+        <Historia images={historyImages} />
         <Moradores moradores={moradores} />
         <NossaCasa />
+        <NossaLoja />
         {showBackToTopBtn && (
           <button className={styles.back_top_btn} title="Voltar para o topo" onClick={handleBackToTopBtn}>
-            <TiArrowUpOutline color="eaeaea"/>
+            <TiArrowUpOutline color="eaeaea" />
           </button>
         )}
       </main>
 
-      <Footer/>
-    </div>  
+      <Footer />
+    </div>
   )
 }
 

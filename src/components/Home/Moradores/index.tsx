@@ -1,6 +1,6 @@
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import Link from 'next/link';
-import styles from './styles.module.css';
 
 type Morador = {
   nome: string;
@@ -19,38 +19,42 @@ interface MoradorProps {
 export default function Moradores({ moradores }: MoradorProps) {
 
   return (
-    <section id="moradores" className={styles.container}>
-      <h2 className={styles.title}>Moradores</h2>
-      <div className={styles.content}>
-        {moradores.map((morador) => (
-          <div key={morador.nome} className={styles.imageContainer}>
-            <Link href={morador.instagram || ''}>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className={styles.image}>
-                  <Image 
-                    src={morador.image}
-                    alt={morador.nome}
-                    placeholder="blur"
-                    blurDataURL={morador.base64}
-                    width="185" 
-                    height="185" 
-                  />
-                </div>
-                
-                <p title={`${morador.nome} - ${morador.curso}`}>
-                  {morador.apelido} <br/>
-                  <span>{morador.dataEntrada}</span>
-                </p>
+    <section id="moradores" className="prose max-w-screen-2xl overflow-x-auto">
+      <h2 className="text-yellow">Moradores</h2>
+      <ScrollArea className="flex justify-normal w-full px-4">
+        <div className="flex justify-center md:justify-normal">
+          {moradores.map((morador) => (
+            <div key={morador.nome} className="mx-5 text-white text-center">
+              <Link href={morador.instagram || ''}>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="rounded-full border-yellow border-8 w-[185px] h-[185px]">
+                    <Image
+                      src={morador.image}
+                      alt={morador.nome}
+                      placeholder="blur"
+                      blurDataURL={morador.base64}
+                      width="185"
+                      height="185"
+                      className="rounded-full w-full"
+                    />
+                  </div>
 
-              </a>
-              
-            </Link>
-          </div>
-        ))}
-      </div>
+                  <p className="text-yellow" title={`${morador.nome} - ${morador.curso}`}>
+                    {morador.apelido} <br />
+                    <span>{morador.dataEntrada}</span>
+                  </p>
+
+                </a>
+
+              </Link>
+            </div>
+          ))}
+        </div>
+        <ScrollBar orientation="horizontal" color="#FFC74A" />
+      </ScrollArea>
     </section>
   );
 }

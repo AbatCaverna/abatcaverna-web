@@ -1,9 +1,7 @@
 import useAlert from "hooks/useAlert";
 import { signIn, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import Stripe from "stripe";
+import { useState } from "react";
 import CheckoutService from "../../../services/CheckoutService";
-import ProdutosService, { Product } from "../../../services/ProdutosService";
 import getStripe from "../../../services/stripejs";
 import ProductCard from "../../Loja/ProductCard";
 import Loader from "../../Shared/Loading";
@@ -24,11 +22,11 @@ export default function NossaLoja() {
 
       const response = await CheckoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
-  
+
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
-      
+
     } catch (error) {
-      console.log('redirect to checkout error',error)
+      console.log('redirect to checkout error', error)
       setAlert({
         message: error as string,
         title: 'Error!',
@@ -40,25 +38,27 @@ export default function NossaLoja() {
   }
 
   const { data, isFetching } = useProdutosQuery()
-  
+
+  if (!data || !data.data || data.data.products.length === 0) return null
+
   return (
-    <section id="nossa-loja">
-      <h2 className={styles.title}>Nossa Loja</h2>
+    <section id="nossa-loja" className="prose max-w-screen-2xl mt-4">
+      <h2 className="text-yellow">Nossa Loja</h2>
       <div className={styles.flex}>
         {data?.data.products.map((produto) => (
           <ProductCard
             key={produto.id}
             data={produto}
             handleClick={handleBuyButton}
-            />
+          />
         ))}
         {(isFetching || loading) && (
           <div className={styles.loading}>
-            <Loader/>
+            <Loader />
             <p>Carregando...</p>
           </div>
         )}
       </div>
     </section>
-  ) 
+  )
 }
