@@ -21,8 +21,8 @@ export default function Moradores({ moradores }: MoradorProps) {
   return (
     <section id="moradores" className="prose max-w-screen-2xl overflow-x-auto">
       <h2 className="text-yellow">Moradores</h2>
-      <ScrollArea className="flex justify-normal w-full px-4">
-        <div className="flex justify-center md:justify-normal">
+      <ScrollArea className="flex justify-normal w-max px-4">
+        <div className="flex justify-center md:justify-normal w-max">
           {moradores.map((morador) => (
             <div key={morador.nome} className="mx-5 text-white text-center">
               <Link href={morador.instagram || ''}>
@@ -53,7 +53,7 @@ export default function Moradores({ moradores }: MoradorProps) {
             </div>
           ))}
         </div>
-        <ScrollBar orientation="horizontal" color="#FFC74A" />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </section>
   );
