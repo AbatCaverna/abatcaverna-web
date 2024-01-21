@@ -56,7 +56,7 @@ export default function NossaCasa() {
     <section id="nossa_casa" className="prose w-full max-w-screen-2xl">
       <h2 className="text-yellow">Nossa casa</h2>
 
-      <div className="flex justify-between px-2">
+      <div className="flex flex-col md:flex-row justify-between px-2">
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}

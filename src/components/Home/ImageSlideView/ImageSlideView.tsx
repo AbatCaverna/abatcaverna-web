@@ -40,7 +40,7 @@ export default function ImageView({ images }: ImageView) {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-[600px]"
+      className="w-full max-w-full md:max-w-[600px]"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -49,7 +49,7 @@ export default function ImageView({ images }: ImageView) {
           images.map((image) => (
             <CarouselItem key={image.img}>
               <Card className="bg-transparent border-none">
-                <CardContent className="flex aspect-square items-center justify-center min-h-[400px] min-w-[600px]">
+                <CardContent className="flex aspect-square items-center justify-center min-h-[400px] md:min-w-[600px]">
                   <img
                     src={image.img}
                     alt={returnImageName(image.img)}

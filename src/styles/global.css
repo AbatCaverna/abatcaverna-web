@@ -40,28 +40,6 @@
     filter: brightness(0.9);
     color: var(--yelloy);
   }
-  /* Custom scrollbar a*/
-
-  /* width */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 8px;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: var(--yelloy);
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #9c792d;
-  }
 }
 
 
