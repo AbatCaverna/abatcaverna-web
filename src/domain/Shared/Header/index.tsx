@@ -7,7 +7,6 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import ProfileButton from '../ProfileButton';
-import CarrinhoIcone from '../../Loja/CarrinhoIcone';
 import useWindow from '../../../hooks/useWindow';
 
 type NavItems = {
