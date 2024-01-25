@@ -70,7 +70,7 @@ export default function TrocarSenha({ name, hashCode }: Props) {
   }
 
   return (
-    <div>
+    <>
       <h2 className="text-xl text-center">Trocar senha</h2>
       <Form {...formInstance}>
         <form onSubmit={formInstance.handleSubmit(onSubmit)} className="space-y-8">
@@ -123,6 +123,6 @@ export default function TrocarSenha({ name, hashCode }: Props) {
         </Button>
       </form>
     </Form>
-    </div >
+    </>
   )
 }
