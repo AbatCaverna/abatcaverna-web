@@ -20,16 +20,17 @@ export default NextAuth({
       name: 'morador',
       credentials: {
         username: { label: "Username", type: "text", placeholder: "abat" },
-        password: {  label: "Password", type: "password" }
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req): Promise<any> {
         if (!credentials) return null
 
         const response = await SessionService.loginMorador(credentials.username, credentials.password)
-        
+        console.log(response)
+
         if (response) {
           console.log('[SERVER]: user logged in', response)
-          
+
           const { user } = response.data
 
           return {
@@ -40,7 +41,7 @@ export default NextAuth({
             role: user.role
           }
         }
-        
+
         // Return null if user data could not be retrieved
         return null
       }
@@ -50,7 +51,7 @@ export default NextAuth({
     async signIn({ user }) {
       // Check if the user is current in the database
       // if not, we create it and returns true if it is ok]
-      if(user) return true
+      if (user) return true
 
       return true
 
@@ -69,7 +70,7 @@ export default NextAuth({
             image: user.image || '',
             role: Role.usuario
           }
-  
+
           const response = await SessionService.loginUser(currentUser)
           console.log('user logged', response.data)
 
