@@ -18,7 +18,6 @@ import {
 import { Input } from "@/components/ui/input"
 import MoradoresService from "services/MoradoresService"
 import useAlert from "hooks/useAlert"
-import styles from "./styles.module.css"
 
 const formSchema = z.object({
   name: z.string({ required_error: 'Campo obrigatório' }).min(2, { message: 'Campo precisa ter mais que 2 caracteres' }).max(50),
@@ -96,7 +95,6 @@ export default function TrocarSenha({ name, hashCode }: Props) {
                 <FormLabel> <RiLockPasswordLine className="inline" /> Nova senha</FormLabel>
                 <FormControl>
                   <Input className="text-light-bg" type="password" {...field} />
-                  <Button size="icon" variant="outline" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
