@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { GoTrashcan } from "react-icons/go";
+import { GoTrash } from "react-icons/go";
 
 import Loader from 'domain/Shared/Loading';
 import useCarrinho from "hooks/useCarrinho";
@@ -55,7 +55,7 @@ export default function Carrinho() {
                         className={styles.table_btn_remove}
                         onClick={() => removeFromCart(product)}
                       >
-                        <GoTrashcan size="1.1rem" />
+                        <GoTrash size="1.1rem" />
                       </button>
                     </td>
                   </tr>

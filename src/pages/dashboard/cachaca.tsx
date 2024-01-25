@@ -105,7 +105,7 @@ export default function Cachaca() {
       </Head>
 
       <header className={styles.header}>
-        <Image src="/images/header-quadro-cachaca.svg" alt="Garrafa 51" width="400px" height="97px" />
+        <Image src="/images/header-quadro-cachaca.svg" alt="Garrafa 51" width={400} height={97} />
       </header>
       <div className={styles.table_content}>
 
@@ -113,8 +113,8 @@ export default function Cachaca() {
           <p
             className={styles.position_absolute}
             style={{ left: headerLabelOffset - 15 }}
-          >Vou beber</p>
-          <p>Já bebi</p>
+          ></p>
+          <p>Já bebeu</p>
         </div>
 
         <div className={styles.table_list}>
@@ -126,16 +126,16 @@ export default function Cachaca() {
                   alt="Imagem morador"
                   title={morador.apelido}
                   className={styles.image}
-                  width="80px"
-                  height="80px"
+                  width={80}
+                  height={80}
                 />
                 {showMedal(0, index, morador.cachaca_ja_tomada) &&
                   <div className={styles.table_medal}>
                     <Image
                       src="/images/medalha-ouro.png"
                       alt="medalha ouro"
-                      width="32px"
-                      height="42px"
+                      width={32}
+                      height={42}
                     />
                   </div>
                 }
@@ -144,8 +144,8 @@ export default function Cachaca() {
                     <Image
                       src="/images/medalha-prata.png"
                       alt="medalha prata"
-                      width="32px"
-                      height="42px"
+                      width={32}
+                      height={42}
                     />
                   </div>
                 }
@@ -154,25 +154,14 @@ export default function Cachaca() {
                     <Image
                       src="/images/medalha-bronze.png"
                       alt="medalha bronze"
-                      width="32px"
-                      height="42px"
+                      width={32}
+                      height={42}
                     />
                   </div>
                 }
               </div>
-              <button
-                type="button"
-                onClick={() => handleSum(morador._id)}
-              >
-                <VscAdd color="#fff" size="24px" />
-              </button>
-              <p ref={el => toDrinkRef.current[index] = el}>{morador.cachaca_para_tomar}</p>
-              <button
-                type="button"
-                onClick={() => handleDrink(morador._id)}
-              >
-                <VscCheck color="#fff" size="24px" />
-              </button>
+              <div className={styles.Apelido}>{morador.apelido}</div>
+
               <p>{morador.cachaca_ja_tomada}</p>
             </div>
           ))}

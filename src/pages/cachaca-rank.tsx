@@ -58,7 +58,7 @@ export default function CachacaRank({ moradores }: CachacaRank) {
       </Head>
 
       <header className={styles.header}>
-        <Image src="/images/header-quadro-cachaca.svg" alt="Garrafa 51" width="400px" height="97px" />
+        <Image src="/images/header-quadro-cachaca.svg" alt="Garrafa 51" width={400} height={97} />
       </header>
       <div className={styles.table_content}>
 
@@ -79,16 +79,16 @@ export default function CachacaRank({ moradores }: CachacaRank) {
                   alt="Imagem morador"
                   title={morador.apelido}
                   className={styles.image}
-                  width="80px"
-                  height="80px"
+                  width={80}
+                  height={80}
                 />
                 {showMedal(0, index, morador.cachaca_ja_tomada) &&
                   <div className={styles.table_medal}>
                     <Image
                       src="/images/medalha-ouro.png"
                       alt="medalha ouro"
-                      width="32px"
-                      height="42px"
+                      width={32}
+                      height={42}
                     />
                   </div>
                 }
@@ -97,8 +97,8 @@ export default function CachacaRank({ moradores }: CachacaRank) {
                     <Image
                       src="/images/medalha-prata.png"
                       alt="medalha prata"
-                      width="32px"
-                      height="42px"
+                      width={32}
+                      height={42}
                     />
                   </div>
                 }
@@ -107,8 +107,8 @@ export default function CachacaRank({ moradores }: CachacaRank) {
                     <Image
                       src="/images/medalha-bronze.png"
                       alt="medalha bronze"
-                      width="32px"
-                      height="42px"
+                      width={32}
+                      height={42}
                     />
                   </div>
                 }
