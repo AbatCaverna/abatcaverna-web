@@ -12,11 +12,11 @@ export default function SideBar() {
   const [isMobile, setIsMobile] = useState(true)
 
   function onChangeRoute(route: string) {
-    router.push('/dashboard/'+route)
+    router.push('/dashboard/' + route)
   }
 
   useEffect(() => {
-    if(window && window?.width < 580) {
+    if (window && window?.width < 580) {
       setIsMobile(true)
     } else {
       setIsMobile(false)
@@ -26,7 +26,7 @@ export default function SideBar() {
   return !isMobile ? (
     <div className={styles.navbar} onClick={() => isMobile && setIsMobile(!isMobile)}>
       <h1>
-        <MdSpaceDashboard/> Dashboard
+        <MdSpaceDashboard /> Dashboard
       </h1>
       <nav className={styles.navbar_menu}>
         <ul>
@@ -39,14 +39,13 @@ export default function SideBar() {
           <hr />
           <li onClick={() => onChangeRoute('produtos')}>Produtos</li>
           <li className={styles.navbar_menu_item_disabled}>Pedidos</li>
-          <li onClick={() => onChangeRoute('qrcode')}>Scanner QRCode</li>
         </ul>
       </nav>
     </div>
   ) : (
     <div className={styles.navbar_mobile} onClick={() => setIsMobile(!isMobile)}>
       <h1>
-        <MdSpaceDashboard/>
+        <MdSpaceDashboard />
       </h1>
     </div>
   );
