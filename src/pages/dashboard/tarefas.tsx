@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { DashboardLayout } from "components/Dashboard/SharedComponents";
+import { DashboardLayout } from "domain/Dashboard/SharedComponents";
 import { TarefasService } from "services";
 import { Tarefas } from "services/TarefasService";
 
@@ -22,9 +22,9 @@ export default function TarefasPage() {
       <h1>Tarefas</h1>
       {data && (
         <ul>
-        {data.map(task => (
-          <li key={task.name}>{task.name} - {task.task}</li> 
-        ))}
+          {data.map(task => (
+            <li key={task.name}>{task.name} - {task.task}</li>
+          ))}
         </ul>
       )}
     </DashboardLayout>

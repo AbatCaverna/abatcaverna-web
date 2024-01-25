@@ -1,6 +1,0 @@
-export { default as Footer } from './Footer'
-export { default as Historia } from './Historia'
-export { default as ImageSlideView } from './ImageSlideView' 
-export { default as Moradores } from './Moradores'
-export { default as NossaCasa } from './NossaCasa'
-export { default as NossaLoja } from './NossaLoja'

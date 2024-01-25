@@ -4,9 +4,9 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { SiHomeassistantcommunitystore } from 'react-icons/si'
 
-import CarrinhoIcone from 'components/Loja/CarrinhoIcone';
-import ProductCard from 'components/Loja/ProductCard';
-import Loader from 'components/Shared/Loading';
+import CarrinhoIcone from 'domain/Loja/CarrinhoIcone';
+import ProductCard from 'domain/Loja/ProductCard';
+import Loader from 'domain/Shared/Loading';
 import useWindow from 'hooks/useWindow';
 import CheckoutService from 'services/CheckoutService';
 import ProdutosService, { Product } from 'services/ProdutosService';
@@ -34,11 +34,11 @@ export default function Loja() {
 
       const response = await CheckoutService.createCheckoutSession(priceId, email)
       const stripe = await getStripe()
-  
+
       await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
-      
+
     } catch (error) {
-      console.log('redirect to checkout error',error)
+      console.log('redirect to checkout error', error)
       setAlert({
         message: error as string,
         title: 'Error!',
@@ -49,14 +49,14 @@ export default function Loja() {
     }
 
   }
-  
+
   useEffect(() => {
     if (window && window.width < 480) {
       setShowCartIcon(false)
     } else {
       setShowCartIcon(true)
     }
-  },[window])
+  }, [window])
 
   return (
     <div>
@@ -67,7 +67,7 @@ export default function Loja() {
       </Head>
       <main className={styles.container}>
         <header>
-          <SiHomeassistantcommunitystore size="2rem"/>
+          <SiHomeassistantcommunitystore size="2rem" />
           <h1>Loja ABatCaverna</h1>
           {showCartIcon && <CarrinhoIcone />}
         </header>
@@ -78,11 +78,11 @@ export default function Loja() {
           {data?.data.products.map((item) => (
             <ProductCard key={item.id} data={item} handleClick={handleBuyItem} />
           ))}
-          
+
         </div>
         {(isLoading || loading) && (
           <div className={styles.loading}>
-            <Loader/>
+            <Loader />
             <p>Carregando...</p>
           </div>
         )}

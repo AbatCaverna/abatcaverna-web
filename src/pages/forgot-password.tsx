@@ -1,12 +1,18 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
 
-import { TrocarSenha } from 'components/Dashboard/SharedComponents'
-import { Button, Card, Input } from 'components/Shared'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { TrocarSenha } from 'domain/Dashboard/SharedComponents'
 import { RecoverPasswordService } from 'services'
 import useAlert from 'hooks/useAlert'
-
-import styles from 'styles/ForgotPassword.module.css'
 
 export default function ForgotPasswordPage() {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -29,7 +35,7 @@ export default function ForgotPasswordPage() {
             type: "error"
           })
         }
-        
+
       } catch (error) {
         setAlert({
           message: 'Nao verificado',
@@ -47,27 +53,33 @@ export default function ForgotPasswordPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Card>
-        <div className={styles.card_content}>
+      <Card className="max-w-lg mx-auto mt-8 mb-auto">
+        <CardHeader>
+          <CardTitle>Esqueci minha senha</CardTitle>
+          <CardDescription>Para recuperar sua senha digite o código de recuperação:</CardDescription>
+        </CardHeader>
+        <CardContent>
           {step === 'code' && (
             <>
-              <h1>Esqueci minha senha</h1>
-              <p>Para recuperar sua senha digite o código de recuperação:</p>
-              <Input
-                name="email"
-                type="text"
-                ref={inputRef}
-                placeholder="************"
-                inputStyle="large"
-              />
-              <Button type="button" onClick={handleRecuperarSenha}>Recuperar</Button> 
+              <div className="flex w-full items-center space-x-2">
+                <Input
+                  name="code"
+                  type="text"
+                  ref={inputRef}
+                  placeholder="************"
+                  className="text-light-bg flex-1"
+                />
+                <Button type="submit" onClick={handleRecuperarSenha}>
+                  Verificar
+                </Button>
+              </div>
             </>
           )}
 
           {step === 'password' && (
             <TrocarSenha hashCode={hashCode} />
           )}
-        </div>
+        </CardContent>
       </Card>
 
     </div>

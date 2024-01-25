@@ -17,6 +17,6 @@
     "incremental": true,
     "strictPropertyInitialization": false,
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src", "environment.d.ts"],
   "exclude": ["node_modules"]
 }

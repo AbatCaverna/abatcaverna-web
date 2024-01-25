@@ -1,0 +1,52 @@
+.container {
+  padding: 1rem 2rem;
+}
+
+.container__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input {
+  border: 2px solid #bbbaba;
+  border-radius: 8px;
+
+  padding: 4px;
+}
+
+.input > label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+
+.input > input {
+  border: none;
+  outline: none;
+}
+
+.button {
+  display: block;
+  margin: 0 auto;
+  background-color: var(--yellow);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: .3rem 1rem;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.button:hover {
+  filter: brightness(0.9);
+}
+
+.button:active {
+  transform: translate(1px, 1px);
+}

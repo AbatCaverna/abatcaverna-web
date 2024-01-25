@@ -1,0 +1,31 @@
+.title {
+  color: var(--yellow);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+}
+
+.flex div {
+  flex: 1;
+}
+
+.loading {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(40, 40, 40, 0.7);
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+}

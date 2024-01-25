@@ -19,7 +19,7 @@
 }
 
 .btn {
-  background-color: var(--yelloy);
+  background-color: var(--yellow);
   color: var(--light-bg);
   outline: none;
   border: 1px solid var(--light-bg);
