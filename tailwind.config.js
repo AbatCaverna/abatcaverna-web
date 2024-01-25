@@ -28,6 +28,7 @@ module.exports = {
         "secondary-foreground": '#0f131d',
         ring: "var(--ring)",
         input: "hsl(var(--input))",
+        'sidebar-bg': 'var(--sidebar-bg)',
       },
       borderRadius: {
         lg: "var(--radius)",
