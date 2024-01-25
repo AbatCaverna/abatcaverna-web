@@ -8,4 +8,5 @@
 
 .container > main {
   padding: 1rem;
+  width: 100%;
 }

@@ -96,7 +96,7 @@ export default function Header() {
         </h1>
         <Sheet>
           <SheetTrigger><MdMenu size="1.5em" /></SheetTrigger>
-          <SheetContent>
+          <SheetContent className="bg-black bg-opacity-60">
             <SheetHeader>
               <SheetTitle>
                 <h1 className="text-yellow text-2xl flex items-center gap-2">
@@ -134,9 +134,17 @@ function Navigation({ orientation = 'horizontal', items }: NavigationProps) {
       <NavigationMenuList className={orientation === 'vertical' ? 'flex-col items-start' : ''}>
         {items.map(item => (
           <NavigationMenuItem key={item.key}>
-            <Link href={item.href} passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>{item.label}</NavigationMenuLink>
-            </Link>
+            {
+              item.render && item.render()
+                ? item.render()
+                : (
+                  <Link href={item.href} passHref>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      {item.label}
+                    </NavigationMenuLink>
+                  </Link>
+                )
+            }
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>

@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { Role } from "utils/enum"
 import { SessionService } from "services"
 
-export default NextAuth({
+const authHandler = NextAuth({
   theme: {
     colorScheme: "dark", // "auto" | "dark" | "light"
     brandColor: "#FFC74A", // Hex color code
@@ -25,25 +25,33 @@ export default NextAuth({
       async authorize(credentials, req): Promise<any> {
         if (!credentials) return null
 
-        const response = await SessionService.loginMorador(credentials.username, credentials.password)
-        console.log(response)
+        try {
 
-        if (response) {
-          console.log('[SERVER]: user logged in', response)
+          const response = await SessionService.loginMorador(credentials.username, credentials.password)
 
-          const { user } = response.data
+          if (response) {
+            console.log('[SERVER]: user logged in', response)
 
-          return {
-            name: user.nome,
-            email: user.email,
-            image: user.imagem,
-            token: user.token,
-            role: user.role
+            const { user } = response.data
+
+            return {
+              name: user.nome,
+              email: user.email,
+              image: user.imagem,
+              token: user.token,
+              role: user.role
+            }
           }
+
+          // Return null if user data could not be retrieved
+          return null
+        } catch (error) {
+          console.log(`[ERROR]: ${error}`)
+
+          // Return null if user data could not be retrieved
+          return null
         }
 
-        // Return null if user data could not be retrieved
-        return null
       }
     })
   ],
@@ -93,4 +101,9 @@ export default NextAuth({
       }
     }
   },
-})
+}
+)
+
+export default async function handler(...params: any[]) {
+  await authHandler(...params);
+}

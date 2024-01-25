@@ -41,7 +41,7 @@ interface UserResponse extends Session {
 
 const SessionService = {
   async loginMorador(username: string, password: string) {
-    return await API.post<MoradorSession>('/session/morador', {username, password})
+    return API.post<MoradorSession>('/session/morador', { username, password })
   },
 
   async loginUser(user: User) {
