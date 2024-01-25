@@ -96,7 +96,7 @@ export default function Header() {
         </h1>
         <Sheet>
           <SheetTrigger><MdMenu size="1.5em" /></SheetTrigger>
-          <SheetContent>
+          <SheetContent className="bg-black bg-opacity-60">
             <SheetHeader>
               <SheetTitle>
                 <h1 className="text-yellow text-2xl flex items-center gap-2">
