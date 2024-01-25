@@ -1,8 +1,14 @@
 import Image from "next/image";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import TrocarSenha from "../SharedComponents/TrocarSenha";
 
-import styles from "./styles.module.css"
 interface Perfil {
   user: {
     name?: string | null | undefined;
@@ -13,17 +19,17 @@ interface Perfil {
 
 export default function Perfil({ user }: Perfil) {
   return (
-    <div>
-      <h1>Perfil</h1>
-      <div className={styles.container_center}>
-        <div className={styles.profile_image}>
-          <Image src={user.image!} alt={user.name!} layout="fill" />
-        </div>
-        <div>
-          <p>{user.name} | {user.email}</p>
+    <Card className="max-w-sm mx-auto">
+      <CardHeader>
+        <CardTitle>Perfil</CardTitle>
+        <CardDescription>{user.name} | {user.email}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="w-40 h-40 mx-auto rounded-md mb-4">
+          <Image src={user.image!} alt={user.name!} className="rounded-md" width={160} height={160} />
         </div>
         <TrocarSenha name={user.name!} />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
