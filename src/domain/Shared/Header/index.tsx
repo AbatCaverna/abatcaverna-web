@@ -134,9 +134,17 @@ function Navigation({ orientation = 'horizontal', items }: NavigationProps) {
       <NavigationMenuList className={orientation === 'vertical' ? 'flex-col items-start' : ''}>
         {items.map(item => (
           <NavigationMenuItem key={item.key}>
-            <Link href={item.href} passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>{item.label}</NavigationMenuLink>
-            </Link>
+            {
+              item.render && item.render()
+                ? item.render()
+                : (
+                  <Link href={item.href} passHref>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      {item.label}
+                    </NavigationMenuLink>
+                  </Link>
+                )
+            }
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
