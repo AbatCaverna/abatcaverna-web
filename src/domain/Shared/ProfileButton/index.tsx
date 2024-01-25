@@ -3,7 +3,17 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import styles from "./styles.module.css";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button";
 
 type ProfileButton = {
   name: string
@@ -12,14 +22,6 @@ type ProfileButton = {
   role?: string
 }
 export default function ProfileButton({ name, image, role = "usuario", email }: ProfileButton) {
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const [showDropdown, setShowDropdown] = useState(false)
-
-  function hadleOpenDropdow() {
-
-    setShowDropdown(!showDropdown)
-  }
-
   async function handleLogOut() {
     await signOut({ callbackUrl: '/' })
   }
@@ -39,40 +41,30 @@ export default function ProfileButton({ name, image, role = "usuario", email }: 
 
   }, [email, name])
 
-  //close the dropdown when click outside of it
-  useEffect(() => {
-    function handleClickOutside(event: any) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        if (showDropdown) {
-          setShowDropdown(!showDropdown)
-        }
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropdownRef, showDropdown]);
-
   return (
-    <div ref={dropdownRef}>
-      <div onClick={hadleOpenDropdow} className={`${styles.container} ${styles.container_item_styles}`}>
-        <Image src={`${image}`} alt="User" width={32} height={32} />
-        <p>{name}</p>
-        {showDropdown && (
-          <div className={`${styles.dropdown}`}>
-            <ul>
-              <li className={styles.container_item_styles}>
-                <Link href={role === "cavernoso" ? "/dashboard" : "/perfil"}>
-                  {role === "cavernoso" ? "Dashboard" : "Perfil"}
-                </Link>
-              </li>
-              <li onClick={handleLogOut} className={styles.container_item_styles}>Sair</li>
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <div className="bg-yellow font-bold flex gap-2 items-center px-2 py-1 rounded-lg">
+          <Avatar>
+            <AvatarImage src={image} />
+            <AvatarFallback className="bg-light-gray text-yellow">{name.slice(0, 2)}</AvatarFallback>
+          </Avatar>
+          <p>{name}</p>
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="bg-yellow">
+        <DropdownMenuLabel>Menu</DropdownMenuLabel>
+        <DropdownMenuSeparator className="bg-light-gray" />
+        <DropdownMenuItem>
+          <Link href={role === "cavernoso" ? "/dashboard" : "/perfil"}>
+            {role === "cavernoso" ? "Dashboard" : "Perfil"}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Button variant="link" className="text-light-gray p-0 hover:no-underline hover:text-yellow hover:brightness-90" onClick={handleLogOut}>Sair</Button>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 
-  );
 }
