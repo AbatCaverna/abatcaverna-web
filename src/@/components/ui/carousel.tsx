@@ -255,4 +255,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  type CarouselApi
 }
