@@ -8,6 +8,7 @@ export const Data = {
       image: '/moradores/selina.jpeg',
       base64: ''
     },
+    /*
     {
       nome: 'Matheus S',
       apelido: 'Teta',
@@ -43,22 +44,22 @@ export const Data = {
       image: '/moradores/chapoca.jpeg',
       instagram: 'https://www.instagram.com/vinciust/',
       base64: ''
-    },
-    {
-      nome: 'Rubens',
-      apelido: 'Alan',
-      dataEntrada: 2022,
-      curso: 'Agronomia',
-      image: '/moradores/alan.jpeg',
-      instagram: 'https://www.instagram.com/rubens5664/',
-      base64: ''
-    },
+    },*/
+    // {
+    //   nome: 'Rubens',
+    //   apelido: 'Alan',
+    //   dataEntrada: 2022,
+    //   curso: 'Agronomia',
+    //   image: '/moradores/alan.jpeg',
+    //   instagram: 'https://www.instagram.com/rubens5664/',
+    //   base64: ''
+    // },
     {
       nome: 'Heron',
       apelido: 'Timão',
       dataEntrada: 2022,
       curso: 'Ciência da Computação',
-      image: '/moradores/heron.jpeg',
+      image: '/moradores/heron.jpg',
       instagram: 'https://www.instagram.com/heron_f4/',
       base64: ''
     },
@@ -69,6 +70,15 @@ export const Data = {
       curso: 'Educação Física',
       image: '/moradores/gustavo.jpg',
       instagram: 'https://www.instagram.com/gh.rochaol/',
+      base64: ''
+    },
+    {
+      nome: 'Felipe',
+      apelido: 'Zezé',
+      dataEntrada: 2023,
+      curso: 'Ciência da Computação',
+      image: '/moradores/Zezé.jpg',
+      instagram: 'https://www.instagram.com/f_tavares_s/',
       base64: ''
     }
   ],
@@ -99,6 +109,14 @@ export const Data = {
     },
     {
       img: '/casa/festa.jpeg',
+      imgBase64: ''
+    },
+    {
+      img: '/casa/trote1.jpg',
+      imgBase64: ''
+    },
+    {
+      img: '/casa/Formatura-2024.jpg',
       imgBase64: ''
     },
   ],

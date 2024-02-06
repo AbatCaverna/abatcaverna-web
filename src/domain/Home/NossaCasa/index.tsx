@@ -86,28 +86,21 @@ export default function NossaCasa() {
           <p>Dúvidas e/ou interesse, entre em contato com um dos moradores:</p>
           <ul className="list-none">
             <li className="pointer mx-2">
-              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5531992881568?text=${urlencodedtext}`}>
+              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5531989082802?text=${urlencodedtext}`}>
                 <FaWhatsapp color="eaeaea" />
-                Matheus (Teta)
+                Heron (Timão)
               </Link>
             </li>
             <li className="pointer mx-2">
-              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5531993420757?text=${urlencodedtext}`}>
+              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5511931500245?text=${urlencodedtext}`}>
                 <FaWhatsapp color="eaeaea" />
-                Takeshi (Coleira)
+                Felipe (Zezé)
               </Link>
             </li>
             <li className="pointer mx-2">
-              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5531992449442?text=${urlencodedtext}`}>
+              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5531991592262?text=${urlencodedtext}`}>
                 <FaWhatsapp color="eaeaea" />
-                Victor (Cocoricó)
-              </Link>
-
-            </li>
-            <li className="pointer mx-2">
-              <Link target="_blank" className="text-white flex items-center gap-2" href={`https://wa.me/5531995339124?text=${urlencodedtext}`}>
-                <FaWhatsapp color="eaeaea" />
-                Vinícius (Chapoca)
+                Gustavo (Xuxu)
               </Link>
             </li>
           </ul>
