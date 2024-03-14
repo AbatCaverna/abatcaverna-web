@@ -4,11 +4,14 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 
 import { DashboardLayout } from "domain/Dashboard/SharedComponents";
-import Perfil from "domain/Dashboard/Perfil";
 import useRole from "hooks/useRole";
 import useSessionToStorage from "hooks/useSessionToStorage";
+import TabelaMoradores from "domain/Dashboard/Moradores/TabelaMoradores";
+import MoradoresService from "services/MoradoresService";
+import { Morador } from "services/SessionService";
 
 export default function DashboardPage() {
+
   const morador = useRole()
 
   useSessionToStorage()
@@ -26,7 +29,7 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <Perfil user={morador} />
+      <TabelaMoradores />
     </DashboardLayout>
   );
 }

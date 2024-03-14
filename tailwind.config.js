@@ -29,6 +29,10 @@ module.exports = {
         ring: "var(--ring)",
         input: "hsl(var(--input))",
         'sidebar-bg': 'var(--sidebar-bg)',
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

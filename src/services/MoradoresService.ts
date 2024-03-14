@@ -1,21 +1,26 @@
 import API from './API'
+import { Morador } from './SessionService'
 
 const MoradoresService = {
 
   async getMoradores() {
-    return await API.get('/moradores') 
+    return await API.get<{ moradores: Morador[] }>('/moradores')
+  },
+
+  async createMorador(data: FormData) {
+    return await API.post<{ user: Morador }>('/moradores', data)
   },
 
   async setCachaca(moradorId: string) {
-    return await API.put('/moradores',  {
-      method_action: 'sum_cachaca', 
+    return await API.put('/moradores', {
+      method_action: 'sum_cachaca',
       morador_id: moradorId
     })
   },
 
   async drinkCachaca(moradorId: string) {
     return await API.put('/moradores', {
-      method_action: 'drunk_cachaca', 
+      method_action: 'drunk_cachaca',
       morador_id: moradorId
     })
   },

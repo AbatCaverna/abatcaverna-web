@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button";
+import UserAvatar from "../UserAvatar";
 
 type ProfileButton = {
   name: string
@@ -45,10 +46,7 @@ export default function ProfileButton({ name, image, role = "usuario", email }: 
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="bg-yellow font-bold flex gap-2 items-center px-2 py-1 rounded-lg">
-          <Avatar>
-            <AvatarImage src={image} />
-            <AvatarFallback className="bg-light-gray text-yellow">{name.slice(0, 2)}</AvatarFallback>
-          </Avatar>
+          <UserAvatar image={image} name={name} />
           <p>{name}</p>
         </div>
       </DropdownMenuTrigger>

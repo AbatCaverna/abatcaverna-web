@@ -1,3 +1,4 @@
+import React from "react"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdSpaceDashboard } from "react-icons/md"
@@ -5,15 +6,11 @@ import { MdSpaceDashboard } from "react-icons/md"
 import useWindow from "hooks/useWindow";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import styles from "./styles.module.css"
 
 export default function SideBar() {
   const router = useRouter()
@@ -48,14 +45,21 @@ export default function SideBar() {
           </DrawerHeader>
           <nav className="w-full text-center">
             <ul className="list-none">
-              <strong className="text-xs">Morador</strong>
-              <hr className="m-0" />
-              <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('')}>Perfil</li>
-              <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('cachaca')}>Cachaça</li>
-              <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('tarefas')}>Tarefas</li>
-              <strong className="text-xs">Loja</strong>
-              <hr className="m-0" />
-              <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('produtos')}>Produtos</li>
+              {items.map(({ strong, list }) => (
+                <React.Fragment key={strong}>
+                  <strong className="text-xs">{strong}</strong>
+                  <hr className="m-0" />it
+                  {list.map(({ label, route }) => (
+                    <li
+                      key={route}
+                      className="text-[1rem] uppercase my-4 cursor-pointer"
+                      onClick={() => onChangeRoute(route)}
+                    >
+                      {label}
+                    </li>
+                  ))}
+                </React.Fragment>
+              ))}
             </ul>
           </nav>
         </DrawerContent>
@@ -70,16 +74,53 @@ export default function SideBar() {
       </h1>
       <nav>
         <ul className="list-none">
-          <strong className="text-xs">Morador</strong>
-          <hr className="m-0" />
-          <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('')}>Perfil</li>
-          <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('cachaca')}>Cachaça</li>
-          <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('tarefas')}>Tarefas</li>
-          <strong className="text-xs">Loja</strong>
-          <hr className="m-0" />
-          <li className="text-[1rem] uppercase my-4 cursor-pointer" onClick={() => onChangeRoute('produtos')}>Produtos</li>
+          {items.map(({ strong, list }) => (
+            <React.Fragment key={strong}>
+              <strong className="text-xs">{strong}</strong>
+              <hr className="m-0" />
+              {list.map(({ label, route }) => (
+                <li
+                  key={route}
+                  className="text-[1rem] uppercase my-4 cursor-pointer"
+                  onClick={() => onChangeRoute(route)}
+                >
+                  {label}
+                </li>
+              ))}
+            </React.Fragment>
+          ))}
         </ul>
       </nav>
     </div>
   )
 }
+
+const items = [
+  {
+    strong: "Morador",
+    list: [
+      {
+        label: "Perfil",
+        route: "perfil",
+      },
+      {
+        label: "Cachaça",
+        route: "cachaca",
+      },
+      {
+        label: "Tarefas",
+        route: "tarefas",
+      }
+    ]
+  },
+  {
+    strong: "Loja",
+    list: [
+      {
+        label: "Produtos",
+        route: "produtos"
+      }
+    ]
+  }
+]
+
