@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import YearInput from '@/components/ui/year-input'
+import YearInput from '@/components/ui/year-select'
 
 import MoradoresService from 'services/MoradoresService'
 import useAlert from 'hooks/useAlert'
@@ -24,10 +24,10 @@ const MoradorSchema = z.object({
   _id: z.string().optional(),
   nome: z.string(),
   apelido: z.string(),
-  ano_entrada: z.number(),
-  curso: z.string(),
+  ano_entrada: z.number().min(2014).max(2114),
+  curso: z.string().min(4),
   imagem: z.string(),
-  instagram: z.string(),
+  instagram: z.string().url('Precisa ser o link do instagram'),
   role: z.string().optional(),
   token: z.string().optional(),
   email: z.string().optional(), // Optional field
@@ -53,8 +53,9 @@ function AdicionarMorador({ initialValues }: Props) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const form = useForm<Morador>({
     resolver: zodResolver(MoradorSchema),
-    defaultValues: initialValues ? initialValues : {},
+    mode: 'onChange',
   })
+  const { errors } = form.formState
 
   async function handleCreateMorador(formData: FormData) {
     try {
@@ -70,7 +71,8 @@ function AdicionarMorador({ initialValues }: Props) {
     }
   }
 
-  function onSubmit(values: any) {
+  function onSubmit(values: Morador) {
+    console.log('values', values)
     const formData = new FormData()
 
     Object.entries(values).forEach(([key, value]) => {
@@ -84,10 +86,12 @@ function AdicionarMorador({ initialValues }: Props) {
     mutate(formData)
   }
 
+  const disableSubmitBtn = isLoading || Object.values(errors).length > 0
+
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Adicionar morador</Button>
+        <Button variant="outline">{initialValues ? 'Editar' : 'Adicionar'} morador</Button>
       </DialogTrigger>
       <DialogContent className="bg-black sm:max-w-[425px]">
         <DialogHeader>
@@ -107,7 +111,13 @@ function AdicionarMorador({ initialValues }: Props) {
                   <FormItem className="space-y-2">
                     <FormLabel>Apelido</FormLabel>
                     <FormControl>
-                      <Input id="apelido" placeholder="@" required {...field} />
+                      <Input
+                        id="apelido"
+                        placeholder="@"
+                        required
+                        variant={errors.apelido ? 'error' : 'default'}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -121,7 +131,13 @@ function AdicionarMorador({ initialValues }: Props) {
                   <FormItem className="space-y-2">
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input id="nome" placeholder="John Doe" required {...field} />
+                      <Input
+                        id="nome"
+                        placeholder="John Doe"
+                        required
+                        variant={errors.nome ? 'error' : 'default'}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -135,7 +151,11 @@ function AdicionarMorador({ initialValues }: Props) {
                   <FormItem className="space-y-2">
                     <FormLabel>Data de entrada</FormLabel>
                     <FormControl>
-                      <YearInput onValueChange={(val) => field.onChange(Number(val))} defaultValue={String(field.value)} />
+                      <YearInput
+                        required
+                        onValueChange={(val) => field.onChange(Number(val))}
+                        defaultValue={String(field.value)}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -149,7 +169,13 @@ function AdicionarMorador({ initialValues }: Props) {
                   <FormItem className="space-y-2">
                     <FormLabel>Curso</FormLabel>
                     <FormControl>
-                      <Input id="curso" placeholder="Ciencia da computacao" required {...field} />
+                      <Input
+                        id="curso"
+                        placeholder="Ciencia da computacao"
+                        required
+                        variant={errors.curso ? 'error' : 'default'}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -163,7 +189,13 @@ function AdicionarMorador({ initialValues }: Props) {
                   <FormItem className="space-y-2">
                     <FormLabel>Instagram</FormLabel>
                     <FormControl>
-                      <Input id="instagram" placeholder="@" required {...field} />
+                      <Input
+                        id="instagram"
+                        placeholder="https://instagram.com/nome"
+                        required
+                        variant={errors.instagram ? 'error' : 'default'}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -181,6 +213,7 @@ function AdicionarMorador({ initialValues }: Props) {
                         accept="image/*"
                         id="file"
                         type="file"
+                        variant={errors.imagem ? 'error' : 'default'}
                         {...field}
                         onChange={(e) => {
                           setSelectedFile(e.target.files![0])
@@ -193,7 +226,14 @@ function AdicionarMorador({ initialValues }: Props) {
                 )}
               />
 
-              <Button type="submit" className="w-full" loading={isLoading}>Salvar</Button>
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={disableSubmitBtn}
+                loading={isLoading}
+              >
+                Salvar
+              </Button>
             </form>
           </Form>
         </div>
