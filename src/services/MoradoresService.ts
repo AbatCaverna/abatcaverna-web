@@ -11,6 +11,10 @@ const MoradoresService = {
     return await API.post<{ user: Morador }>('/moradores', data)
   },
 
+  async updateMorador(data: FormData) {
+    return await API.put<{ user: Morador }>('/moradores', data)
+  },
+
   async setCachaca(moradorId: string) {
     return await API.put('/moradores', {
       method_action: 'sum_cachaca',

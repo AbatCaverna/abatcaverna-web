@@ -5,6 +5,7 @@ import { UserAvatar } from 'domain/Shared'
 import useMoradoresQuery from 'query/moradoresQuery'
 import React from 'react'
 import AdicionarMorador from './AdicionarMorador'
+import EditarMorador from './EditarMorador'
 
 function TabelaMoradores() {
   const { data, isFetching } = useMoradoresQuery()
@@ -42,7 +43,7 @@ function TabelaMoradores() {
             <TableCell>{morador.nome}</TableCell>
             <TableCell>{morador.ano_entrada}</TableCell>
             <TableCell className="px-auto">
-              <Button type="button" variant="outline">Editar</Button>
+              <EditarMorador morador={morador} />
             </TableCell>
           </TableRow>
         ))}
