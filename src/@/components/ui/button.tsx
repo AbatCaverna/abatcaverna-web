@@ -4,7 +4,6 @@ import { cva } from "class-variance-authority"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { RiLoader2Line, RiLoaderLine } from "react-icons/ri"
 import { AiOutlineLoading } from "react-icons/ai"
 
 const buttonVariants = cva(
