@@ -22,6 +22,19 @@ yarn
 yarn docker
 ```
 
+### Docker
+
+Usamos o Docker para facilitar o desenvolvimento utilizando o stripe. O stripe é o nosso
+gateway de pagamento, ele disponibiliza uma cli para desenvolvimento local.
+
+Para utilizar rode
+
+```
+git clone <url>
+cd abatcaverna-web
+chmod +x run.sh && ./run.sh
+```
+
 > Obs: caso não consiga rodar o aqruivo bash por falta de permissão execute o comando ```chmod +x run.sh```
 
 Para ver o app apenas acesse o site https://abatcaverna.app
