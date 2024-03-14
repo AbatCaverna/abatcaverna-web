@@ -3,7 +3,7 @@ import { SelectProps } from '@radix-ui/react-select'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select'
 
-function YearInput(props: SelectProps) {
+function YearSelect(props: SelectProps) {
   return (
     <Select {...props}>
       <SelectTrigger>
@@ -27,5 +27,4 @@ function generateValues() {
 }
 const VALUES = generateValues()
 
-
-export default YearInput
+export default YearSelect
