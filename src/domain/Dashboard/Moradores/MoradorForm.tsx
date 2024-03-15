@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -33,10 +34,17 @@ function MoradorForm({ onSuccess, isLoading = false, initialValues }: Props) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const form = useForm<Morador>({
     resolver: zodResolver(MoradorSchema),
-    mode: 'onChange',
-    defaultValues: initialValues,
+    values: {
+      apelido: initialValues?.apelido || '',
+      nome: initialValues?.nome || '',
+      ano_entrada: initialValues?.ano_entrada || 2014,
+      curso: initialValues?.curso || '',
+      imagem: initialValues?.imagem || '',
+      instagram: initialValues?.instagram || '',
+    },
   })
   const { errors } = form.formState
+  console.log({ initialValues })
 
   function onSubmit(values: Morador) {
     const formData = new FormData()
@@ -156,7 +164,6 @@ function MoradorForm({ onSuccess, isLoading = false, initialValues }: Props) {
         />
 
         <FormField
-          control={form.control}
           name="imagem"
           render={({ field }) => (
             <FormItem className="space-y-2">

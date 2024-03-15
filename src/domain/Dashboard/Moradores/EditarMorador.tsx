@@ -47,6 +47,7 @@ function EditarMorador({ morador }: Props) {
       })
     }
   }
+  console.log({ morador })
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
